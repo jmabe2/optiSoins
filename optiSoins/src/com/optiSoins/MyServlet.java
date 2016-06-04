@@ -1,6 +1,7 @@
 package com.optiSoins;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 
 import javax.servlet.ServletContext;
@@ -46,7 +47,7 @@ public class MyServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String id = request.getParameter("ID");
 		//response.getWriter().print("Testing Success !");
-
+		
 		response.sendRedirect(getServletContext().getContextPath()+"/views/welcome.jsp");
 
 	}

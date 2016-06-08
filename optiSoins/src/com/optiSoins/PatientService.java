@@ -20,8 +20,8 @@ public class PatientService {
 
 	public Patient createPatient (int id, String name, String lastName){
 		Patient Pat = new Patient(id);
-		Pat.setName(name);
-		Pat.setLastName(lastName);
+		Pat.setNom(name);
+		Pat.setPrenom(lastName);
 		return Pat;
 	}
 	

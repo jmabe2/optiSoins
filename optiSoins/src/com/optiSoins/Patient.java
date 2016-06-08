@@ -5,6 +5,7 @@ package com.optiSoins;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author Administrateur
@@ -12,38 +13,42 @@ import javax.persistence.Id;
  */
 
 @Entity
+@Table(name = "patient")
 
 public class Patient {
 	
-	@Id private int id;
-	private String Name;
-	private String LastName;
+	@Id private int idPatient;
+	private String Nom;
+	private String Prenom;
 	
 	
 	public Patient (){
 		
 	}
 	public Patient (int id){
-		this.id=id;
+		this.idPatient=id;
 	}
 	public int getId() {
-		return id;
+		return idPatient;
 	}
 	public void setId(int id) {
-		this.id = id;
+		this.idPatient = id;
 	}
-	public String getName() {
-		return Name;
+	public String getNom() {
+		return Nom;
 	}
-	public void setName(String name) {
-		Name = name;
+	public void setNom(String nom) {
+		Nom = nom;
 	}
-	public String getLastName() {
-		return LastName;
+	public String getPrenom() {
+		return Prenom;
 	}
-	public void setLastName(String lastName) {
-		LastName = lastName;
+	public void setPrenom(String prenom) {
+		Prenom = prenom;
 	}
 	
-
+	
 }
+	
+
+

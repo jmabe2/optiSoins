@@ -2,9 +2,21 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="optiSoins_PU"  transaction-type="JTA">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<jta-data-source>JDBC/optiSoins</jta-data-source>
-		
-				<class>com.optiSons.Patient</class>
+		<jta-data-source>java:comp/env/jdbc/optiSoins</jta-data-source>
+		<class>com.optisoins.model.Chambre</class>
+		<class>com.optisoins.model.Equipement</class>
+		<class>com.optisoins.model.EquipementChambre</class>
+		<class>com.optisoins.model.Intervention</class>
+		<class>com.optisoins.model.Medicament</class>
+		<class>com.optisoins.model.MedicamentSejour</class>
+		<class>com.optisoins.model.Patient</class>
+		<class>com.optisoins.model.Role</class>
+		<class>com.optisoins.model.Sejour</class>
+		<class>com.optisoins.model.SejourChambre</class>
+		<class>com.optisoins.model.Specialite</class>
+		<class>com.optisoins.model.TypeChambre</class>
+		<class>com.optisoins.model.TypeIntervention</class>
+		<class>com.optisoins.model.Utilisateur</class>
 		
 		<properties>
 			<property name="eclipselink.ddl-generation.output-mode" value="database"/>

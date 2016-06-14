@@ -21,21 +21,21 @@ public class Sejour implements Serializable {
 	@Column(unique=true, nullable=false)
 	private int idSejour;
 
-	private byte actif;
+	private boolean actif;
 
 	@Temporal(TemporalType.DATE)
-	@Column(nullable=false)
-	private Date date_entree;
+	@Column(nullable=false, name="date_entree")
+	private Date dateEntree;
 
 	@Temporal(TemporalType.DATE)
-	@Column(nullable=false)
-	private Date date_sortie;
+	@Column(nullable=false, name="date_sortie")
+	private Date dateSortie;
 
 	@Column(length=255)
 	private String emplacement;
 
-	@Column(length=255)
-	private String motif_sejour;
+	@Column(length=255, name="motif_sejour")
+	private String motifSejour;
 
 	//bi-directional many-to-one association to Intervention
 	@OneToMany(mappedBy="sejour")
@@ -65,28 +65,28 @@ public class Sejour implements Serializable {
 		this.idSejour = idSejour;
 	}
 
-	public byte getActif() {
+	public boolean getActif() {
 		return this.actif;
 	}
 
-	public void setActif(byte actif) {
+	public void setActif(boolean actif) {
 		this.actif = actif;
 	}
 
-	public Date getDate_entree() {
-		return this.date_entree;
+	public Date getDateEntree() {
+		return this.dateEntree;
 	}
 
-	public void setDate_entree(Date date_entree) {
-		this.date_entree = date_entree;
+	public void setDate_entree(Date dateEntree) {
+		this.dateEntree = dateEntree;
 	}
 
-	public Date getDate_sortie() {
-		return this.date_sortie;
+	public Date getDatSortie() {
+		return this.dateSortie;
 	}
 
-	public void setDate_sortie(Date date_sortie) {
-		this.date_sortie = date_sortie;
+	public void setDate_sortie(Date dateSortie) {
+		this.dateSortie = dateSortie;
 	}
 
 	public String getEmplacement() {
@@ -97,12 +97,12 @@ public class Sejour implements Serializable {
 		this.emplacement = emplacement;
 	}
 
-	public String getMotif_sejour() {
-		return this.motif_sejour;
+	public String getMotifSejour() {
+		return this.motifSejour;
 	}
 
-	public void setMotif_sejour(String motif_sejour) {
-		this.motif_sejour = motif_sejour;
+	public void setMotifSejour(String motifSejour) {
+		this.motifSejour = motifSejour;
 	}
 
 	public List<Intervention> getInterventions() {

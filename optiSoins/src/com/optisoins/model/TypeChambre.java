@@ -20,7 +20,7 @@ public class TypeChambre implements Serializable {
 	@Column(unique=true, nullable=false)
 	private int idType_chambre;
 
-	private byte actif;
+	private boolean actif;
 
 	@Column(length=255)
 	private String nom;
@@ -40,11 +40,11 @@ public class TypeChambre implements Serializable {
 		this.idType_chambre = idType_chambre;
 	}
 
-	public byte getActif() {
+	public boolean getActif() {
 		return this.actif;
 	}
 
-	public void setActif(byte actif) {
+	public void setActif(boolean actif) {
 		this.actif = actif;
 	}
 

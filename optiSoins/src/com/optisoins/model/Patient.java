@@ -21,7 +21,7 @@ public class Patient implements Serializable {
 	@Column(unique=true, nullable=false)
 	private int idPatient;
 
-	private byte actif;
+	private boolean actif;
 
 	@Column(length=255)
 	private String adresse;
@@ -53,11 +53,11 @@ public class Patient implements Serializable {
 		this.idPatient = idPatient;
 	}
 
-	public byte getActif() {
+	public boolean getActif() {
 		return this.actif;
 	}
 
-	public void setActif(byte actif) {
+	public void setActif(boolean actif) {
 		this.actif = actif;
 	}
 

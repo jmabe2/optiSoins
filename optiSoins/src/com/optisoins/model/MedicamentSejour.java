@@ -19,7 +19,7 @@ public class MedicamentSejour implements Serializable {
 	@Column(unique=true, nullable=false)
 	private int idMedicament_sejour;
 
-	private byte actif;
+	private boolean actif;
 
 	@Column(length=255)
 	private String indication;
@@ -51,11 +51,11 @@ public class MedicamentSejour implements Serializable {
 		this.idMedicament_sejour = idMedicament_sejour;
 	}
 
-	public byte getActif() {
+	public boolean getActif() {
 		return this.actif;
 	}
 
-	public void setActif(byte actif) {
+	public void setActif(boolean actif) {
 		this.actif = actif;
 	}
 

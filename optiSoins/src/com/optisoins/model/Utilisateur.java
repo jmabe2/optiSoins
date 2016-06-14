@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="utilisateur")
-@NamedQueries({@NamedQuery(name="Utilisateur.findAll", query="SELECT u FROM Utilisateur u"),
+	@NamedQueries({@NamedQuery(name="Utilisateur.findAll", query="SELECT u FROM Utilisateur u"),
 	@NamedQuery(name="Utilisateur.findAllASC", query="SELECT u FROM Utilisateur u ORDER BY u.nom ASC")})
 public class Utilisateur implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,10 +22,11 @@ public class Utilisateur implements Serializable {
 	@Column(unique=true, nullable=false)
 	private int idUtilisateur;
 
-	private byte actif;
+	private boolean actif;
 
 	@Temporal(TemporalType.DATE)
-	private Date date_naissance;
+	@Column(name="date_naissance")
+	private Date dateNaissance;
 
 	@Column(length=255)
 	private String login;
@@ -58,7 +59,10 @@ public class Utilisateur implements Serializable {
 
 	public Utilisateur() {
 	}
-
+	
+	public Utilisateur (int id){
+		this.idUtilisateur=id;
+	}
 	public int getIdUtilisateur() {
 		return this.idUtilisateur;
 	}
@@ -67,20 +71,20 @@ public class Utilisateur implements Serializable {
 		this.idUtilisateur = idUtilisateur;
 	}
 
-	public byte getActif() {
+	public boolean getActif() {
 		return this.actif;
 	}
 
-	public void setActif(byte actif) {
+	public void setActif(boolean actif) {
 		this.actif = actif;
 	}
 
-	public Date getDate_naissance() {
-		return this.date_naissance;
+	public Date getDateNaissance() {
+		return this.dateNaissance;
 	}
 
-	public void setDate_naissance(Date date_naissance) {
-		this.date_naissance = date_naissance;
+	public void setDateNaissance(Date dateNaissance) {
+		this.dateNaissance = dateNaissance;
 	}
 
 	public String getLogin() {

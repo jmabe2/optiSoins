@@ -1,6 +1,4 @@
-<Context path="/optiSoins" docBase="optiSoins" reloadable="true"
-
-crossContext="true">
+<Context path="/optiSoins" docBase="optiSoins" reloadable="true" crossContext="true">
 
 <!-- maxActive: Maximum number of dB connections in pool. Make sure you
 
@@ -48,9 +46,7 @@ com.mysql.jdbc.Driver.
 
 maxActive="100" maxIdle="30" maxWait="10000" driverClassName="com.mysql.jdbc.Driver"
 
-username="root" password=""
-
-url="jdbc:mysql://localhost:3306/optiSoins?autoReconnect=true"/>
+username="root" password="" url="jdbc:mysql://localhost:3306/optiSoins?autoReconnect=true"/>
 
 </Context>
 

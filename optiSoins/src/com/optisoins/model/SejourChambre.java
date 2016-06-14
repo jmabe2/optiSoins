@@ -20,13 +20,15 @@ public class SejourChambre implements Serializable {
 	@Column(unique=true, nullable=false)
 	private int idSejour_chambre;
 
-	private byte actif;
+	private boolean actif;
 
 	@Temporal(TemporalType.DATE)
-	private Date date_entree;
+	@Column (name="date_entree")
+	private Date dateEntree;
 
 	@Temporal(TemporalType.DATE)
-	private Date date_sortie;
+	@Column (name="date_sortie")
+	private Date dateSortie;
 
 	//bi-directional many-to-one association to Chambre
 	@ManyToOne
@@ -49,28 +51,28 @@ public class SejourChambre implements Serializable {
 		this.idSejour_chambre = idSejour_chambre;
 	}
 
-	public byte getActif() {
+	public boolean getActif() {
 		return this.actif;
 	}
 
-	public void setActif(byte actif) {
+	public void setActif(boolean actif) {
 		this.actif = actif;
 	}
 
-	public Date getDate_entree() {
-		return this.date_entree;
+	public Date getDateEntree() {
+		return this.dateEntree;
 	}
 
-	public void setDate_entree(Date date_entree) {
-		this.date_entree = date_entree;
+	public void setDateEntree(Date dateEntree) {
+		this.dateEntree = dateEntree;
 	}
 
-	public Date getDate_sortie() {
-		return this.date_sortie;
+	public Date getDateSortie() {
+		return this.dateSortie;
 	}
 
-	public void setDate_sortie(Date date_sortie) {
-		this.date_sortie = date_sortie;
+	public void setDateSortie(Date dateSortie) {
+		this.dateSortie = dateSortie;
 	}
 
 	public Chambre getChambre() {

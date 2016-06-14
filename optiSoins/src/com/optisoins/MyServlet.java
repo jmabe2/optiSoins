@@ -3,13 +3,22 @@ package com.optisoins;
 import java.io.IOException;
 
 import java.io.PrintWriter;
+import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.optisoins.model.Role;
+import com.optisoins.model.Utilisateur;
+import com.optisoins.services.RoleService;
+import com.optisoins.services.UtilisateurService;
 
 
 /**
@@ -49,6 +58,24 @@ public class MyServlet extends HttpServlet {
 		//response.getWriter().print("Testing Success !");
 		
 		response.sendRedirect(getServletContext().getContextPath()+"/views/welcome.jsp");
+		
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("optiSoins_PU");
+		EntityManager em = emf.createEntityManager();
+		RoleService service = new RoleService(em);
+		
+		em.getTransaction().begin();
+		Role ro = service.createRole(1, true, "Fou");
+		//Utilisateur util = service.createUtilisateur(1, true, "fou", "fou1234");
+		em.getTransaction().commit();
+		System.out.println(ro+ "is persisted");
+		
+		List<Role> role = service.findAllRole();
+		for(Role u : role){
+			System.out.println(u+ "is existing");
+			
+			em.close();
+			emf.close();
+		}
 
 	}
 

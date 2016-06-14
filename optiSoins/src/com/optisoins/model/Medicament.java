@@ -28,8 +28,8 @@ public class Medicament implements Serializable {
 	@Column(length=255)
 	private String nom;
 
-	@Column(nullable=false)
-	private int quantite_dispo;
+	@Column(nullable=false, name="quantite_dispo")
+	private int quantiteDispo;
 
 	//bi-directional many-to-one association to MedicamentSejour
 	@OneToMany(mappedBy="medicament")
@@ -70,12 +70,12 @@ public class Medicament implements Serializable {
 		this.nom = nom;
 	}
 
-	public int getQuantite_dispo() {
-		return this.quantite_dispo;
+	public int getQuantiteDispo() {
+		return this.quantiteDispo;
 	}
 
 	public void setQuantite_dispo(int quantite_dispo) {
-		this.quantite_dispo = quantite_dispo;
+		this.quantiteDispo = quantite_dispo;
 	}
 
 	public List<MedicamentSejour> getMedicamentSejours() {

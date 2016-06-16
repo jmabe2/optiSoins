@@ -22,7 +22,7 @@ public class Role implements Serializable {
 
 	private boolean actif;
 
-	@Column(length=255)
+	@Column(nullable=false, length=255)
 	private String nom;
 
 	//bi-directional many-to-one association to Utilisateur
@@ -30,10 +30,6 @@ public class Role implements Serializable {
 	private List<Utilisateur> utilisateurs;
 
 	public Role() {
-	}
-
-	public Role(int idRole) {
-		this.idRole=idRole;
 	}
 
 	public int getIdRole() {

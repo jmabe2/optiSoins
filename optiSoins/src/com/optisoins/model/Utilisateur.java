@@ -12,8 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="utilisateur")
-	@NamedQueries({@NamedQuery(name="Utilisateur.findAll", query="SELECT u FROM Utilisateur u"),
-	@NamedQuery(name="Utilisateur.findAllASC", query="SELECT u FROM Utilisateur u ORDER BY u.nom ASC")})
+@NamedQuery(name="Utilisateur.findAll", query="SELECT u FROM Utilisateur u")
 public class Utilisateur implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -25,22 +24,22 @@ public class Utilisateur implements Serializable {
 	private boolean actif;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="date_naissance")
+	@Column(nullable=false)
 	private Date dateNaissance;
 
-	@Column(length=255)
+	@Column(nullable=false, length=255)
 	private String login;
 
-	@Column(length=255)
-	private String mdp;
+	@Column(nullable=false, length=255)
+	private String motDePasse;
 
-	@Column(length=255)
+	@Column(nullable=false, length=255)
 	private String nom;
 
-	@Column(length=255)
+	@Column(nullable=false, length=255)
 	private String prenom;
 
-	@Column(length=255)
+	@Column(nullable=false, length=255)
 	private String sexe;
 
 	//bi-directional many-to-one association to Intervention
@@ -49,20 +48,21 @@ public class Utilisateur implements Serializable {
 
 	//bi-directional many-to-one association to Role
 	@ManyToOne
-	@JoinColumn(name="Role_idRole", nullable=false)
+	@JoinColumn(name="RoleIdRole", nullable=false)
 	private Role role;
 
 	//bi-directional many-to-one association to Specialite
 	@ManyToOne
-	@JoinColumn(name="Specialite_idSpecialite")
+	@JoinColumn(name="SpecialiteIdSpecialite")
 	private Specialite specialite;
 
 	public Utilisateur() {
 	}
-	
-	public Utilisateur (int id){
-		this.idUtilisateur=id;
+
+	public Utilisateur(int idUtilisateur) {
+
 	}
+
 	public int getIdUtilisateur() {
 		return this.idUtilisateur;
 	}
@@ -95,12 +95,12 @@ public class Utilisateur implements Serializable {
 		this.login = login;
 	}
 
-	public String getMdp() {
-		return this.mdp;
+	public String getMotDePasse() {
+		return this.motDePasse;
 	}
 
-	public void setMdp(String mdp) {
-		this.mdp = mdp;
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
 	}
 
 	public String getNom() {

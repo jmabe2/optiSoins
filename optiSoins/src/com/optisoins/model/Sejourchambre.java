@@ -6,49 +6,47 @@ import java.util.Date;
 
 
 /**
- * The persistent class for the sejour_chambre database table.
+ * The persistent class for the sejourchambre database table.
  * 
  */
 @Entity
-@Table(name="sejour_chambre")
-@NamedQuery(name="SejourChambre.findAll", query="SELECT s FROM SejourChambre s")
-public class SejourChambre implements Serializable {
+@Table(name="sejourchambre")
+@NamedQuery(name="Sejourchambre.findAll", query="SELECT s FROM Sejourchambre s")
+public class Sejourchambre implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(unique=true, nullable=false)
-	private int idSejour_chambre;
+	private int idSejourChambre;
 
 	private boolean actif;
 
 	@Temporal(TemporalType.DATE)
-	@Column (name="date_entree")
 	private Date dateEntree;
 
 	@Temporal(TemporalType.DATE)
-	@Column (name="date_sortie")
 	private Date dateSortie;
 
 	//bi-directional many-to-one association to Chambre
 	@ManyToOne
-	@JoinColumn(name="Chambre_idChambre", nullable=false)
+	@JoinColumn(name="ChambreIdChambre", nullable=false)
 	private Chambre chambre;
 
 	//bi-directional many-to-one association to Sejour
 	@ManyToOne
-	@JoinColumn(name="Sejour_idSejour", nullable=false)
+	@JoinColumn(name="SejourIdSejour", nullable=false)
 	private Sejour sejour;
 
-	public SejourChambre() {
+	public Sejourchambre() {
 	}
 
-	public int getIdSejour_chambre() {
-		return this.idSejour_chambre;
+	public int getIdSejourChambre() {
+		return this.idSejourChambre;
 	}
 
-	public void setIdSejour_chambre(int idSejour_chambre) {
-		this.idSejour_chambre = idSejour_chambre;
+	public void setIdSejourChambre(int idSejourChambre) {
+		this.idSejourChambre = idSejourChambre;
 	}
 
 	public boolean getActif() {

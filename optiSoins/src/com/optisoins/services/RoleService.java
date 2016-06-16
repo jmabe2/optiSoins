@@ -14,14 +14,26 @@ public class RoleService {
 		this.em=em;
 	}
 
-	public Role createRole(int idRole, boolean actif, String nom) 
+	public Role createRole(boolean actif, String nom) 
 	
 	{
-		Role ro = new Role(idRole);
+		Role ro = new Role();
 		ro.setActif(actif);
 		ro.setNom(nom);
 		em.persist(ro);
 		return ro;
+	}
+	
+	public Role findRole(int idRole){
+		return em.find(Role.class, idRole);
+	}
+	
+	public void RemoveRole(int idRole){
+		
+		Role ro=findRole(idRole);
+		if (ro!=null){
+			em.remove(ro);
+		}
 	}
 	
 	public List<Role> findAllRole (){

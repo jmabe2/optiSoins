@@ -27,7 +27,8 @@ public class Patient implements Serializable {
 	private String adresse;
 
 	@Temporal(TemporalType.DATE)
-	private Date ddn;
+	@Column(nullable=false)
+	private Date dateDeNaissance;
 
 	@Column(nullable=false, length=255)
 	private String nom;
@@ -35,7 +36,7 @@ public class Patient implements Serializable {
 	@Column(nullable=false, length=255)
 	private String prenom;
 
-	@Column(length=255)
+	@Column(nullable=false, length=255)
 	private String sexe;
 
 	//bi-directional many-to-one association to Sejour
@@ -69,12 +70,12 @@ public class Patient implements Serializable {
 		this.adresse = adresse;
 	}
 
-	public Date getDdn() {
-		return this.ddn;
+	public Date getDateDeNaissance() {
+		return this.dateDeNaissance;
 	}
 
-	public void setDdn(Date ddn) {
-		this.ddn = ddn;
+	public void setDateDeNaissance(Date dateDeNaissance) {
+		this.dateDeNaissance = dateDeNaissance;
 	}
 
 	public String getNom() {

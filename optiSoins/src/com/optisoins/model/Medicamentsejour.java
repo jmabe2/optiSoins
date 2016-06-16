@@ -5,19 +5,19 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the medicament_sejour database table.
+ * The persistent class for the medicamentsejour database table.
  * 
  */
 @Entity
-@Table(name="medicament_sejour")
-@NamedQuery(name="MedicamentSejour.findAll", query="SELECT m FROM MedicamentSejour m")
-public class MedicamentSejour implements Serializable {
+@Table(name="medicamentsejour")
+@NamedQuery(name="Medicamentsejour.findAll", query="SELECT m FROM Medicamentsejour m")
+public class Medicamentsejour implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(unique=true, nullable=false)
-	private int idMedicament_sejour;
+	private int idMedicamentSejour;
 
 	private boolean actif;
 
@@ -30,25 +30,25 @@ public class MedicamentSejour implements Serializable {
 	@Column(length=255)
 	private String remarque;
 
-	//bi-directional many-to-one association to Medicament
-	@ManyToOne
-	@JoinColumn(name="Medicament_idMedicament", nullable=false)
-	private Medicament medicament;
-
 	//bi-directional many-to-one association to Sejour
 	@ManyToOne
-	@JoinColumn(name="Sejour_idSejour", nullable=false)
+	@JoinColumn(name="SejourIdSejour", nullable=false)
 	private Sejour sejour;
 
-	public MedicamentSejour() {
+	//bi-directional many-to-one association to Medicament
+	@ManyToOne
+	@JoinColumn(name="MedicamentIdMedicament", nullable=false)
+	private Medicament medicament;
+
+	public Medicamentsejour() {
 	}
 
-	public int getIdMedicament_sejour() {
-		return this.idMedicament_sejour;
+	public int getIdMedicamentSejour() {
+		return this.idMedicamentSejour;
 	}
 
-	public void setIdMedicament_sejour(int idMedicament_sejour) {
-		this.idMedicament_sejour = idMedicament_sejour;
+	public void setIdMedicamentSejour(int idMedicamentSejour) {
+		this.idMedicamentSejour = idMedicamentSejour;
 	}
 
 	public boolean getActif() {
@@ -83,20 +83,20 @@ public class MedicamentSejour implements Serializable {
 		this.remarque = remarque;
 	}
 
-	public Medicament getMedicament() {
-		return this.medicament;
-	}
-
-	public void setMedicament(Medicament medicament) {
-		this.medicament = medicament;
-	}
-
 	public Sejour getSejour() {
 		return this.sejour;
 	}
 
 	public void setSejour(Sejour sejour) {
 		this.sejour = sejour;
+	}
+
+	public Medicament getMedicament() {
+		return this.medicament;
+	}
+
+	public void setMedicament(Medicament medicament) {
+		this.medicament = medicament;
 	}
 
 }

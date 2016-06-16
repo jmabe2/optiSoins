@@ -22,7 +22,7 @@ public class Specialite implements Serializable {
 
 	private boolean actif;
 
-	@Column(length=255)
+	@Column(nullable=false, length=255)
 	private String specialite;
 
 	//bi-directional many-to-one association to Utilisateur

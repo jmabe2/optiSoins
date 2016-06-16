@@ -24,35 +24,35 @@ public class Sejour implements Serializable {
 	private boolean actif;
 
 	@Temporal(TemporalType.DATE)
-	@Column(nullable=false, name="date_entree")
+	@Column(nullable=false)
 	private Date dateEntree;
 
 	@Temporal(TemporalType.DATE)
-	@Column(nullable=false, name="date_sortie")
+	@Column(nullable=false)
 	private Date dateSortie;
 
 	@Column(length=255)
 	private String emplacement;
 
-	@Column(length=255, name="motif_sejour")
+	@Column(nullable=false, length=255)
 	private String motifSejour;
 
 	//bi-directional many-to-one association to Intervention
 	@OneToMany(mappedBy="sejour")
 	private List<Intervention> interventions;
 
-	//bi-directional many-to-one association to MedicamentSejour
-	@OneToMany(mappedBy="sejour")
-	private List<MedicamentSejour> medicamentSejours;
-
 	//bi-directional many-to-one association to Patient
 	@ManyToOne
-	@JoinColumn(name="Patient_idPatient", nullable=false)
+	@JoinColumn(name="PatientIdPatient", nullable=false)
 	private Patient patient;
 
-	//bi-directional many-to-one association to SejourChambre
+	//bi-directional many-to-one association to Medicamentsejour
 	@OneToMany(mappedBy="sejour")
-	private List<SejourChambre> sejourChambres;
+	private List<Medicamentsejour> medicamentsejours;
+
+	//bi-directional many-to-one association to Sejourchambre
+	@OneToMany(mappedBy="sejour")
+	private List<Sejourchambre> sejourchambres;
 
 	public Sejour() {
 	}
@@ -77,15 +77,15 @@ public class Sejour implements Serializable {
 		return this.dateEntree;
 	}
 
-	public void setDate_entree(Date dateEntree) {
+	public void setDateEntree(Date dateEntree) {
 		this.dateEntree = dateEntree;
 	}
 
-	public Date getDatSortie() {
+	public Date getDateSortie() {
 		return this.dateSortie;
 	}
 
-	public void setDate_sortie(Date dateSortie) {
+	public void setDateSortie(Date dateSortie) {
 		this.dateSortie = dateSortie;
 	}
 
@@ -127,28 +127,6 @@ public class Sejour implements Serializable {
 		return intervention;
 	}
 
-	public List<MedicamentSejour> getMedicamentSejours() {
-		return this.medicamentSejours;
-	}
-
-	public void setMedicamentSejours(List<MedicamentSejour> medicamentSejours) {
-		this.medicamentSejours = medicamentSejours;
-	}
-
-	public MedicamentSejour addMedicamentSejour(MedicamentSejour medicamentSejour) {
-		getMedicamentSejours().add(medicamentSejour);
-		medicamentSejour.setSejour(this);
-
-		return medicamentSejour;
-	}
-
-	public MedicamentSejour removeMedicamentSejour(MedicamentSejour medicamentSejour) {
-		getMedicamentSejours().remove(medicamentSejour);
-		medicamentSejour.setSejour(null);
-
-		return medicamentSejour;
-	}
-
 	public Patient getPatient() {
 		return this.patient;
 	}
@@ -157,26 +135,48 @@ public class Sejour implements Serializable {
 		this.patient = patient;
 	}
 
-	public List<SejourChambre> getSejourChambres() {
-		return this.sejourChambres;
+	public List<Medicamentsejour> getMedicamentsejours() {
+		return this.medicamentsejours;
 	}
 
-	public void setSejourChambres(List<SejourChambre> sejourChambres) {
-		this.sejourChambres = sejourChambres;
+	public void setMedicamentsejours(List<Medicamentsejour> medicamentsejours) {
+		this.medicamentsejours = medicamentsejours;
 	}
 
-	public SejourChambre addSejourChambre(SejourChambre sejourChambre) {
-		getSejourChambres().add(sejourChambre);
-		sejourChambre.setSejour(this);
+	public Medicamentsejour addMedicamentsejour(Medicamentsejour medicamentsejour) {
+		getMedicamentsejours().add(medicamentsejour);
+		medicamentsejour.setSejour(this);
 
-		return sejourChambre;
+		return medicamentsejour;
 	}
 
-	public SejourChambre removeSejourChambre(SejourChambre sejourChambre) {
-		getSejourChambres().remove(sejourChambre);
-		sejourChambre.setSejour(null);
+	public Medicamentsejour removeMedicamentsejour(Medicamentsejour medicamentsejour) {
+		getMedicamentsejours().remove(medicamentsejour);
+		medicamentsejour.setSejour(null);
 
-		return sejourChambre;
+		return medicamentsejour;
+	}
+
+	public List<Sejourchambre> getSejourchambres() {
+		return this.sejourchambres;
+	}
+
+	public void setSejourchambres(List<Sejourchambre> sejourchambres) {
+		this.sejourchambres = sejourchambres;
+	}
+
+	public Sejourchambre addSejourchambre(Sejourchambre sejourchambre) {
+		getSejourchambres().add(sejourchambre);
+		sejourchambre.setSejour(this);
+
+		return sejourchambre;
+	}
+
+	public Sejourchambre removeSejourchambre(Sejourchambre sejourchambre) {
+		getSejourchambres().remove(sejourchambre);
+		sejourchambre.setSejour(null);
+
+		return sejourchambre;
 	}
 
 }

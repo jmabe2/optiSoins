@@ -26,7 +26,7 @@ public class Intervention implements Serializable {
 	@Column(length=255)
 	private String description;
 
-	@Column(length=255)
+	@Column(nullable=false, length=255)
 	private String nom;
 
 	//bi-directional many-to-one association to Sejour
@@ -34,15 +34,15 @@ public class Intervention implements Serializable {
 	@JoinColumn(name="Sejour_idSejour", nullable=false)
 	private Sejour sejour;
 
-	//bi-directional many-to-one association to TypeIntervention
-	@ManyToOne
-	@JoinColumn(name="Type_intervention_idType_intervention", nullable=false)
-	private TypeIntervention typeIntervention;
-
 	//bi-directional many-to-one association to Utilisateur
 	@ManyToOne
-	@JoinColumn(name="Utilisateur_idUtilisateur", nullable=false)
+	@JoinColumn(name="UtilisateurIdUtilisateur", nullable=false)
 	private Utilisateur utilisateur;
+
+	//bi-directional many-to-one association to Typeintervention
+	@ManyToOne
+	@JoinColumn(name="TypeInterventionIdTypeIntervention", nullable=false)
+	private Typeintervention typeintervention;
 
 	public Intervention() {
 	}
@@ -87,20 +87,20 @@ public class Intervention implements Serializable {
 		this.sejour = sejour;
 	}
 
-	public TypeIntervention getTypeIntervention() {
-		return this.typeIntervention;
-	}
-
-	public void setTypeIntervention(TypeIntervention typeIntervention) {
-		this.typeIntervention = typeIntervention;
-	}
-
 	public Utilisateur getUtilisateur() {
 		return this.utilisateur;
 	}
 
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
+	}
+
+	public Typeintervention getTypeintervention() {
+		return this.typeintervention;
+	}
+
+	public void setTypeintervention(Typeintervention typeintervention) {
+		this.typeintervention = typeintervention;
 	}
 
 }

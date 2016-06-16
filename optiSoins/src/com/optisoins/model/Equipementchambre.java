@@ -5,39 +5,39 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the equipement_chambre database table.
+ * The persistent class for the equipementchambre database table.
  * 
  */
 @Entity
-@Table(name="equipement_chambre")
-@NamedQuery(name="EquipementChambre.findAll", query="SELECT e FROM EquipementChambre e")
-public class EquipementChambre implements Serializable {
+@Table(name="equipementchambre")
+@NamedQuery(name="Equipementchambre.findAll", query="SELECT e FROM Equipementchambre e")
+public class Equipementchambre implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(unique=true, nullable=false)
-	private int idEquipement_chambre;
+	private int idEquipementChambre;
 
 	//bi-directional many-to-one association to Chambre
 	@ManyToOne
-	@JoinColumn(name="Chambre_idChambre", nullable=false)
+	@JoinColumn(name="ChambreIdChambre", nullable=false)
 	private Chambre chambre;
 
 	//bi-directional many-to-one association to Equipement
 	@ManyToOne
-	@JoinColumn(name="Equipement_idEquipement", nullable=false)
+	@JoinColumn(name="EquipementIdEquipement", nullable=false)
 	private Equipement equipement;
 
-	public EquipementChambre() {
+	public Equipementchambre() {
 	}
 
-	public int getIdEquipement_chambre() {
-		return this.idEquipement_chambre;
+	public int getIdEquipementChambre() {
+		return this.idEquipementChambre;
 	}
 
-	public void setIdEquipement_chambre(int idEquipement_chambre) {
-		this.idEquipement_chambre = idEquipement_chambre;
+	public void setIdEquipementChambre(int idEquipementChambre) {
+		this.idEquipementChambre = idEquipementChambre;
 	}
 
 	public Chambre getChambre() {

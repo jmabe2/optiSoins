@@ -20,20 +20,20 @@ public class Medicament implements Serializable {
 	@Column(unique=true, nullable=false)
 	private int idMedicament;
 
-	private byte actif;
+	private boolean actif;
 
 	@Column(length=255)
 	private String description;
 
-	@Column(length=255)
+	@Column(nullable=false, length=255)
 	private String nom;
 
-	@Column(nullable=false, name="quantite_dispo")
+	@Column(nullable=false)
 	private int quantiteDispo;
 
-	//bi-directional many-to-one association to MedicamentSejour
+	//bi-directional many-to-one association to Medicamentsejour
 	@OneToMany(mappedBy="medicament")
-	private List<MedicamentSejour> medicamentSejours;
+	private List<Medicamentsejour> medicamentsejours;
 
 	public Medicament() {
 	}
@@ -46,11 +46,11 @@ public class Medicament implements Serializable {
 		this.idMedicament = idMedicament;
 	}
 
-	public byte getActif() {
+	public boolean getActif() {
 		return this.actif;
 	}
 
-	public void setActif(byte actif) {
+	public void setActif(boolean actif) {
 		this.actif = actif;
 	}
 
@@ -74,30 +74,30 @@ public class Medicament implements Serializable {
 		return this.quantiteDispo;
 	}
 
-	public void setQuantite_dispo(int quantite_dispo) {
-		this.quantiteDispo = quantite_dispo;
+	public void setQuantiteDispo(int quantiteDispo) {
+		this.quantiteDispo = quantiteDispo;
 	}
 
-	public List<MedicamentSejour> getMedicamentSejours() {
-		return this.medicamentSejours;
+	public List<Medicamentsejour> getMedicamentsejours() {
+		return this.medicamentsejours;
 	}
 
-	public void setMedicamentSejours(List<MedicamentSejour> medicamentSejours) {
-		this.medicamentSejours = medicamentSejours;
+	public void setMedicamentsejours(List<Medicamentsejour> medicamentsejours) {
+		this.medicamentsejours = medicamentsejours;
 	}
 
-	public MedicamentSejour addMedicamentSejour(MedicamentSejour medicamentSejour) {
-		getMedicamentSejours().add(medicamentSejour);
-		medicamentSejour.setMedicament(this);
+	public Medicamentsejour addMedicamentsejour(Medicamentsejour medicamentsejour) {
+		getMedicamentsejours().add(medicamentsejour);
+		medicamentsejour.setMedicament(this);
 
-		return medicamentSejour;
+		return medicamentsejour;
 	}
 
-	public MedicamentSejour removeMedicamentSejour(MedicamentSejour medicamentSejour) {
-		getMedicamentSejours().remove(medicamentSejour);
-		medicamentSejour.setMedicament(null);
+	public Medicamentsejour removeMedicamentsejour(Medicamentsejour medicamentsejour) {
+		getMedicamentsejours().remove(medicamentsejour);
+		medicamentsejour.setMedicament(null);
 
-		return medicamentSejour;
+		return medicamentsejour;
 	}
 
 }

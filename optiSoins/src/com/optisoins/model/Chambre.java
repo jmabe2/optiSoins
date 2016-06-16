@@ -20,20 +20,20 @@ public class Chambre implements Serializable {
 	@Column(unique=true, nullable=false)
 	private int idChambre;
 
-	private int numero_chambre;
+	private int numeroChambre;
 
-	//bi-directional many-to-one association to TypeChambre
+	//bi-directional many-to-one association to Typechambre
 	@ManyToOne
-	@JoinColumn(name="Type_chambre_idType_chambre", nullable=false)
-	private TypeChambre typeChambre;
+	@JoinColumn(name="TypeChambreIdTypeChambre", nullable=false)
+	private Typechambre typechambre;
 
-	//bi-directional many-to-one association to EquipementChambre
+	//bi-directional many-to-one association to Equipementchambre
 	@OneToMany(mappedBy="chambre")
-	private List<EquipementChambre> equipementChambres;
+	private List<Equipementchambre> equipementchambres;
 
-	//bi-directional many-to-one association to SejourChambre
+	//bi-directional many-to-one association to Sejourchambre
 	@OneToMany(mappedBy="chambre")
-	private List<SejourChambre> sejourChambres;
+	private List<Sejourchambre> sejourchambres;
 
 	public Chambre() {
 	}
@@ -46,64 +46,64 @@ public class Chambre implements Serializable {
 		this.idChambre = idChambre;
 	}
 
-	public int getNumero_chambre() {
-		return this.numero_chambre;
+	public int getNumeroChambre() {
+		return this.numeroChambre;
 	}
 
-	public void setNumero_chambre(int numero_chambre) {
-		this.numero_chambre = numero_chambre;
+	public void setNumeroChambre(int numeroChambre) {
+		this.numeroChambre = numeroChambre;
 	}
 
-	public TypeChambre getTypeChambre() {
-		return this.typeChambre;
+	public Typechambre getTypechambre() {
+		return this.typechambre;
 	}
 
-	public void setTypeChambre(TypeChambre typeChambre) {
-		this.typeChambre = typeChambre;
+	public void setTypechambre(Typechambre typechambre) {
+		this.typechambre = typechambre;
 	}
 
-	public List<EquipementChambre> getEquipementChambres() {
-		return this.equipementChambres;
+	public List<Equipementchambre> getEquipementchambres() {
+		return this.equipementchambres;
 	}
 
-	public void setEquipementChambres(List<EquipementChambre> equipementChambres) {
-		this.equipementChambres = equipementChambres;
+	public void setEquipementchambres(List<Equipementchambre> equipementchambres) {
+		this.equipementchambres = equipementchambres;
 	}
 
-	public EquipementChambre addEquipementChambre(EquipementChambre equipementChambre) {
-		getEquipementChambres().add(equipementChambre);
-		equipementChambre.setChambre(this);
+	public Equipementchambre addEquipementchambre(Equipementchambre equipementchambre) {
+		getEquipementchambres().add(equipementchambre);
+		equipementchambre.setChambre(this);
 
-		return equipementChambre;
+		return equipementchambre;
 	}
 
-	public EquipementChambre removeEquipementChambre(EquipementChambre equipementChambre) {
-		getEquipementChambres().remove(equipementChambre);
-		equipementChambre.setChambre(null);
+	public Equipementchambre removeEquipementchambre(Equipementchambre equipementchambre) {
+		getEquipementchambres().remove(equipementchambre);
+		equipementchambre.setChambre(null);
 
-		return equipementChambre;
+		return equipementchambre;
 	}
 
-	public List<SejourChambre> getSejourChambres() {
-		return this.sejourChambres;
+	public List<Sejourchambre> getSejourchambres() {
+		return this.sejourchambres;
 	}
 
-	public void setSejourChambres(List<SejourChambre> sejourChambres) {
-		this.sejourChambres = sejourChambres;
+	public void setSejourchambres(List<Sejourchambre> sejourchambres) {
+		this.sejourchambres = sejourchambres;
 	}
 
-	public SejourChambre addSejourChambre(SejourChambre sejourChambre) {
-		getSejourChambres().add(sejourChambre);
-		sejourChambre.setChambre(this);
+	public Sejourchambre addSejourchambre(Sejourchambre sejourchambre) {
+		getSejourchambres().add(sejourchambre);
+		sejourchambre.setChambre(this);
 
-		return sejourChambre;
+		return sejourchambre;
 	}
 
-	public SejourChambre removeSejourChambre(SejourChambre sejourChambre) {
-		getSejourChambres().remove(sejourChambre);
-		sejourChambre.setChambre(null);
+	public Sejourchambre removeSejourchambre(Sejourchambre sejourchambre) {
+		getSejourchambres().remove(sejourchambre);
+		sejourchambre.setChambre(null);
 
-		return sejourChambre;
+		return sejourchambre;
 	}
 
 }

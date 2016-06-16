@@ -6,36 +6,36 @@ import java.util.List;
 
 
 /**
- * The persistent class for the type_intervention database table.
+ * The persistent class for the typeintervention database table.
  * 
  */
 @Entity
-@Table(name="type_intervention")
-@NamedQuery(name="TypeIntervention.findAll", query="SELECT t FROM TypeIntervention t")
-public class TypeIntervention implements Serializable {
+@Table(name="typeintervention")
+@NamedQuery(name="Typeintervention.findAll", query="SELECT t FROM Typeintervention t")
+public class Typeintervention implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(unique=true, nullable=false)
-	private int idType_intervention;
+	private int idTypeIntervention;
 
-	@Column(length=255)
+	@Column(nullable=false, length=255)
 	private String libelle;
 
 	//bi-directional many-to-one association to Intervention
-	@OneToMany(mappedBy="typeIntervention")
+	@OneToMany(mappedBy="typeintervention")
 	private List<Intervention> interventions;
 
-	public TypeIntervention() {
+	public Typeintervention() {
 	}
 
-	public int getIdType_intervention() {
-		return this.idType_intervention;
+	public int getIdTypeIntervention() {
+		return this.idTypeIntervention;
 	}
 
-	public void setIdType_intervention(int idType_intervention) {
-		this.idType_intervention = idType_intervention;
+	public void setIdTypeIntervention(int idTypeIntervention) {
+		this.idTypeIntervention = idTypeIntervention;
 	}
 
 	public String getLibelle() {
@@ -56,14 +56,14 @@ public class TypeIntervention implements Serializable {
 
 	public Intervention addIntervention(Intervention intervention) {
 		getInterventions().add(intervention);
-		intervention.setTypeIntervention(this);
+		intervention.setTypeintervention(this);
 
 		return intervention;
 	}
 
 	public Intervention removeIntervention(Intervention intervention) {
 		getInterventions().remove(intervention);
-		intervention.setTypeIntervention(null);
+		intervention.setTypeintervention(null);
 
 		return intervention;
 	}

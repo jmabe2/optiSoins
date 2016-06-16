@@ -7,23 +7,23 @@
 		<jta-data-source>java:comp/env/jdbc/optiSoins</jta-data-source>
 		<class>com.optisoins.model.Chambre</class>
 		<class>com.optisoins.model.Equipement</class>
-		<class>com.optisoins.model.EquipementChambre</class>
+		<class>com.optisoins.model.Equipementchambre</class>
 		<class>com.optisoins.model.Intervention</class>
 		<class>com.optisoins.model.Medicament</class>
-		<class>com.optisoins.model.MedicamentSejour</class>
+		<class>com.optisoins.model.Medicamentsejour</class>
 		<class>com.optisoins.model.Patient</class>
 		<class>com.optisoins.model.Role</class>
 		<class>com.optisoins.model.Sejour</class>
-		<class>com.optisoins.model.SejourChambre</class>
+		<class>com.optisoins.model.Sejourchambre</class>
 		<class>com.optisoins.model.Specialite</class>
-		<class>com.optisoins.model.TypeChambre</class>
-		<class>com.optisoins.model.TypeIntervention</class>
+		<class>com.optisoins.model.Typechambre</class>
+		<class>com.optisoins.model.Typeintervention</class>
 		<class>com.optisoins.model.Utilisateur</class>
 		
 		
 		<properties>
 			<property name="eclipselink.ddl-generation.output-mode" value="database"/>
-			<property name="eclipselink.ddl-generation" value="create-tables"/>				
+			<property name="eclipselink.ddl-generation" value="none"/>				
 		</properties>	
 	</persistence-unit>
 </persistence>

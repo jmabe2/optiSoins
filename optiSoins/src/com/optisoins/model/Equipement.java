@@ -23,12 +23,12 @@ public class Equipement implements Serializable {
 	@Column(length=255)
 	private String description;
 
-	@Column(length=255)
+	@Column(nullable=false, length=255)
 	private String nom;
 
-	//bi-directional many-to-one association to EquipementChambre
+	//bi-directional many-to-one association to Equipementchambre
 	@OneToMany(mappedBy="equipement")
-	private List<EquipementChambre> equipementChambres;
+	private List<Equipementchambre> equipementchambres;
 
 	public Equipement() {
 	}
@@ -57,26 +57,26 @@ public class Equipement implements Serializable {
 		this.nom = nom;
 	}
 
-	public List<EquipementChambre> getEquipementChambres() {
-		return this.equipementChambres;
+	public List<Equipementchambre> getEquipementchambres() {
+		return this.equipementchambres;
 	}
 
-	public void setEquipementChambres(List<EquipementChambre> equipementChambres) {
-		this.equipementChambres = equipementChambres;
+	public void setEquipementchambres(List<Equipementchambre> equipementchambres) {
+		this.equipementchambres = equipementchambres;
 	}
 
-	public EquipementChambre addEquipementChambre(EquipementChambre equipementChambre) {
-		getEquipementChambres().add(equipementChambre);
-		equipementChambre.setEquipement(this);
+	public Equipementchambre addEquipementchambre(Equipementchambre equipementchambre) {
+		getEquipementchambres().add(equipementchambre);
+		equipementchambre.setEquipement(this);
 
-		return equipementChambre;
+		return equipementchambre;
 	}
 
-	public EquipementChambre removeEquipementChambre(EquipementChambre equipementChambre) {
-		getEquipementChambres().remove(equipementChambre);
-		equipementChambre.setEquipement(null);
+	public Equipementchambre removeEquipementchambre(Equipementchambre equipementchambre) {
+		getEquipementchambres().remove(equipementchambre);
+		equipementchambre.setEquipement(null);
 
-		return equipementChambre;
+		return equipementchambre;
 	}
 
 }

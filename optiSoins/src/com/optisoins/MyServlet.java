@@ -37,6 +37,9 @@ public class MyServlet extends HttpServlet {
 	
 	static Logger log = Logger.getLogger(MyServlet.class);
 	
+	String name=null;
+	String pwd =null;
+	
 	/**
 	 * @author Administrateur
 	 * @see HttpServlet#HttpServlet() 
@@ -59,7 +62,7 @@ public class MyServlet extends HttpServlet {
 		String pwd = request.getParameter("pwd");
 		//response.getWriter().print("Success !");
 		//response.sendRedirect(getServletContext().getContextPath()+"/views/welcome.jsp");
-		log.debug("Name: " + name + " pw: " + pwd);
+		log.debug("Name: " + name + " pw S: " + pwd);
 		HttpSession session = request.getSession();
 		user.setNom(name);
 		session.setAttribute("loginUser", user);
@@ -78,13 +81,13 @@ public class MyServlet extends HttpServlet {
 	    log.info("Rules created !"); */
 
 
-	    em.getTransaction().begin();
+		/* em.getTransaction().begin();
 		service.RemoveRole(1);
 		service.RemoveRole(2);
 		service.RemoveRole(3);
 		service.RemoveRole(4);
 		em.getTransaction().commit();
-	    log.info("Rules deleted !");
+	    log.info("Rules deleted !");*/
 		
 		
 		/*List<Role> role = service.findAllRole();

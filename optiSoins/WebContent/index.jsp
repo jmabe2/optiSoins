@@ -6,8 +6,7 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="prefetch"
 	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900">
-<link rel="prefetch"
-	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
 	
   
 
@@ -16,6 +15,6 @@
 </head>
 <body>
 	<c:redirect url="/views/Signin.jsp"></c:redirect>
-
+	
 </body>
 </html>

@@ -3,9 +3,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Acceuil</title>
 </head>
 <body>
-	<c:out value="${sessionScope['loginUser'].nom}"></c:out>
+	Hello <c:out value="${sessionScope['loginUser'].nom}"></c:out>
 </body>
 </html>

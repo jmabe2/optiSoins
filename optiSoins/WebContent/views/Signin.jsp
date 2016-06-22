@@ -3,29 +3,33 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="prefetch"
+	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900">
 <link rel="prefetch"
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	
+
+
 <title>Sign in</title>
 </head>
 <body>
 	<div class="pen-title">
 		<div class="input-container">
-			<form class="login" action="/optiSoins/MyServlet" method="post">
+			<form class="login" action="/optiSoins/LoginServlet" method="post">
 				<div class="container">
-					  <div class="card"></div>
+					<div class="card"></div>
 					<div class="card">
 						<h1 class="title">Login</h1>
 						Login :<input type="text" id="Username" placeholder="Login"
 							name="login" size="20" /><br>
 						<div class="bar"></div>
 					</div>
-						Password : <input type="text" name="pwd" placeholder="Password"
-							id="Password" size="20" /><br> <br>
-					
-						<input type="submit" name="Submit" value="Submit" />
+					Password : <input type="text" name="pwd" placeholder="Password"
+						id="Password" size="20" /><br> <br> <input
+						type="submit" name="Submit" value="Submit" />
 				</div>
-			</form>			
+			</form>
 		</div>
 	</div>
 

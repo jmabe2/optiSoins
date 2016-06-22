@@ -1,4 +1,4 @@
-package com.optisoins.model;
+package com.optisoins.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -6,38 +6,38 @@ import java.util.List;
 
 
 /**
- * The persistent class for the role database table.
+ * The persistent class for the specialite database table.
  * 
  */
 @Entity
-@Table(name="role")
-@NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
-public class Role implements Serializable {
+@Table(name="specialite")
+@NamedQuery(name="Specialite.findAll", query="SELECT s FROM Specialite s")
+public class Specialite implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(unique=true, nullable=false)
-	private int idRole;
+	private int idSpecialite;
 
 	private boolean actif;
 
 	@Column(nullable=false, length=255)
-	private String nom;
+	private String specialite;
 
 	//bi-directional many-to-one association to Utilisateur
-	@OneToMany(mappedBy="role")
+	@OneToMany(mappedBy="specialite")
 	private List<Utilisateur> utilisateurs;
 
-	public Role() {
+	public Specialite() {
 	}
 
-	public int getIdRole() {
-		return this.idRole;
+	public int getIdSpecialite() {
+		return this.idSpecialite;
 	}
 
-	public void setIdRole(int idRole) {
-		this.idRole = idRole;
+	public void setIdSpecialite(int idSpecialite) {
+		this.idSpecialite = idSpecialite;
 	}
 
 	public boolean getActif() {
@@ -48,12 +48,12 @@ public class Role implements Serializable {
 		this.actif = actif;
 	}
 
-	public String getNom() {
-		return this.nom;
+	public String getSpecialite() {
+		return this.specialite;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setSpecialite(String specialite) {
+		this.specialite = specialite;
 	}
 
 	public List<Utilisateur> getUtilisateurs() {
@@ -66,14 +66,14 @@ public class Role implements Serializable {
 
 	public Utilisateur addUtilisateur(Utilisateur utilisateur) {
 		getUtilisateurs().add(utilisateur);
-		utilisateur.setRole(this);
+		utilisateur.setSpecialite(this);
 
 		return utilisateur;
 	}
 
 	public Utilisateur removeUtilisateur(Utilisateur utilisateur) {
 		getUtilisateurs().remove(utilisateur);
-		utilisateur.setRole(null);
+		utilisateur.setSpecialite(null);
 
 		return utilisateur;
 	}

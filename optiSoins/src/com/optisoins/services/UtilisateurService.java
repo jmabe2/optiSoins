@@ -1,7 +1,7 @@
 package com.optisoins.services;
 import javax.persistence.*;
 
-import com.optisoins.model.Utilisateur;
+import com.optisoins.entities.Utilisateur;
 
 import java.util.Date;
 import java.util.List;

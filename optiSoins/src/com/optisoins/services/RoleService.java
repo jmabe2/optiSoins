@@ -3,7 +3,7 @@ package com.optisoins.services;
 import java.util.List;
 import javax.persistence.*;
 
-import com.optisoins.model.Role;
+import com.optisoins.entities.Role;
 
 
 

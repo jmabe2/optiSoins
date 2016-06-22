@@ -1,4 +1,4 @@
-package com.optisoins.model;
+package com.optisoins.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;

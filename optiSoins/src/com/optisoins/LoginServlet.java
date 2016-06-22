@@ -17,14 +17,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Logger; 
-import com.optisoins.model.Role;
-import com.optisoins.model.Utilisateur;
+import org.apache.log4j.Logger;
+
+import com.optisoins.entities.Role;
+import com.optisoins.entities.Utilisateur;
 import com.optisoins.services.RoleService;
 
 
 /**
- * Servlet implementation class MyServlet
+ * Servlet implementation class LoginServlet
  */
 /**
  * Date 03/06/2016

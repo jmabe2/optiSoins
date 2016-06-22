@@ -14,7 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import com.optisoins.model.Utilisateur;
+import com.optisoins.connection.EMF;
+import com.optisoins.entities.Utilisateur;
 import com.optisoins.services.RoleService;
 
 /**
@@ -40,9 +41,10 @@ public class CreateRoleServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("optiSoins_PU");
-		EntityManager em = emf.createEntityManager();
+		
+		EntityManager em = EMF.getEM(); 
+		//EntityManagerFactory emf = Persistence.createEntityManagerFactory("optiSoins_PU");
+		//EntityManager em = emf.createEntityManager();
 		RoleService service = new RoleService(em);
 
 		/*em.getTransaction().begin();
@@ -68,7 +70,7 @@ public class CreateRoleServlet extends HttpServlet {
 		 */
 
 		em.close();
-		emf.close();
+		//emf.close();
 
 		response.sendRedirect("views/welcome.jsp");
 

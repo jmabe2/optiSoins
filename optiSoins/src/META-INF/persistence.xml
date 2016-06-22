@@ -5,20 +5,20 @@
 		
 		
 		<jta-data-source>java:comp/env/jdbc/optiSoins</jta-data-source>
-		<class>com.optisoins.model.Chambre</class>
-		<class>com.optisoins.model.Equipement</class>
-		<class>com.optisoins.model.Equipementchambre</class>
-		<class>com.optisoins.model.Intervention</class>
-		<class>com.optisoins.model.Medicament</class>
-		<class>com.optisoins.model.Medicamentsejour</class>
-		<class>com.optisoins.model.Patient</class>
-		<class>com.optisoins.model.Role</class>
-		<class>com.optisoins.model.Sejour</class>
-		<class>com.optisoins.model.Sejourchambre</class>
-		<class>com.optisoins.model.Specialite</class>
-		<class>com.optisoins.model.Typechambre</class>
-		<class>com.optisoins.model.Typeintervention</class>
-		<class>com.optisoins.model.Utilisateur</class>
+		<class>com.optisoins.entities.Chambre</class>
+		<class>com.optisoins.entities.Equipement</class>
+		<class>com.optisoins.entities.Equipementchambre</class>
+		<class>com.optisoins.entities.Intervention</class>
+		<class>com.optisoins.entities.Medicament</class>
+		<class>com.optisoins.entities.Medicamentsejour</class>
+		<class>com.optisoins.entities.Patient</class>
+		<class>com.optisoins.entities.Role</class>
+		<class>com.optisoins.entities.Sejour</class>
+		<class>com.optisoins.entities.Sejourchambre</class>
+		<class>com.optisoins.entities.Specialite</class>
+		<class>com.optisoins.entities.Typechambre</class>
+		<class>com.optisoins.entities.Typeintervention</class>
+		<class>com.optisoins.entities.Utilisateur</class>
 		
 		
 		<properties>

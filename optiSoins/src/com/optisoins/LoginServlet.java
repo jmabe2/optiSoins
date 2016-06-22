@@ -70,7 +70,7 @@ public class LoginServlet extends HttpServlet {
 		String name = request.getParameter("login");
 		String pwd = request.getParameter("pwd");
 		//response.getWriter().print("Success !");
-		response.sendRedirect(getServletContext().getContextPath()+"/views/welcome.jsp");
+		response.sendRedirect(getServletContext().getContextPath()+"/views/Welcome.jsp");
 		log.debug("Name: " + name + " pw : " + pwd);
 		HttpSession session = request.getSession();
 		user.setNom(name);

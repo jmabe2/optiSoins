@@ -8,6 +8,6 @@
 <title></title>
 </head>
 <body>
-	<c:redirect url="/views/Signin.jsp"></c:redirect>
+	<c:redirect url="/views/signin.jsp"></c:redirect>
 </body>
 </html>

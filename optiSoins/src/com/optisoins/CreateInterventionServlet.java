@@ -49,7 +49,7 @@ public class CreateInterventionServlet extends HttpServlet {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("optiSoins_PU");
 		EntityManager em1 = emf.createEntityManager();
 		InterventionService service = new InterventionService(em1);
-		SimpleDateFormat formatter = new SimpleDateFormat();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 		em1.getTransaction().begin();  //create interventions in the db
 
@@ -59,16 +59,16 @@ public class CreateInterventionServlet extends HttpServlet {
 			String nomInterv = request.getParameter("nomInterv");  
 			String descripInterv = request.getParameter("descripInterv");  */
 		
-			Intervention interv1 = service.createIntervention(formatter.parse("2015-8-11"), "Fou","ad");
-			Intervention interv2 = service.createIntervention(formatter.parse("2015-8-12"), "Fou","ad");
-			Intervention interv3 = service.createIntervention(formatter.parse("2015-8-13"), "Fou","ad");
+			Intervention interv1 = service.createIntervention(formatter.parse("2015-08-11"), "Fou","ad");
+			Intervention interv2 = service.createIntervention(formatter.parse("2015-08-12"), "Fou","ad");
+			Intervention interv3 = service.createIntervention(formatter.parse("2015-08-13"), "Fou","ad");
 
 			em1.getTransaction().commit();
 			log.info("Interventions created !"); 
 
 		}
 		catch (Exception e){
-
+			log.error(e,e);
 			log.info("Interventions not created !"); 
 		}
 

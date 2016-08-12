@@ -8,8 +8,8 @@
 </head>
 <body>
 
-<form action="/optiSoins/CreateInterventionServlet" method="POST">
-  <input type="button" value="Créer une intervention" />
+<form action="/optiSoins/InterventionServlet" method="POST">
+  <input type="submit" value="Créer une intervention" />
   <input type="button" value="Modifier une intervention" />
   
 </form>

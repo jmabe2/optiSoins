@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
-
 import com.optisoins.connection.EMF;
+import com.optisoins.entities.Role;
 import com.optisoins.entities.Utilisateur;
 import com.optisoins.services.RoleService;
 
@@ -43,17 +42,17 @@ public class CreateRoleServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		EntityManager em = EMF.getEM(); 
-		//EntityManagerFactory emf = Persistence.createEntityManagerFactory("optiSoins_PU");
-		//EntityManager em = emf.createEntityManager();
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("optiSoins_PU");
+		EntityManager em1 = emf.createEntityManager();
 		RoleService service = new RoleService(em);
 
-		/*em.getTransaction().begin();
+		em.getTransaction().begin();
 		Role ro = service.createRole(true, "Fou");
 		Role ro2 = service.createRole(false, "ABC");
 		Role ro3 = service.createRole(false, "DEF");
 		Role ro4 = service.createRole(true, "GHI");
 		em.getTransaction().commit();
-	    log.info("Rules created !"); */
+	    log.info("Rules created !"); 
 
 
 		/* em.getTransaction().begin();
@@ -70,7 +69,7 @@ public class CreateRoleServlet extends HttpServlet {
 		 */
 
 		em.close();
-		//emf.close();
+		emf.close();
 
 		response.sendRedirect("views/welcome.jsp");
 

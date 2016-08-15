@@ -1,6 +1,11 @@
 package com.optisoins;
 
 import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -10,85 +15,77 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import com.optisoins.connection.EMF;
 import com.optisoins.entities.Intervention;
+import com.optisoins.entities.Sejour;
 import com.optisoins.services.InterventionService;
+import com.optisoins.services.SejourService;
 
 /**
- * Servlet implementation class InterventionServlet
+ * Servlet implementation class CretateSejour
  */
-@WebServlet("/InterventionServlet")
-public class CreateInterventionServlet extends HttpServlet {
+@WebServlet("/CreateSejour")
+public class CreateSejourServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static Logger log = Logger.getLogger(CreateInterventionServlet.class);
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public CreateInterventionServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	static Logger log = Logger.getLogger(CreateSejourServlet.class);     
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public CreateSejourServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-
 		response.setContentType("text/html");    
 		PrintWriter pw = response.getWriter(); 
 
 		EntityManager em = EMF.getEM(); 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("optiSoins_PU");
 		EntityManager em1 = emf.createEntityManager();
-		InterventionService service = new InterventionService(em1);
+		SejourService service = new SejourService(em1);
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 		em1.getTransaction().begin();  //create interventions in the db
 
 		try {
 			
-			String nomInterv = request.getParameter("nomInterv");  
-			String dateInterv = request.getParameter("dateInterv");  
-			String descripInterv = request.getParameter("descripInterv"); 
-		
-			//Intervention interv1 = service.createIntervention(formatter.parse("2015-08-11"), "Fou","ad");
-			//Intervention interv2 = service.createIntervention(formatter.parse("2015-08-12"), "Fou","ad");
-			//Intervention interv3 = service.createIntervention(formatter.parse("2015-08-13"), "Fou","ad");
+			Sejour sej1 = service.createSejour(true, formatter.parse("2015-08-11"),formatter.parse("2015-08-12"),"Exemple","1");
+			Sejour sej2 = service.createSejour(true, formatter.parse("2015-08-12"),formatter.parse("2015-08-13"),"Exemple","2");
+			Sejour sej3 = service.createSejour(true, formatter.parse("2015-08-13"),formatter.parse("2015-08-14"),"Exemple","3");
 
 			em1.getTransaction().commit();
-			log.info("Interventions created !"); 
+			log.info("Stays created !"); 
 
 		}
 		catch (Exception e){
 			log.error(e,e);
-			log.info("Interventions not created !"); 
+			log.info("Stays not created !"); 
 		}
 
 
 
 
-		/*  List<Intervention> interv = service.findAllIntervention();
-		for(Intervention u : interv){
-	          pw.println(interv);  
+		/*  List<Sejour> sej = service.findAllSejour();
+		for(Sejour u : sej){
+	          pw.println(sej);  
 		 } 
 		 em.getTransaction().begin(); // remove data from the db
-		service.RemoveIntervention(1);
+		service.RemoveSejour(1);
 		em.getTransaction().commit();
-	    log.info("Interventions deleted !");*/
+	    log.info("Stays deleted !");*/
 
 		em1.close();
 		emf.close();
 
-		response.sendRedirect("views/intervention.jsp");
+		response.sendRedirect("views/sejour.jsp");
 
+	
 	}
 
 	/**
@@ -97,10 +94,6 @@ public class CreateInterventionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-
-
-
 	}
-
 
 }

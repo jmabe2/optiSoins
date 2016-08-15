@@ -24,7 +24,7 @@ import com.optisoins.services.RoleService;
 public class CreateRoleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	static Logger log = Logger.getLogger(LoginServlet.class);
+	static Logger log = Logger.getLogger(CreateRoleServlet.class);
 
 	/**
 	 * @see HttpServlet#HttpServlet()

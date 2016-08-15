@@ -21,7 +21,7 @@ import java.io.PrintWriter;
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	static Logger log = Logger.getLogger(LoginServlet.class);
+	static Logger log = Logger.getLogger(LogoutServlet.class);
 
        
     /**

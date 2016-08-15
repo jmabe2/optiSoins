@@ -9,10 +9,12 @@
 <body>
 
 <form action="/optiSoins/InterventionServlet" method="POST">
+  Entrez le nom de l'intervention : <input type="text" name="nomIntervention"><br>
+  Entrez la date de l'intervention : <input type="text" name="dateIntervention"><br>
+  Entrez la description de l'intervention : <input type="text" name="descriptIntervention"><br><br>
   <input type="submit" value="Créer une intervention" />
-  <input type="button" value="Modifier une intervention" />
+  <input type="button" value="Modifier une intervention" /><br>
   
 </form>
-
 </body>
 </html>

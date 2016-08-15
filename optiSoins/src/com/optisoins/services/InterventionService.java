@@ -3,10 +3,8 @@ package com.optisoins.services;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-
 import com.optisoins.entities.Intervention;
 
 public class InterventionService {

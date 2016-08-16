@@ -4,7 +4,7 @@
 		        <li><a href="welcome.jsp"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil</a></li>
 		        <li><a href="patients.jsp"> Patients</a></li>
 		        <li><a href="intervention.jsp"> Interventions</a></li>
-		        <li><a href="sejours.jsp"> Séjours</a></li>
+		        <li><a href="sejour.jsp"> Séjours</a></li>
 		        <li><a href="medicaments.jsp"> Médicaments</a></li>
 		        <li class="dropdown">
                 	<a href="#" data-toggle="dropdown" class="dropdown-toggle">Configuration<b class="caret"></b></a>

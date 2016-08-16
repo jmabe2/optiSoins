@@ -1,6 +1,7 @@
 package com.optisoins;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -47,13 +48,23 @@ public class CreateRoleServlet extends HttpServlet {
 		RoleService service = new RoleService(em);
 
 		em.getTransaction().begin();
-		Role ro = service.createRole(true, "Fou");
-		Role ro2 = service.createRole(false, "ABC");
-		Role ro3 = service.createRole(false, "DEF");
-		Role ro4 = service.createRole(true, "GHI");
+		
+		try {
+		
+		Role ro = service.createRole(true, "");
+		Role ro2 = service.createRole(false, "");
+		Role ro3 = service.createRole(false, "");
+		Role ro4 = service.createRole(true, "");
+		
 		em.getTransaction().commit();
 	    log.info("Rules created !"); 
 
+		}
+		
+		catch (Exception e){
+			log.error(e,e);
+			log.info("Rules not created !"); 
+		}
 
 		/* em.getTransaction().begin();
 		service.RemoveRole(1);
@@ -64,9 +75,10 @@ public class CreateRoleServlet extends HttpServlet {
 	    log.info("Rules deleted !");*/
 
 
-		/*List<Role> role = service.findAllRole();
+		/*List <Role> role = service.findAllRole();
 		for(Role u : role){
-		 */
+		
+		}*/
 
 		em.close();
 		emf.close();

@@ -25,13 +25,13 @@ public Medicament createMedicament(String nom, String description, int quantite,
 	return medic;
 }
 
-public Medicament findRole(int idMedicament){
+public Medicament findMedicament(int idMedicament){
 	return em.find(Medicament.class, idMedicament);
 }
 
 public void RemoveMedicament(int idMedicament){
 	
-	Medicament medic =findRole(idMedicament);
+	Medicament medic =findMedicament(idMedicament);
 	if (medic!=null){
 		em.remove(medic);
 	}

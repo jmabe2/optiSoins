@@ -14,6 +14,13 @@ public class RoleService {
 		this.em=em;
 	}
 
+	/** 
+	 * Mehod to create a new role
+	 * 
+	 * @param actif
+	 * @param nom
+	 * @return created role object
+	 */
 	public Role createRole(boolean actif, String nom) 
 	{
 		Role ro = new Role();
@@ -28,7 +35,7 @@ public class RoleService {
 		Role ro = em.find(Role.class, idRole);
 		ro.setActif(actif);
 		ro.setNom(nom);
-		em.persist(ro);
+		//em.persist(ro);
 		return ro;
 	}
 	

@@ -25,7 +25,7 @@ import com.optisoins.services.SejourService;
 /**
  * Servlet implementation class CretateSejour
  */
-@WebServlet("/CreateSejour")
+@WebServlet("/CreateSejourServlet")
 public class CreateSejourServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static Logger log = Logger.getLogger(CreateSejourServlet.class);     

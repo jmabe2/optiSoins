@@ -15,9 +15,17 @@ public class RoleService {
 	}
 
 	public Role createRole(boolean actif, String nom) 
-	
 	{
 		Role ro = new Role();
+		ro.setActif(actif);
+		ro.setNom(nom);
+		em.persist(ro);
+		return ro;
+	}
+	
+	public Role updateRole(int idRole,boolean actif, String nom) 	
+	{
+		Role ro = em.find(Role.class, idRole);
 		ro.setActif(actif);
 		ro.setNom(nom);
 		em.persist(ro);

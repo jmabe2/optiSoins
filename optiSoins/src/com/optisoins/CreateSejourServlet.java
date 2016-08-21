@@ -18,19 +18,21 @@ import javax.persistence.Persistence;
 import org.apache.log4j.Logger;
 import com.optisoins.connection.EMF;
 import com.optisoins.entities.Intervention;
+import com.optisoins.entities.Role;
 import com.optisoins.entities.Sejour;
 import com.optisoins.services.InterventionService;
+import com.optisoins.services.RoleService;
 import com.optisoins.services.SejourService;
 
 /**
  * Servlet implementation class CretateSejour
  */
-@WebServlet("/CreateSejourServlet")
+@WebServlet("/sejours")
 public class CreateSejourServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static Logger log = Logger.getLogger(CreateSejourServlet.class);     
     /**
-     * @see HttpServlet#HttpServlet()
+     * @see HttpServlet#HttpSevlet()
      */
     public CreateSejourServlet() {
         super();
@@ -42,58 +44,89 @@ public class CreateSejourServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html");    
-		PrintWriter pw = response.getWriter(); 
 
 		EntityManager em = EMF.getEM(); 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("optiSoins_PU");
-		EntityManager em1 = emf.createEntityManager();
-		SejourService service = new SejourService(em1);
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		SejourService service = new SejourService(em);
+		request.setAttribute("sejours", service.findAllSejour() );
+		this.getServletContext().getRequestDispatcher("/views/all/allsejour.jsp").forward( request, response );
 
-		em1.getTransaction().begin();  //create interventions in the db
-
-		try {
-			
-			Sejour sej1 = service.createSejour(true, formatter.parse("2015-08-11"),formatter.parse("2015-08-12"),"Exemple","1");
-			Sejour sej2 = service.createSejour(true, formatter.parse("2015-08-12"),formatter.parse("2015-08-13"),"Exemple","2");
-			Sejour sej3 = service.createSejour(true, formatter.parse("2015-08-13"),formatter.parse("2015-08-14"),"Exemple","3");
-
-			em1.getTransaction().commit();
-			log.info("Stays created !"); 
-
-		}
-		catch (Exception e){
-			log.error(e,e);
-			log.info("Stays not created !"); 
-		}
-
-
-
-
-		/*  List<Sejour> sej = service.findAllSejour();
-		for(Sejour u : sej){
-	          pw.println(sej);  
-		 } 
-		 em.getTransaction().begin(); // remove data from the db
-		service.RemoveSejour(1);
-		em.getTransaction().commit();
-	    log.info("Stays deleted !");*/
-
-		em1.close();
-		emf.close();
-
-		response.sendRedirect("views/sejour.jsp");
-
-	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		String jspview="";
+        String action = request.getParameter("action");
+        EntityManager em = EMF.getEM(); 
+		SejourService service = new SejourService(em);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		// case Edit
+		if (action.equalsIgnoreCase("edit")){
+			jspview="/views/edit/editsejour.jsp";
+            int sejourId = Integer.parseInt(request.getParameter("sejourId"));
+            Sejour sej = service.findSejour(sejourId);
+            request.setAttribute("sejour", sej);
+        
+        // case Create
+		} else if (action.equalsIgnoreCase("create")){
+        	jspview="/views/create/createsejour.jsp";        	
+		} else if (action.equalsIgnoreCase("saveedit")){
+        	jspview="/views/viewsejour.jsp";
+        	em.getTransaction().begin();  		
+    		try {
+    		
+    			Sejour sej = service.updateSejour( Integer.parseInt(request.getParameter("sejourId") ),
+    		    (request.getParameter("actif") != null), (sdf.parse (request.getParameter("dateEntree")) ),(sdf.parse (request.getParameter("dateSortie")) ),
+    			request.getParameter("emplacement"), request.getParameter("motifSejour") );                    		
+                
+    			em.getTransaction().commit();
+                log.info("Stays updated !");
+                request.setAttribute("Sejour", sej);
+    		}	
+    		catch (Exception e){
+    			log.error(e,e);
+    			log.info("Stays not updated !"); 
+           }
+        } else if (action.equalsIgnoreCase("savecreate")){
+        	jspview="/views/viewsejour.jsp";
+        	em.getTransaction().begin();  		
+    		try {
+    		
+    			Sejour sej = service.createSejour( (request.getParameter("actif") != null), 
+    		    (sdf.parse (request.getParameter("dateEntree")) ),(sdf.parse (request.getParameter("dateSortie")) ),
+    	    	request.getParameter("emplacement"), request.getParameter("motifSejour") );                    		
+                
+    			em.getTransaction().commit();
+                log.info("Stays created !");
+                request.setAttribute("Sejour", sej);
+    		}	
+    		catch (Exception e){
+    			log.error(e,e);
+    			log.info("Stays not created !"); 
+           }
+
+        /*} else if (action.equalsIgnoreCase("delete")){
+            int sejourId = Integer.parseInt(request.getParameter("sejourId"));
+            em.getTransaction().begin();  		
+    		try {
+    			service.RemoveSejour(sejourId);
+    			log.info("Stays deleted !");
+    		}
+    		catch (Exception e){
+        			log.error(e,e);
+        			log.info("Stays not deleted !"); 
+            }*/
+
+            jspview = "/views/all/allsejour.jsp";;
+            request.setAttribute("sejours", service.findAllSejour());    
+        }
+		em.close();
+		this.getServletContext().getRequestDispatcher(jspview).forward( request, response );
 	}
 
 }

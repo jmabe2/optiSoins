@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import com.optisoins.entities.Intervention;
+import com.optisoins.entities.Patient;
+import com.optisoins.entities.Role;
 import com.optisoins.entities.Sejour;
 
 public class SejourService {
@@ -18,6 +20,8 @@ public class SejourService {
 	
 	public Sejour createSejour(boolean actif,Date dateEntree, Date dateSortie, String emplacement, String motifSejour){
 		Sejour sej = new Sejour();
+		Patient patient = em.find(Patient.class, 1);
+		sej.setPatient(patient);
 		sej.setActif(actif);
 		sej.setDateEntree(dateEntree);
 		sej.setDateSortie(dateSortie);
@@ -26,6 +30,18 @@ public class SejourService {
 		em.persist(sej);
 		return sej;
 	}
+	
+	public Sejour updateSejour (int idSejour,boolean actif,Date dateEntree, Date dateSortie, String emplacement, String motifSejour) 	
+	{
+		Sejour sej = em.find(Sejour.class, idSejour);
+		sej.setActif(actif);
+		sej.setDateEntree(dateEntree);
+		sej.setDateSortie(dateSortie);
+		sej.setEmplacement(emplacement);
+		sej.setMotifSejour(motifSejour);
+		return sej;
+		}
+		
 	public Sejour findSejour(int idSejour){
 		return em.find(Sejour.class, idSejour);
 	}
@@ -40,7 +56,7 @@ public class SejourService {
 
 	public List<Sejour> findAllSejour (){
 		
-		TypedQuery<Sejour> query = em.createQuery("SELECT r from Role r", Sejour.class);
+		TypedQuery<Sejour> query = em.createQuery("SELECT s from Sejour s", Sejour.class);
 		return query.getResultList();
 
 	}

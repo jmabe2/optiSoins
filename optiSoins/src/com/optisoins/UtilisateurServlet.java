@@ -1,6 +1,7 @@
 package com.optisoins;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -62,6 +63,7 @@ public class UtilisateurServlet extends HttpServlet {
 		UtilisateurService service = new UtilisateurService(em);
 		RoleService roleService = new RoleService(em);
 		SpecialiteService specialiteService = new SpecialiteService(em);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Map<String, String> erreurs;
 
 		// case View
@@ -101,25 +103,25 @@ public class UtilisateurServlet extends HttpServlet {
 			erreurs = service.validate(request);
 			if (erreurs.isEmpty()) {
 				jspview = "/views/viewutilisateur.jsp";
-				em.getTransaction().begin();
+				
 				try {
 
-					/*
-					 * Utilisateur utilisateur =
-					 * service.createUtilisateur((request.getParameter("actif")
-					 * != null), request.getParameter("nom"),
-					 * request.getParameter("prenom"),
-					 * request.getParameter("sexe"),
-					 * request.getParameter("datenaiss"),
-					 * request.getParameter("login"),
-					 * request.getParameter("mdp"),
-					 * request.getParameter("role"),
-					 * request.getParameter("specialite") );
-					 */
+					 em.getTransaction().begin();
+					 Utilisateur utilisateur =
+					 service.createUtilisateur((request.getParameter("actif")
+					 != null), request.getParameter("nom"),
+					 request.getParameter("prenom"),
+					 request.getParameter("sexe"),
+					 sdf.parse(request.getParameter("datenaiss")),
+					 request.getParameter("login"),
+					 request.getParameter("mdp"),
+					 roleService.findRole(Integer.parseInt(request.getParameter("role"))),
+					 (request.getParameter("specialite") != null ? specialiteService.findSpecialite(Integer.parseInt(request.getParameter("specialite"))) : null) );
+					
 					em.getTransaction().commit();
 					log.info("utilisateur created !");
 
-					// request.setAttribute("utilisateur", utilisateur);
+					request.setAttribute("utilisateur", utilisateur);
 				} catch (Exception e) {
 					log.error(e, e);
 					log.info("utilisateur not created !");

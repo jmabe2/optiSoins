@@ -22,7 +22,7 @@
                         <td>${utilisateur.getIdUtilisateur()}</td>
                         <td>${utilisateur.getNom()}</td>
                         <td>${utilisateur.getPrenom()}</td>
-                        <td>${utilisateur.getDate_naissance()}</td>
+                        <td>${utilisateur.getDateNaissance()}</td>
                         <td>${utilisateur.getRole().getNom()}</td>
                         <td>${utilisateur.getActif() ? "<span class=\"glyphicon glyphicon-check\"  aria-hidden=\"true\"></span>" : "<span class=\"glyphicon glyphicon-unchecked\"  aria-hidden=\"true\"></span>"}</td>
                         <td>

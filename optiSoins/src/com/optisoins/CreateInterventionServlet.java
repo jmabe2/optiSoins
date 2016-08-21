@@ -18,12 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import com.optisoins.connection.EMF;
 import com.optisoins.entities.Intervention;
+import com.optisoins.entities.Sejour;
 import com.optisoins.services.InterventionService;
+import com.optisoins.services.SejourService;
 
 /**
  * Servlet implementation class InterventionServlet
  */
-@WebServlet("/InterventionServlet")
+@WebServlet("/intervention")
 public class CreateInterventionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static Logger log = Logger.getLogger(CreateInterventionServlet.class);
@@ -40,63 +42,86 @@ public class CreateInterventionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-
-		response.setContentType("text/html");    
-		PrintWriter pw = response.getWriter(); 
-
-		EntityManager em = EMF.getEM(); 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("optiSoins_PU");
-		EntityManager em1 = emf.createEntityManager();
-		InterventionService service = new InterventionService(em1);
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-		em1.getTransaction().begin();  //create interventions in the db
-
-		try {
-			
-			String nomInterv = request.getParameter("nomInterv");  
-			String dateInterv = request.getParameter("dateInterv");  
-			String descripInterv = request.getParameter("descripInterv"); 
 		
-			//Intervention interv1 = service.createIntervention(formatter.parse("2015-08-11"), "Fou","ad");
-			//Intervention interv2 = service.createIntervention(formatter.parse("2015-08-12"), "Fou","ad");
-			//Intervention interv3 = service.createIntervention(formatter.parse("2015-08-13"), "Fou","ad");
-
-			em1.getTransaction().commit();
-			log.info("Interventions created !"); 
-
-		}
-		catch (Exception e){
-			log.error(e,e);
-			log.info("Interventions not created !"); 
-		}
-
-
-
-
-		/*  List<Intervention> interv = service.findAllIntervention();
-		for(Intervention u : interv){
-	          pw.println(interv);  
-		 } 
-		 em.getTransaction().begin(); // remove data from the db
-		service.RemoveIntervention(1);
-		em.getTransaction().commit();
-	    log.info("Interventions deleted !");*/
-
-		em1.close();
-		emf.close();
-
-		response.sendRedirect("views/intervention.jsp");
-
+		EntityManager em = EMF.getEM(); 
+		InterventionService service = new InterventionService(em);
+		request.setAttribute("interventions", service.findAllIntervention() );
+		this.getServletContext().getRequestDispatcher("/views/all/allintervention.jsp").forward( request, response );
+		
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		String jspview="";
+        String action = request.getParameter("action");
+        EntityManager em = EMF.getEM(); 
+		InterventionService service = new InterventionService(em);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		// case Edit
+		if (action.equalsIgnoreCase("edit")){
+			jspview="/views/edit/editintervention.jsp";
+            int interventionId = Integer.parseInt(request.getParameter("interventionId"));
+            Intervention interv = service.findIntervention(interventionId);
+            request.setAttribute("intervention", interv);
+        
+        // case Create
+		} else if (action.equalsIgnoreCase("create")){
+        	jspview="/views/create/createintervention.jsp";        	
+		} else if (action.equalsIgnoreCase("saveedit")){
+        	jspview="/views/viewintervention.jsp";
+        	em.getTransaction().begin();  		
+    		try {
+    		
+    			Intervention interv = service.updateIntervention( Integer.parseInt(request.getParameter("interventionId") ),
+    	        sdf.parse( request.getParameter("date")), request.getParameter("description"), request.getParameter("nom") );                    		
+                
+    			em.getTransaction().commit();
+                log.info("Interventions updated !");
+                request.setAttribute("Intervention", interv);
+    		}	
+    		catch (Exception e){
+    			log.error(e,e);
+    			log.info("Interventions not updated !"); 
+           }
+        } else if (action.equalsIgnoreCase("savecreate")){
+        	jspview="/views/viewintervention.jsp";
+        	em.getTransaction().begin();  		
+    		try {
+    		
+    			Intervention interv = service.createIntervention(sdf.parse( request.getParameter("date")), request.getParameter("description"), 
+    		    request.getParameter("nom") );                    		
+    			em.getTransaction().commit();
+                log.info("Interventions created !");
+                request.setAttribute("Intervention", interv);
+    		}	
+    		catch (Exception e){
+    			log.error(e,e);
+    			log.info("Intervention not created !"); 
+           }
+
+        /*} else if (action.equalsIgnoreCase("delete")){
+            int interventionrId = Integer.parseInt(request.getParameter("interventionId"));
+            em.getTransaction().begin();  		
+    		try {
+    			service.RemoveIntervention (interventionId);
+    			log.info("Interventions deleted !");
+    		}
+    		catch (Exception e){
+        			log.error(e,e);
+        			log.info("Interventions not deleted !"); 
+            }*/
+
+            jspview = "/views/all/allintervention.jsp";;
+            request.setAttribute("intervention", service.findAllIntervention());    
+        }
+		
+		em.close();
+		this.getServletContext().getRequestDispatcher(jspview).forward( request, response );
 
 
 

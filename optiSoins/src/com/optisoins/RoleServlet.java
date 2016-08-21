@@ -38,7 +38,7 @@ public class RoleServlet extends HttpServlet {
 		EntityManager em = EMF.getEM(); 
 		RoleService service = new RoleService(em);
 		request.setAttribute("roles", service.findAllRole());
-		this.getServletContext().getRequestDispatcher("/views/allroles.jsp").forward( request, response );
+		this.getServletContext().getRequestDispatcher("/views/all/allroles.jsp").forward( request, response );
 	}
 
 	/**
@@ -54,14 +54,14 @@ public class RoleServlet extends HttpServlet {
 		
 		// case Edit
 		if (action.equalsIgnoreCase("edit")){
-			jspview="/views/editrole.jsp";
+			jspview="/views/edit/editrole.jsp";
             int roleId = Integer.parseInt(request.getParameter("roleId"));
             Role role = service.findRole(roleId);
             request.setAttribute("role", role);
         
         // case Create
 		} else if (action.equalsIgnoreCase("create")){
-        	jspview="/views/createrole.jsp";        	
+        	jspview="/views/create/createrole.jsp";        	
 		} else if (action.equalsIgnoreCase("saveedit")){
         	jspview="/views/viewrole.jsp";
         	em.getTransaction().begin();  		
@@ -103,7 +103,7 @@ public class RoleServlet extends HttpServlet {
         			log.info("Role not deleted !"); 
             }
 
-            jspview = "/views/allroles.jsp";;
+            jspview = "/views/all/allroles.jsp";;
             request.setAttribute("roles", service.findAllRole());    
         }
 		em.close();

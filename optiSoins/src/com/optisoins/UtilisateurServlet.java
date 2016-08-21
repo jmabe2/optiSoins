@@ -27,124 +27,128 @@ import java.util.Map;
 public class UtilisateurServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static Logger log = Logger.getLogger(UtilisateurServlet.class);
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UtilisateurServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EntityManager em = EMF.getEM(); 
-		UtilisateurService service = new UtilisateurService(em);
-		request.setAttribute("utilisateurs", service.findAllUtilisateur());
-		this.getServletContext().getRequestDispatcher("/views/allutilisateurs.jsp").forward( request, response );
+	public UtilisateurServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		EntityManager em = EMF.getEM();
+		UtilisateurService service = new UtilisateurService(em);
+		request.setAttribute("utilisateurs", service.findAllUtilisateur());
+		this.getServletContext().getRequestDispatcher("/views/all/allutilisateurs.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-				
-		String jspview="";
-        String action = request.getParameter("action");
-        EntityManager em = EMF.getEM(); 
+
+		String jspview = "";
+		String action = request.getParameter("action");
+		EntityManager em = EMF.getEM();
 		UtilisateurService service = new UtilisateurService(em);
 		RoleService roleService = new RoleService(em);
 		SpecialiteService specialiteService = new SpecialiteService(em);
-	    Map<String, String> erreurs;
-		
-	    
-	    
+		Map<String, String> erreurs;
+
 		// case View
-		if (action.equalsIgnoreCase("view")){
-			jspview="/views/viewutilisateur.jsp";
-            int utilisateurId = Integer.parseInt(request.getParameter("utilisateurId"));
-            Utilisateur utilisateur = service.findUtilisateur(utilisateurId);
-            request.setAttribute("utilisateur", utilisateur);
-		// case Edit
-		} else if (action.equalsIgnoreCase("edit")){
-			jspview="/views/editutilisateur.jsp";
-            int utilisateurId = Integer.parseInt(request.getParameter("utilisateurId"));
-            Utilisateur utilisateur = service.findUtilisateur(utilisateurId);
-            request.setAttribute("utilisateur", utilisateur);
-        
-        // case Create
-		} else if (action.equalsIgnoreCase("create")){
+		if (action.equalsIgnoreCase("view")) {
+			jspview = "/views/viewutilisateur.jsp";
+			int utilisateurId = Integer.parseInt(request.getParameter("utilisateurId"));
+			Utilisateur utilisateur = service.findUtilisateur(utilisateurId);
+			request.setAttribute("utilisateur", utilisateur);
+			// case Edit
+		} else if (action.equalsIgnoreCase("edit")) {
+			jspview = "/views/edit/editutilisateur.jsp";
+			int utilisateurId = Integer.parseInt(request.getParameter("utilisateurId"));
+			Utilisateur utilisateur = service.findUtilisateur(utilisateurId);
+			request.setAttribute("utilisateur", utilisateur);
+
+			// case Create
+		} else if (action.equalsIgnoreCase("create")) {
 			request.setAttribute("roles", roleService.findAllRole());
 			request.setAttribute("specialites", specialiteService.findAllSpecialite());
-        	jspview="/views/createutilisateur.jsp";        	
-		} else if (action.equalsIgnoreCase("saveedit")){
-        	jspview="/views/viewutilisateur.jsp";
-        	em.getTransaction().begin();  		
-    		try {
-    		
-    			Utilisateur utilisateur = service.updateUtilisateur(Integer.parseInt(request.getParameter("utilisateurId")),(request.getParameter("actif") != null), request.getParameter("name"));                    		
-                em.getTransaction().commit();
-                log.info("utilisateur updated !");
-                request.setAttribute("utilisateur", utilisateur);
-    		}	
-    		catch (Exception e){
-    			log.error(e,e);
-    			log.info("utilisateur not updated !"); 
-           }
-        } else if (action.equalsIgnoreCase("savecreate")){
-        	erreurs = service.validate(request);
+			jspview = "/views/create/createutilisateur.jsp";
+		} else if (action.equalsIgnoreCase("saveedit")) {
+			jspview = "/views/viewutilisateur.jsp";
+			em.getTransaction().begin();
+			try {
+
+				Utilisateur utilisateur = service.updateUtilisateur(
+						Integer.parseInt(request.getParameter("utilisateurId")),
+						(request.getParameter("actif") != null), request.getParameter("name"));
+				em.getTransaction().commit();
+				log.info("utilisateur updated !");
+				request.setAttribute("utilisateur", utilisateur);
+			} catch (Exception e) {
+				log.error(e, e);
+				log.info("utilisateur not updated !");
+			}
+		} else if (action.equalsIgnoreCase("savecreate")) {
+			erreurs = service.validate(request);
 			if (erreurs.isEmpty()) {
-        	jspview="/views/viewutilisateur.jsp";
-        	em.getTransaction().begin();  		
-    		try {
-    			
-    			
-    		/*	Utilisateur utilisateur = service.createUtilisateur((request.getParameter("actif") != null), 
-    					request.getParameter("nom"),
-    					request.getParameter("prenom"),
-    					request.getParameter("sexe"),
-    					request.getParameter("datenaiss"),
-    					request.getParameter("login"),
-    					request.getParameter("mdp"),
-    					request.getParameter("role"),
-    					request.getParameter("specialite")
-    					);        */            		
-                em.getTransaction().commit();
-                log.info("utilisateur created !");
-    			
-    				
-    			
-             //   request.setAttribute("utilisateur", utilisateur);
-    		}	
-    		catch (Exception e){
-    			log.error(e,e);
-    			log.info("utilisateur not created !"); 
-           }
-        	} else {
-        		jspview="/views/createutilisateur.jsp";
-        		request.setAttribute("erreurs", erreurs);
-        	}
+				jspview = "/views/viewutilisateur.jsp";
+				em.getTransaction().begin();
+				try {
 
-        } else if (action.equalsIgnoreCase("delete")){
-            int utilisateurId = Integer.parseInt(request.getParameter("utilisateurId"));
-            em.getTransaction().begin();  		
-    		try {
-    			service.RemoveUtilisateur(utilisateurId);
-    			log.info("utilisateur deleted !");
-    		}
-    		catch (Exception e){
-        			log.error(e,e);
-        			log.info("utilisateur not deleted !"); 
-            }
+					/*
+					 * Utilisateur utilisateur =
+					 * service.createUtilisateur((request.getParameter("actif")
+					 * != null), request.getParameter("nom"),
+					 * request.getParameter("prenom"),
+					 * request.getParameter("sexe"),
+					 * request.getParameter("datenaiss"),
+					 * request.getParameter("login"),
+					 * request.getParameter("mdp"),
+					 * request.getParameter("role"),
+					 * request.getParameter("specialite") );
+					 */
+					em.getTransaction().commit();
+					log.info("utilisateur created !");
 
-            jspview = "/views/allutilisateurs.jsp";;
-            request.setAttribute("utilisateurs", service.findAllUtilisateur());    
-        }
+					// request.setAttribute("utilisateur", utilisateur);
+				} catch (Exception e) {
+					log.error(e, e);
+					log.info("utilisateur not created !");
+				}
+			} else {
+				request.setAttribute("roles", roleService.findAllRole());
+				request.setAttribute("specialites", specialiteService.findAllSpecialite());
+				jspview = "/views/create/createutilisateur.jsp";
+				request.setAttribute("erreurs", erreurs);
+			}
+
+		} else if (action.equalsIgnoreCase("delete")) {
+			int utilisateurId = Integer.parseInt(request.getParameter("utilisateurId"));
+			em.getTransaction().begin();
+			try {
+				service.RemoveUtilisateur(utilisateurId);
+				log.info("utilisateur deleted !");
+			} catch (Exception e) {
+				log.error(e, e);
+				log.info("utilisateur not deleted !");
+			}
+
+			jspview = "/views/all/allutilisateurs.jsp";
+			;
+			request.setAttribute("utilisateurs", service.findAllUtilisateur());
+		}
 		em.close();
-		this.getServletContext().getRequestDispatcher(jspview).forward( request, response );
-		
+		this.getServletContext().getRequestDispatcher(jspview).forward(request, response);
+
 	}
 
 }

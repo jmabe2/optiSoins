@@ -11,7 +11,8 @@
                     <ul class="dropdown-menu">
                     	<li><a href="${pageContext.request.contextPath}/chambres"> Chambres</a></li>
                     	<li><a href="${pageContext.request.contextPath}/utilisateurs"> Utilisateurs</a></li>
-                    	<li><a href="${pageContext.request.contextPath}/roles"> Rôles</a></li>                     
+                    	<li><a href="${pageContext.request.contextPath}/roles"> Rôles</a></li> 
+                    	<li><a href="${pageContext.request.contextPath}/specialites"> Spécialités</a></li>                     
                     </ul>
                 </li>
 		        <li><a href="${pageContext.request.contextPath}/LogoutServlet"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Déconnexion</a></li>

@@ -1,40 +1,41 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 	<table>
 		<tr>
 			<td><label>Nom: </label></td>
-			<td><input type="text" name="nom" value="${utilisateur.getNom()}">
+			<td><input type="text" name="nom" value="${param.nom}">
 			<span class="erreur">${erreurs['nom']}</span>
 			</td>
 		</tr>
 		<tr>
 			<td><label>Prenom: </label></td>
-			<td><input type="text" name="prenom" value="${utilisateur.getPrenom()}">
+			<td><input type="text" name="prenom" value="${param.prenom}">
 			<span class="erreur">${erreurs['prenom']}</span>
 			</td>
 		</tr>
 		<tr>
 			<td><label>Sexe: </label></td>
 			<td><select name="sexe">
-					<option value="M">Homme</option>
-					<option value="F">Femme</option>
+					<option value="M" ${param.sexe == "M" ? "selected" : ""}>Homme</option>
+					<option value="F" ${param.sexe == "F" ? "selected" : ""}>Femme</option>
 			</select></td>
 		</tr>
 		<tr>
 			<td><label>Date de naissance: </label></td>
-			<td><input type="text" name="datenaiss"></td>
+			<td><input type="text" name="datenaiss" value="${param.datenaiss}"></td>
 		</tr>
 		<tr>
 			<td><label>Login: </label></td>
-			<td><input type="text" name="login"></td>
+			<td><input type="text" name="login" value="${param.login}"></td>
 		</tr>
 		<tr>
 			<td><label>Mot de passe: </label></td>
-			<td><input type="text" name="mdp"></td>
+			<td><input type="text" name="mdp" value="${param.mdp}"></td>
 		</tr>
 		<tr>
 			<td><label>Role: </label></td>
 			<td><select name="role">
 					<c:forEach items="${roles}" var="role">
-						<option value="${role.getIdRole()}">${role.getNom()}</option>
+						<option value="${role.getIdRole()}" ${param.role == role.getIdRole() ? "selected" : ""}>${role.getNom()}</option>
 					</c:forEach>
 			</select><br></td>
 		</tr>
@@ -42,12 +43,12 @@
 			<td><label>Spécialité: </label></td>
 			<td><select name="specialite">
 					<c:forEach items="${specialites}" var="specialite">
-						<option value="${specialite.getIdSpecialite()}">${specialite.getSpecialite()}</option>
+						<option value="${specialite.getIdSpecialite()}" ${param.specialite == specialite.getIdSpecialite() ? "selected" : ""}>${specialite.getSpecialite()}</option>
 					</c:forEach>
 			</select><br></td>
 		</tr>
 		<tr>
 			<td><label>Actif: </label></td>
-			<td><input type="checkbox" name="actif"><br></td>
+			<td><input type="checkbox" name="actif" ${param.actif != null ? "checked" : ""}><br></td>
 		</tr>
 	</table>

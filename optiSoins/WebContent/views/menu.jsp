@@ -1,4 +1,4 @@
-	 <nav class="navbar navbar-inverse navbar-static">
+ <nav class="navbar navbar-inverse navbar-static">
     	<div class="container">
 		    <ul class="nav navbar-nav">
 		        <li><a href="${pageContext.request.contextPath}/views/welcome.jsp"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil</a></li>
@@ -19,4 +19,3 @@
 		    </ul>
 		</div>
 	</nav>
-

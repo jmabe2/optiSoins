@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import com.optisoins.entities.Medicament;
+import com.optisoins.entities.Role;
 
 public class MedicamentService {
 	protected EntityManager em;
@@ -22,6 +23,16 @@ public Medicament createMedicament(String nom, String description, int quantite,
 	medic.setQuantiteDispo(quantite);
 	medic.setActif(actif);
 	em.persist(medic);
+	return medic;
+}
+
+public Medicament updateMedicament(int idMedicament, String nom, String description, int quantite, boolean actif) 	
+{
+	Medicament medic = em.find(Medicament.class, idMedicament);
+	medic.setNom("nom");
+	medic.setDescription("description");
+	medic.setQuantiteDispo(quantite);
+	medic.setActif(actif);
 	return medic;
 }
 

@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 
-<jsp:include page="header.jsp"/>
+<jsp:include page="../header.jsp"/>
 
 			<h2>Utilisateurs</h2><br>
 			<form action="${pageContext.request.contextPath}/utilisateurs" method="post">
@@ -42,4 +42,4 @@
                 </c:forEach>
             </table>
 
-<jsp:include page="footer.jsp"/>
+<jsp:include page="../footer.jsp"/>

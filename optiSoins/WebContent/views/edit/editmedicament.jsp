@@ -11,7 +11,7 @@
 	<label>Description: </label>
 	<input type="text" name="description" value="${medicament.getDescription()}"><br>
 	<label>Quantité: </label>
-	<input type="text" name="quantite" value="${medicament.getQuantiteDispo()}"><br>
+	<input type="text" name="quantiteDispo" value="${medicament.getQuantiteDispo()}"><br>
 	<label>Actif: </label>
 	<input type="checkbox" name="actif" ${medicament.getActif() ? "checked" : ""}><br>
 	

@@ -74,50 +74,67 @@ public class UtilisateurServlet extends HttpServlet {
 			request.setAttribute("utilisateur", utilisateur);
 			// case Edit
 		} else if (action.equalsIgnoreCase("edit")) {
+			request.setAttribute("roles", roleService.findAllRole());
+			request.setAttribute("specialites", specialiteService.findAllSpecialite());
 			jspview = "/views/edit/editutilisateur.jsp";
 			int utilisateurId = Integer.parseInt(request.getParameter("utilisateurId"));
 			Utilisateur utilisateur = service.findUtilisateur(utilisateurId);
 			request.setAttribute("utilisateur", utilisateur);
-
 			// case Create
 		} else if (action.equalsIgnoreCase("create")) {
 			request.setAttribute("roles", roleService.findAllRole());
 			request.setAttribute("specialites", specialiteService.findAllSpecialite());
 			jspview = "/views/create/createutilisateur.jsp";
 		} else if (action.equalsIgnoreCase("saveedit")) {
-			jspview = "/views/viewutilisateur.jsp";
-			em.getTransaction().begin();
-			try {
+			erreurs = service.validate(request);
+			if (erreurs.isEmpty()) {
+				jspview = "/views/viewutilisateur.jsp";
+				em.getTransaction().begin();
+				try {
 
-				Utilisateur utilisateur = service.updateUtilisateur(
-						Integer.parseInt(request.getParameter("utilisateurId")),
-						(request.getParameter("actif") != null), request.getParameter("name"));
-				em.getTransaction().commit();
-				log.info("utilisateur updated !");
-				request.setAttribute("utilisateur", utilisateur);
-			} catch (Exception e) {
-				log.error(e, e);
-				log.info("utilisateur not updated !");
+					Utilisateur utilisateur = service
+							.updateUtilisateur(Integer.parseInt(request.getParameter("utilisateurId")),
+									(request.getParameter("actif") != null), request.getParameter("nom"),
+									request.getParameter("prenom"), request.getParameter("sexe"),
+									sdf.parse(request.getParameter("datenaiss")), request.getParameter("login"),
+									request.getParameter("mdp"),
+									roleService.findRole(Integer.parseInt(
+											request.getParameter("role"))),
+									(request.getParameter("specialite") != null ? specialiteService.findSpecialite(
+											Integer.parseInt(request.getParameter("specialite"))) : null));
+					em.getTransaction().commit();
+					log.info("utilisateur updated !");
+					request.setAttribute("utilisateur", utilisateur);
+				} catch (Exception e) {
+					log.error(e, e);
+					log.info("utilisateur not updated !");
+				}
+			} else {
+				request.setAttribute("erreurs", erreurs);
+				request.setAttribute("roles", roleService.findAllRole());
+				request.setAttribute("specialites", specialiteService.findAllSpecialite());
+				jspview = "/views/edit/editutilisateur.jsp";
+
 			}
+
 		} else if (action.equalsIgnoreCase("savecreate")) {
 			erreurs = service.validate(request);
 			if (erreurs.isEmpty()) {
 				jspview = "/views/viewutilisateur.jsp";
-				
+
 				try {
 
-					 em.getTransaction().begin();
-					 Utilisateur utilisateur =
-					 service.createUtilisateur((request.getParameter("actif")
-					 != null), request.getParameter("nom"),
-					 request.getParameter("prenom"),
-					 request.getParameter("sexe"),
-					 sdf.parse(request.getParameter("datenaiss")),
-					 request.getParameter("login"),
-					 request.getParameter("mdp"),
-					 roleService.findRole(Integer.parseInt(request.getParameter("role"))),
-					 (request.getParameter("specialite") != null ? specialiteService.findSpecialite(Integer.parseInt(request.getParameter("specialite"))) : null) );
-					
+					em.getTransaction().begin();
+					Utilisateur utilisateur = service
+							.createUtilisateur((request.getParameter("actif") != null), request.getParameter("nom"),
+									request.getParameter("prenom"), request.getParameter("sexe"),
+									sdf.parse(request.getParameter("datenaiss")), request.getParameter("login"),
+									request.getParameter("mdp"),
+									roleService.findRole(Integer.parseInt(
+											request.getParameter("role"))),
+									(request.getParameter("specialite") != null ? specialiteService.findSpecialite(
+											Integer.parseInt(request.getParameter("specialite"))) : null));
+
 					em.getTransaction().commit();
 					log.info("utilisateur created !");
 
@@ -145,7 +162,6 @@ public class UtilisateurServlet extends HttpServlet {
 			}
 
 			jspview = "/views/all/allutilisateurs.jsp";
-			;
 			request.setAttribute("utilisateurs", service.findAllUtilisateur());
 		}
 		em.close();

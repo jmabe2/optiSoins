@@ -67,7 +67,7 @@ public class MedicamentServlet extends HttpServlet {
         	em.getTransaction().begin();  		
     		try {
     		
-    			Medicament medic = service.updateMedicament(Integer.parseInt(request.getParameter("medicamentId")), (request.getParameter("name")) ,(request.getParameter("description")),Integer.parseInt(request.getParameter("quantité")), (request.getParameter("actif") != null));                  		
+    			Medicament medic = service.updateMedicament(Integer.parseInt(request.getParameter("medicamentId")), request.getParameter("name") ,request.getParameter("description"),Integer.parseInt(request.getParameter("quantiteDispo")), (request.getParameter("actif") != null));                  		
                 em.getTransaction().commit();
                 log.info("Medicament updated !");
                 request.setAttribute("medicament", medic);
@@ -81,7 +81,7 @@ public class MedicamentServlet extends HttpServlet {
         	em.getTransaction().begin();  		
     		try {
     		
-    			Medicament medic = service.createMedicament ((request.getParameter("name")) ,(request.getParameter("description")),Integer.parseInt(request.getParameter("quantité")), (request.getParameter("actif") != null));                     		
+    			Medicament medic = service.createMedicament (request.getParameter("name") ,request.getParameter("description"),Integer.parseInt(request.getParameter("quantiteDispo")), (request.getParameter("actif") != null));                     		
                 em.getTransaction().commit();
                 log.info("Medicament created !");
                 request.setAttribute("medicament", medic);

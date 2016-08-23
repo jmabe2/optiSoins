@@ -7,7 +7,7 @@
 	<label>Nom: </label>${medicament.getNom()}<br>
 	<label>Description: </label>${medicament.getDescription()}<br>
 	<label>Quantité: </label>${medicament.getQuantiteDispo()}<br>
-	<label>Actif: </label> ${role.getActif() ? "<span class=\"glyphicon glyphicon-check\"  aria-hidden=\"true\"></span>" : "<span class=\"glyphicon glyphicon-unchecked\"  aria-hidden=\"true\"></span>"}<br>
+	<label>Actif: </label> ${medicament.getActif() ? "<span class=\"glyphicon glyphicon-check\"  aria-hidden=\"true\"></span>" : "<span class=\"glyphicon glyphicon-unchecked\"  aria-hidden=\"true\"></span>"}<br>
 	<button type="submit">Modifier</button>	
 </form>
 	<a href="${pageContext.request.contextPath}/medicaments"><button>Retour à la liste</button></a>

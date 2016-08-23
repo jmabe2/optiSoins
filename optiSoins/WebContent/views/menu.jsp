@@ -10,6 +10,8 @@
                 	<a href="#" data-toggle="dropdown" class="dropdown-toggle">Configuration<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     	<li><a href="${pageContext.request.contextPath}/chambres"> Chambres</a></li>
+                    	<li><a href="${pageContext.request.contextPath}/equipements"> Equipements chambre</a></li>
+                    	<li><a href="${pageContext.request.contextPath}/types"> Types de chambre</a></li>
                     	<li><a href="${pageContext.request.contextPath}/utilisateurs"> Utilisateurs</a></li>
                     	<li><a href="${pageContext.request.contextPath}/roles"> Rôles</a></li> 
                     	<li><a href="${pageContext.request.contextPath}/specialites"> Spécialités</a></li>                     

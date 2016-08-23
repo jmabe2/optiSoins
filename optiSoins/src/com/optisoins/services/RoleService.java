@@ -30,6 +30,7 @@ public class RoleService {
 		return ro;
 	}
 	
+
 	public Role updateRole(int idRole,boolean actif, String nom) 	
 	{
 		Role ro = em.find(Role.class, idRole);

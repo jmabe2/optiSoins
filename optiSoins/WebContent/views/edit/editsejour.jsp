@@ -5,7 +5,7 @@
 <form action="${pageContext.request.contextPath}/sejours" method="post">
 
 	<input type="hidden" name="action" value="saveedit">
-	<input type="hidden" name="sejourId" value="${role.getIdSejour()}">
+	<input type="hidden" name="sejourId" value="${sejour.getIdSejour()}">
 	<label>Date d'entrée : </label>
 	<input type="text" name="dateEntree" value="${sejour.getDateEntree()}"><br>
 	<label>Date de sortie : </label>
@@ -20,6 +20,6 @@
 	
 </form>
 
-	<a href="${pageContext.request.contextPath}/sejour"><button>Retour à la liste</button></a>
+	<a href="${pageContext.request.contextPath}/sejours"><button>Retour à la liste</button></a>
 	
 <jsp:include page="../footer.jsp"/>

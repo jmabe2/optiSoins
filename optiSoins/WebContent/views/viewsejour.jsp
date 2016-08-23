@@ -5,11 +5,11 @@
 <form action="${pageContext.request.contextPath}/sejours" method="post">
 	
 	<input type="hidden" name="action" value="edit">
-	<input type="hidden" name="sejourId" value="${role.getIdSejour()}">
-	<label>Date d'entrée : </label>${sejour.getDateEntree()}<br>
-	<label>Date de sortie : </label>${sejour.getDateSortie()}<br>
-	<label>Emplacement : </label>${sejour.getEmplacement()}<br>
-	<label>Motif du séjour : </label>${sejour.getMotifSejour()}<br>
+	<input type="hidden" name="sejourId" value="${sejour.getIdSejour()}">
+	<label>Date d'entrée : </label> ${sejour.getDateEntree()}<br>
+	<label>Date de sortie : </label> ${sejour.getDateSortie()}<br>
+	<label>Emplacement : </label> ${sejour.getEmplacement()}<br>
+	<label>Motif du séjour : </label> ${sejour.getMotifSejour()}<br>
 	<label>Actif : </label> ${sejour.getActif() ? "<span class=\"glyphicon glyphicon-check\"  aria-hidden=\"true\"></span>" : "<span class=\"glyphicon glyphicon-unchecked\"  aria-hidden=\"true\"></span>"}<br>
 	<button type="submit">Modifier</button>	
 	

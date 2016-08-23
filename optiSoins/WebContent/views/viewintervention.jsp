@@ -2,16 +2,16 @@
 
 <jsp:include page="header.jsp"/>
 
-<form action="${pageContext.request.contextPath}/sejours" method="post">
+<form action="${pageContext.request.contextPath}/interventions" method="post">
 	
 	<input type="hidden" name="action" value="edit">
-	<input type="hidden" name="sejourId" value="${role.getIdSejour()}">
+	<input type="hidden" name="interventionId" value="${intervention.getIdIntervention()}">
 	<label>Date de l'intervention : </label>
-	<input type="text" name="name" value="${sejour.getDate()}"><br>
+	<input type="text" name="date" value="${intervention.getDate()}"><br>
 	<label>Description de l'intervention : </label>
-	<input type="text" name="name" value="${sejour.getDescription()}"><br>
+	<input type="text" name="description" value="${intervention.getDescription()}"><br>
 	<label>Nom de l'intervention : </label>
-	<input type="text" name="name" value="${sejour.getNom()}"><br>
+	<input type="text" name="name" value="${intervention.getNom()}"><br>
 	<button type="submit">Modifier</button>	
 	
 </form>

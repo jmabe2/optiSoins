@@ -39,7 +39,7 @@
 						<option value="${role.getIdRole()}" ${param.role == role.getIdRole() ? "selected" : ""}${utilisateur.getRole().getIdRole() == role.getIdRole() ? "selected" : ""}>${role.getNom()}</option>
 					</c:forEach>
 			</select><br></td>
-		</tr>
+		</tr> 
 		<tr id="specialite">
 			<td><label>Spécialité: </label></td>
 			<td><select name="specialite">

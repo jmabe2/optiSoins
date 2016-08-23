@@ -1,4 +1,5 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="../header.jsp"/>
 
@@ -16,13 +17,14 @@
                     <th>Role</th>
                     <th>Actif</th>
                     <th></th>
+                    <th></th>
                 </tr>
                 <c:forEach items="${utilisateurs}" var="utilisateur">
                     <tr>
                         <td>${utilisateur.getIdUtilisateur()}</td>
                         <td>${utilisateur.getNom()}</td>
                         <td>${utilisateur.getPrenom()}</td>
-                        <td>${utilisateur.getDate_naissance()}</td>
+                        <td><fmt:formatDate value="${utilisateur.getDateNaissance()}" pattern="yyyy-MM-dd" /></td>
                         <td>${utilisateur.getRole().getNom()}</td>
                         <td>${utilisateur.getActif() ? "<span class=\"glyphicon glyphicon-check\"  aria-hidden=\"true\"></span>" : "<span class=\"glyphicon glyphicon-unchecked\"  aria-hidden=\"true\"></span>"}</td>
                         <td>
@@ -31,6 +33,8 @@
 	    					<input type="hidden" name="utilisateurId" value="${utilisateur.getIdUtilisateur()}">
 	    					<button type="submit">Visualiser</button>
 						  </form>
+						  </td>
+						  <td>
                           <form action="${pageContext.request.contextPath}/utilisateurs" method="post">
 	    					<input type="hidden" name="action" value="edit">
 	    					<input type="hidden" name="utilisateurId" value="${utilisateur.getIdUtilisateur()}">

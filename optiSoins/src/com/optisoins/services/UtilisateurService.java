@@ -65,11 +65,26 @@ public class UtilisateurService {
 		return utilisateur;
 	}
 	
-	public Utilisateur updateUtilisateur(int idUtilisateur,boolean actif, String nom) 	
+	public Utilisateur updateUtilisateur(int idUtilisateur,boolean actif, 
+			String nom,
+			String prenom,
+			String sexe,
+			Date datenaiss,
+			String login,
+			String mdp,
+			Role role,
+			Specialite specialite) 
 	{
 		Utilisateur utilisateur = em.find(Utilisateur.class, idUtilisateur);
 		utilisateur.setActif(actif);
 		utilisateur.setNom(nom);
+		utilisateur.setPrenom(prenom);
+		utilisateur.setSexe(sexe);
+		utilisateur.setDateNaissance(datenaiss);
+		utilisateur.setLogin(login);
+		utilisateur.setMotDePasse(mdp);
+		utilisateur.setRole(role);
+		utilisateur.setSpecialite(specialite);
 		return utilisateur;
 	}
 	

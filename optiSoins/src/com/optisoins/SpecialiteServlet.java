@@ -38,7 +38,7 @@ public class SpecialiteServlet extends HttpServlet {
 		EntityManager em = EMF.getEM(); 
 		SpecialiteService service = new SpecialiteService(em);
 		request.setAttribute("specialites", service.findAllSpecialite());
-		this.getServletContext().getRequestDispatcher("/views/allspecialites.jsp").forward( request, response );
+		this.getServletContext().getRequestDispatcher("/views/all/allspecialites.jsp").forward( request, response );
 	}
 
 	/**
@@ -54,14 +54,14 @@ public class SpecialiteServlet extends HttpServlet {
 		
 		// case Edit
 		if (action.equalsIgnoreCase("edit")){
-			jspview="/views/editspecialite.jsp";
+			jspview="/views/edit/editspecialite.jsp";
             int specialiteId = Integer.parseInt(request.getParameter("specialiteId"));
             Specialite specialite = service.findSpecialite(specialiteId);
             request.setAttribute("specialite", specialite);
         
         // case Create
 		} else if (action.equalsIgnoreCase("create")){
-        	jspview="/views/createspecialite.jsp";        	
+        	jspview="/views/create/createspecialite.jsp";        	
 		} else if (action.equalsIgnoreCase("saveedit")){
         	jspview="/views/viewspecialite.jsp";
         	em.getTransaction().begin();  		
@@ -103,7 +103,7 @@ public class SpecialiteServlet extends HttpServlet {
         			log.info("specialite not deleted !"); 
             }
 
-            jspview = "/views/allspecialites.jsp";;
+            jspview = "/views/all/allspecialites.jsp";;
             request.setAttribute("specialites", service.findAllSpecialite());    
         }
 		em.close();

@@ -17,11 +17,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.apache.log4j.Logger;
 import com.optisoins.connection.EMF;
-import com.optisoins.entities.Intervention;
-import com.optisoins.entities.Role;
 import com.optisoins.entities.Sejour;
-import com.optisoins.services.InterventionService;
-import com.optisoins.services.RoleService;
 import com.optisoins.services.SejourService;
 
 /**
@@ -70,7 +66,7 @@ public class CreateSejourServlet extends HttpServlet {
 			jspview="/views/edit/editsejour.jsp";
             int sejourId = Integer.parseInt(request.getParameter("sejourId"));
             Sejour sej = service.findSejour(sejourId);
-            request.setAttribute("sejour", sej);
+            request.setAttribute("sejours", sej);
         
         // case Create
 		} else if (action.equalsIgnoreCase("create")){
@@ -80,13 +76,14 @@ public class CreateSejourServlet extends HttpServlet {
         	em.getTransaction().begin();  		
     		try {
     		
-    			Sejour sej = service.updateSejour( Integer.parseInt(request.getParameter("sejourId") ),
-    		    (request.getParameter("actif") != null), (sdf.parse (request.getParameter("dateEntree")) ),(sdf.parse (request.getParameter("dateSortie")) ),
+    			Sejour sej = service.updateSejour(Integer.parseInt(request.getParameter("sejourId") ),
+    		    (request.getParameter("actif") != null), (sdf.parse (request.getParameter("dateEntree")) ),
+    		    (sdf.parse (request.getParameter("dateSortie")) ),
     			request.getParameter("emplacement"), request.getParameter("motifSejour") );                    		
                 
     			em.getTransaction().commit();
                 log.info("Stays updated !");
-                request.setAttribute("Sejour", sej);
+                request.setAttribute("sejours", sej);
     		}	
     		catch (Exception e){
     			log.error(e,e);
@@ -103,7 +100,7 @@ public class CreateSejourServlet extends HttpServlet {
                 
     			em.getTransaction().commit();
                 log.info("Stays created !");
-                request.setAttribute("Sejour", sej);
+                request.setAttribute("sejours", sej);
     		}	
     		catch (Exception e){
     			log.error(e,e);
@@ -122,7 +119,7 @@ public class CreateSejourServlet extends HttpServlet {
         			log.info("Stays not deleted !"); 
             }*/
 
-            jspview = "/views/all/allsejour.jsp";;
+            jspview = "/views/all/allsejour.jsp";
             request.setAttribute("sejours", service.findAllSejour());    
         }
 		em.close();

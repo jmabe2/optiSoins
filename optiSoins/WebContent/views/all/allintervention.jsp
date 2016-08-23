@@ -18,16 +18,16 @@
                 </tr>
                 <c:forEach items="${interventions}" var="sejour">
                     <tr>
-                        <td>${role.getIdIntervention()}</td>
-                        <td>${role.getdNom()}</td>
-						<td>${role.getDescription()}</td>
-						<td>${role.getDate()}</td>
+                        <td>${intervention.getIdIntervention()}</td>
+                        <td>${intervention.getdNom()}</td>
+						<td>${intervention.getDescription()}</td>
+						<td>${intervention.getDate()}</td>
                         <td>
                         
-                          <form action="${pageContext.request.contextPath}/interventions" method="post">
+                          <form action="${pageContext.request.contextPath}/intervention" method="post">
                           
 	    					<input type="hidden" name="action" value="edit">
-	    					<input type="hidden" name="interventionId" value="${role.getIdIntervention()}">
+	    					<input type="hidden" name="interventionId" value="${intervention.getIdIntervention()}">
 	    					
 	    					<button type="submit">Modifier une intervention</button>
 						  

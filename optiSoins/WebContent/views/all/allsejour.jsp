@@ -29,11 +29,9 @@
                         <td>
                         
                           <form action="${pageContext.request.contextPath}/sejours" method="post">
-                          
-	    					<input type="hidden" name="action" value="edit">
-	    					<input type="hidden" name="sejourId" value="${sejour.getIdSejour()}">
-	    					
-	    					<button type="submit">Modifier un séjour</button>
+                          <input type="hidden" name="action" value="edit">
+	    				  <input type="hidden" name="sejourId" value="${sejour.getIdSejour()}">
+	    				  <button type="submit">Modifier un séjour</button>
 						  
 						  </form>
 						  </td>

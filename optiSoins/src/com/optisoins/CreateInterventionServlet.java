@@ -18,9 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import com.optisoins.connection.EMF;
 import com.optisoins.entities.Intervention;
-import com.optisoins.entities.Sejour;
 import com.optisoins.services.InterventionService;
-import com.optisoins.services.SejourService;
 
 /**
  * Servlet implementation class InterventionServlet
@@ -45,7 +43,7 @@ public class CreateInterventionServlet extends HttpServlet {
 		
 		EntityManager em = EMF.getEM(); 
 		InterventionService service = new InterventionService(em);
-		request.setAttribute("interventions", service.findAllIntervention() );
+		request.setAttribute("intervention", service.findAllIntervention() );
 		this.getServletContext().getRequestDispatcher("/views/all/allintervention.jsp").forward( request, response );
 		
 	}
@@ -78,11 +76,12 @@ public class CreateInterventionServlet extends HttpServlet {
     		try {
     		
     			Intervention interv = service.updateIntervention( Integer.parseInt(request.getParameter("interventionId") ),
-    	        sdf.parse( request.getParameter("date")), request.getParameter("description"), request.getParameter("nom") );                    		
+    	        sdf.parse( request.getParameter("date")), request.getParameter("description"), 
+    	        request.getParameter("nom") );                    		
                 
     			em.getTransaction().commit();
                 log.info("Interventions updated !");
-                request.setAttribute("Intervention", interv);
+                request.setAttribute("intervention", interv);
     		}	
     		catch (Exception e){
     			log.error(e,e);
@@ -93,11 +92,11 @@ public class CreateInterventionServlet extends HttpServlet {
         	em.getTransaction().begin();  		
     		try {
     		
-    			Intervention interv = service.createIntervention(sdf.parse( request.getParameter("date")), request.getParameter("description"), 
-    		    request.getParameter("nom") );                    		
+    			Intervention interv = service.createIntervention(sdf.parse( request.getParameter("date")), 
+    			request.getParameter("description"), request.getParameter("nom") );                    		
     			em.getTransaction().commit();
                 log.info("Interventions created !");
-                request.setAttribute("Intervention", interv);
+                request.setAttribute("intervention", interv);
     		}	
     		catch (Exception e){
     			log.error(e,e);

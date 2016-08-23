@@ -23,7 +23,7 @@
                         <td>${patient.getIdPatient()}</td>
                         <td>${patient.getNom()}</td>
                         <td>${patient.getPrenom()}</td>
-                        <td><fmt:formatDate value="${patient.getDateNaissance()}" pattern="yyyy-MM-dd" /></td>
+                        <td><fmt:formatDate value="${patient.getDateDeNaissance()}" pattern="yyyy-MM-dd" /></td>
                         <td>${patient.getActif() ? "<span class=\"glyphicon glyphicon-check\"  aria-hidden=\"true\"></span>" : "<span class=\"glyphicon glyphicon-unchecked\"  aria-hidden=\"true\"></span>"}</td>
                         <td>
                         <form action="${pageContext.request.contextPath}/patients" method="post">

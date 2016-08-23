@@ -22,7 +22,13 @@
 		</tr>
 		<tr>
 			<td><label>Date de naissance: </label></td>
-			<td><input type="text" name="datenaiss" value="${param.datenaiss}<fmt:formatDate value="${patient.getDateNaissance()}" pattern="yyyy-MM-dd" />"></td>
+			<td><input type="text" name="datenaiss" value="${param.datenaiss}<fmt:formatDate value="${patient.getDateDeNaissance()}" pattern="yyyy-MM-dd" />"></td>
+		</tr>
+		<tr>
+			<td><label>Adresse: </label></td>
+			<td><textarea name="adresse">${param.adresse}${patient.getAdresse()}</textarea>
+			<span class="erreur">${erreurs['adresse']}</span>
+			</td>
 		</tr>
 		<tr>
 			<td><label>Actif: </label></td>

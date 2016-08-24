@@ -14,7 +14,9 @@
 	<button type="submit">Modifier</button>	
 	
 </form>
-
-	<a href="${pageContext.request.contextPath}/sejours"><button>Retour à la liste</button></a>
+	<a href=${pageContext.request.contextPath}/intervention><button>Créer une intervention</button></a><br><br>
+	<a href=${pageContext.request.contextPath}/sejourchambre><button>Changer de chambre</button></a><br><br>	
+	<a href=${pageContext.request.contextPath}/sejours><button>Retour à la liste</button></a>
 	
 <jsp:include page="footer.jsp"/>
+

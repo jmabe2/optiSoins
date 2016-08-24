@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="../header.jsp"/>
 
@@ -7,9 +8,9 @@
 	<input type="hidden" name="action" value="saveedit">
 	<input type="hidden" name="sejourId" value="${sejour.getIdSejour()}">
 	<label>Date d'entrée : </label>
-	<input type="text" name="dateEntree" value="${sejour.getDateEntree()}"><br>
+	<input type="text" name="dateEntree" value=<fmt:formatDate value="${sejour.getDateEntree()}" pattern="yyyy-MM-dd" /> > <br>
 	<label>Date de sortie : </label>
-	<input type="text" name="dateSortie" value="${sejour.getDateSortie()}"><br>
+	<input type="text" name="dateSortie" value=<fmt:formatDate value="${sejour.getDateSortie()}" pattern="yyyy-MM-dd" /> ><br>
 	<label>Emplacement : </label>
 	<input type="text" name="emplacement" value="${sejour.getEmplacement()}"><br>
 	<label>Motif du Séjour : </label>

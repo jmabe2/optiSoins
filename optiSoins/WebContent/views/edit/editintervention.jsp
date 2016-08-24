@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="../header.jsp"/>
 
@@ -7,7 +8,7 @@
 	<input type="hidden" name="action" value="saveedit">
 	<input type="hidden" name="interventionId" value="${intervention.getIdIntervention()}">
 	<label>Date de l'intervention : </label>
-	<input type="text" name="date" value="${intervention.getDate()}"><br>
+	<input type="text" name="date" value=<fmt:formatDate value="${sejour.getDate()}" pattern="yyyy-MM-dd" /> ><br>
 	<label>Description de l'intervention : </label>
 	<input type="text" name="description" value="${intervention.getDescription()}"><br>
 	<label>Nom de l'intervention : </label>

@@ -4,8 +4,8 @@
 
 <jsp:include page="../header.jsp"/>
 
-			<h2>Séjours</h2><br>
-			<form action="${pageContext.request.contextPath}/sejours" method="post">
+			<h2>Changement de chambre</h2><br>
+			<form action="${pageContext.request.contextPath}/sejourchambre" method="post">
 	    		<input type="hidden" name="action" value="create">
 	    		<button type="submit">Créer un séjour</button><br><br>
 			</form>
@@ -15,32 +15,28 @@
                     <th>Id</th>
                     <th>Date d'entrée</th>
  				    <th>Date de sortie</th>                   
- 				    <th>Emplacement</th>
- 				    <th>Motif du séjour</th>
                     <th>Actif</th>
                     <th></th>
                 </tr>
-                <c:forEach items="${sejours}" var="sejour">
+                <c:forEach items="${Sejourchambre}" var="Sejourchambre">
                     <tr>
-                        <td>${sejour.getIdSejour()}</td>
-                        <td><fmt:formatDate value="${sejour.getDateEntree()}" pattern="yyyy-MM-dd" /></td>
-                        <td><fmt:formatDate value="${sejour.getDateSortie()}" pattern="yyyy-MM-dd" /></td>
-						<td>${sejour.getEmplacement()}</td>
-				        <td>${sejour.getMotifSejour()}</td>
-					    <td>${sejour.getActif() ? "<span class=\"glyphicon glyphicon-check\"  aria-hidden=\"true\"></span>" : "<span class=\"glyphicon glyphicon-unchecked\"  aria-hidden=\"true\"></span>"}</td>
+                        <td>${Sejourchambre.getIdSejourchambre()}</td>
+                        <td><fmt:formatDate value="${Sejourchambre.getDateEntree()}" pattern="yyyy-MM-dd" /></td>
+                        <td><fmt:formatDate value="${Sejourchambre.getDateSortie()}" pattern="yyyy-MM-dd" /></td>
+					    <td>${Sejourchambre.getActif() ? "<span class=\"glyphicon glyphicon-check\"  aria-hidden=\"true\"></span>" : "<span class=\"glyphicon glyphicon-unchecked\"  aria-hidden=\"true\"></span>"}</td>
                         <td>
                         
-             			  <form action="${pageContext.request.contextPath}/sejours" method="post">
+             			  <form action="${pageContext.request.contextPath}/Sejourchambre" method="post">
                           <input type="hidden" name="action" value="view">
-	    				  <input type="hidden" name="sejourId" value="${sejour.getIdSejour()}">
+	    				  <input type="hidden" name="SejourchambreId" value="${Sejourchambre.getIdSejourchambre()}">
 	    				  <button type="submit">Visualiser</button>						  
 						  </form>
 						  
 						  </td>
 						  <td>
-                          <form action="${pageContext.request.contextPath}/sejours" method="post">
+                          <form action="${pageContext.request.contextPath}/Sejourchambre" method="post">
                           <input type="hidden" name="action" value="edit">
-	    				  <input type="hidden" name="sejourId" value="${sejour.getIdSejour()}">
+	    				  <input type="hidden" name="SejourchambreId" value="${Sejourchambre.getIdSejourchambre()}">
 	    				  <button type="submit">Modifier un séjour</button>						  
 						  </form>
 						  </td>

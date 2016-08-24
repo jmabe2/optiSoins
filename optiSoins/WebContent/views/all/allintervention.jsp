@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="../header.jsp"/>
 
@@ -21,7 +22,7 @@
                         <td>${intervention.getIdIntervention()}</td>
                         <td>${intervention.getdNom()}</td>
 						<td>${intervention.getDescription()}</td>
-						<td>${intervention.getDate()}</td>
+						<td> <fmt:formatDate value="${intervention.getDate()}" pattern="yyyy-MM-dd" /> </td>
                         <td>
                         
                           <form action="${pageContext.request.contextPath}/intervention" method="post">

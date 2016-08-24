@@ -21,9 +21,10 @@ import com.optisoins.entities.Sejour;
 import com.optisoins.services.SejourService;
 
 /**
- * Servlet implementation class CretateSejour
+ * Servlet implementation class CreateSejour
  */
 @WebServlet("/sejours")
+
 public class CreateSejourServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static Logger log = Logger.getLogger(CreateSejourServlet.class);     
@@ -61,16 +62,27 @@ public class CreateSejourServlet extends HttpServlet {
 		SejourService service = new SejourService(em);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
-		// case Edit
-		if (action.equalsIgnoreCase("edit")){
+		// case view
+		if (action.equalsIgnoreCase("view")) {
+			jspview = "/views/viewsejour.jsp";
+			int sejourId = Integer.parseInt(request.getParameter("sejourId"));
+            Sejour sej = service.findSejour(sejourId);
+            request.setAttribute("sejour", sej);
+		}
+			
+		else if (action.equalsIgnoreCase("edit")){
 			jspview="/views/edit/editsejour.jsp";
             int sejourId = Integer.parseInt(request.getParameter("sejourId"));
             Sejour sej = service.findSejour(sejourId);
-            request.setAttribute("sejours", sej);
+            request.setAttribute("sejour", sej);
         
         // case Create
+            
 		} else if (action.equalsIgnoreCase("create")){
-        	jspview="/views/create/createsejour.jsp";        	
+        	jspview="/views/create/createsejour.jsp";      
+        	
+        //case update
+        	
 		} else if (action.equalsIgnoreCase("saveedit")){
         	jspview="/views/viewsejour.jsp";
         	em.getTransaction().begin();  		
@@ -83,7 +95,7 @@ public class CreateSejourServlet extends HttpServlet {
                 
     			em.getTransaction().commit();
                 log.info("Stays updated !");
-                request.setAttribute("sejours", sej);
+                request.setAttribute("sejour", sej);
     		}	
     		catch (Exception e){
     			log.error(e,e);
@@ -100,7 +112,7 @@ public class CreateSejourServlet extends HttpServlet {
                 
     			em.getTransaction().commit();
                 log.info("Stays created !");
-                request.setAttribute("sejours", sej);
+                request.setAttribute("sejour", sej);
     		}	
     		catch (Exception e){
     			log.error(e,e);
@@ -120,7 +132,7 @@ public class CreateSejourServlet extends HttpServlet {
             }*/
 
             jspview = "/views/all/allsejour.jsp";
-            request.setAttribute("sejours", service.findAllSejour());    
+            request.setAttribute("sejour", service.findAllSejour());    
         }
 		em.close();
 		this.getServletContext().getRequestDispatcher(jspview).forward( request, response );

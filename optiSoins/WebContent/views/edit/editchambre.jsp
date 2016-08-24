@@ -7,7 +7,7 @@
 	<input type="hidden" name="action" value="saveedit">
 	<input type="hidden" name="chambreId" value="${chambre.getIdChambre()}">
 	<label>Numéro de chambre: </label>
-	<input type="text" name="name" value="${chambre.getNuméroChambre()}"><br>
+	<input type="text" name="numeroChambre" value="${chambre.getNumeroChambre()}"><br>
 	<label>Type de chambre :</label> 
 	<select id="selectType" name="type">
 					<c:forEach items="${types}" var="typechambre">

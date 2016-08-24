@@ -22,7 +22,7 @@
                         <td>
                           <form action="${pageContext.request.contextPath}/chambres" method="post">
 	    					<input type="hidden" name="action" value="edit">
-	    					<input type="hidden" name="medicamentId" value="${chambre.getIdChambre()}">
+	    					<input type="hidden" name="chambreId" value="${chambre.getIdChambre()}">
 	    					<button type="submit">Modifier</button>
 						  </form>
 						  </td>

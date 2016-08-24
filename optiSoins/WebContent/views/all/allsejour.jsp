@@ -5,10 +5,11 @@
 <jsp:include page="../header.jsp"/>
 
 			<h2>Séjours</h2><br>
-			<form action="${pageContext.request.contextPath}/sejours" method="post">
+			
+			<%--<form action="${pageContext.request.contextPath}/sejours" method="post">
 	    		<input type="hidden" name="action" value="create">
 	    		<button type="submit">Créer un séjour</button><br><br>
-			</form>
+			</form> --%>
 			
             <table class="table table-striped">
                 <tr>

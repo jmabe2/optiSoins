@@ -9,9 +9,9 @@
 	<input type="hidden" name="patientId" value="${param.patientId}">
 	<input type="hidden" name="action" value="savecreate">
 	<label>Date d'entrée :</label> 
-	<input type="text" name="dateEntree" value=<fmt:formatDate value="${sejour.getDateEntree()}" pattern="yyyy-MM-dd" /> ><br>
+	<input type="text"  class="datepicker" name="dateEntree" value=<fmt:formatDate value="${sejour.getDateEntree()}" pattern="yyyy-MM-dd" /> ><br>
 	<label>Date de sortie : </label>  
-	<input type="text" name="dateSortie" value=<fmt:formatDate value="${sejour.getDateSortie()}" pattern="yyyy-MM-dd" /> ><br>
+	<input type="text" class="datepicker"  name="dateSortie" value=<fmt:formatDate value="${sejour.getDateSortie()}" pattern="yyyy-MM-dd" /> ><br>
 	<label>Emplacement : </label>  
 	<input type="text" name="emplacement" value="${sejour.getEmplacement()}"><br>
 	<label>Motif séjour : </label>  
@@ -21,6 +21,10 @@
 	<button type="submit">Enregistrer</button><br>
 	
 </form>
+
+<script type="text/javascript">
+		$(".datepicker").flatpickr();
+	</script>
 
 <a href=c${pageContext.request.contextPath}/sejours><button>Retour à la liste</button></a>
 

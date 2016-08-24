@@ -14,7 +14,9 @@
                     	<li><a href="${pageContext.request.contextPath}/types"> Types de chambre</a></li>
                     	<li><a href="${pageContext.request.contextPath}/utilisateurs"> Utilisateurs</a></li>
                     	<li><a href="${pageContext.request.contextPath}/roles"> Rôles</a></li> 
-                    	<li><a href="${pageContext.request.contextPath}/specialites"> Spécialités</a></li>                     
+                    	<li><a href="${pageContext.request.contextPath}/specialites"> Spécialités</a></li> 
+                    	<li><a href="${pageContext.request.contextPath}/typeintervention"> Types d'intervention</a></li>
+                    	                    
                     </ul>
                 </li>
 		        <li><a href="${pageContext.request.contextPath}/LogoutServlet"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Déconnexion</a></li>

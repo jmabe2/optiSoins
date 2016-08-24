@@ -4,10 +4,12 @@
 <jsp:include page="../header.jsp"/>
 
 			<h2>Interventions</h2><br>
-			<form action="${pageContext.request.contextPath}/intervention" method="post">
+			
+			 <%-- <form action="${pageContext.request.contextPath}/intervention" method="post">
+	    		
 	    		<input type="hidden" name="action" value="create">
 	    		<button type="submit">Créer une intervention</button><br><br>
-			</form>
+			</form> --%>
 			
             <table class="table table-striped">
                 <tr>

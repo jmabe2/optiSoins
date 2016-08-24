@@ -6,7 +6,7 @@
 
                                          
 <form action="${pageContext.request.contextPath}/sejours" method="post">
-	
+	<input type="hidden" name="patientId" value="${param.patientId}">
 	<input type="hidden" name="action" value="savecreate">
 	<label>Date d'entrée :</label> 
 	<input type="text" name="dateEntree" value=<fmt:formatDate value="${sejour.getDateEntree()}" pattern="yyyy-MM-dd" /> ><br>

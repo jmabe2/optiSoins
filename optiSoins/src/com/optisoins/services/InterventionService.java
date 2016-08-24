@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import com.optisoins.entities.Intervention;
+import com.optisoins.entities.Patient;
 import com.optisoins.entities.Sejour;
 
 public class InterventionService {
@@ -15,10 +16,12 @@ public InterventionService(EntityManager em){
 	this.em=em;
 }
 
-public Intervention createIntervention(Date date, String description, String nom) 
+public Intervention createIntervention(Date date, String description, String nom, int sejourId) 
 
 {
 	Intervention interv = new Intervention();
+	Sejour sej = em.find(Sejour.class, sejourId);
+	interv.setSejour(sej);
 	interv.setDate(date);
 	interv.setDescription("description");
 	interv.setNom("nom");

@@ -64,7 +64,7 @@
 		$(document).ready(function() {      
 		    $("#selectRole").change();
 		});
-		$("#datenaiss").flatpickr();;
+		$("#datenaiss").flatpickr();
 		
 			
 	</script>

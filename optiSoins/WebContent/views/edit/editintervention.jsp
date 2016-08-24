@@ -8,7 +8,7 @@
 	<input type="hidden" name="action" value="saveedit">
 	<input type="hidden" name="interventionId" value="${intervention.getIdIntervention()}">
 	<label>Date de l'intervention : </label>
-	<input type="text" name="date" value=<fmt:formatDate value="${sejour.getDate()}" pattern="yyyy-MM-dd" /> ><br>
+	<input type="text" class="datepicker" name="date" value=<fmt:formatDate value="${sejour.getDate()}" pattern="yyyy-MM-dd" /> ><br>
 	<label>Description de l'intervention : </label>
 	<input type="text" name="description" value="${intervention.getDescription()}"><br>
 	<label>Nom de l'intervention : </label>
@@ -18,5 +18,7 @@
 </form>
 
 	<a href="${pageContext.request.contextPath}/intervention"><button>Retour à la liste</button></a>
-	
+	<script type="text/javascript">
+		$(".datepicker").flatpickr();
+	</script>
 <jsp:include page="../footer.jsp"/>

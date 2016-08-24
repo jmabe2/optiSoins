@@ -93,7 +93,7 @@ public class CreateInterventionServlet extends HttpServlet {
     		try {
     		
     			Intervention interv = service.createIntervention(sdf.parse( request.getParameter("date")), 
-    			request.getParameter("description"), request.getParameter("nom") );                    		
+    			request.getParameter("description"), request.getParameter("nom"), Integer.parseInt(request.getParameter("sejourId")));                    		
     			em.getTransaction().commit();
                 log.info("Interventions created !");
                 request.setAttribute("intervention", interv);

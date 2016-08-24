@@ -108,7 +108,7 @@ public class CreateSejourServlet extends HttpServlet {
     		
     			Sejour sej = service.createSejour( (request.getParameter("actif") != null), 
     		    (sdf.parse (request.getParameter("dateEntree")) ),(sdf.parse (request.getParameter("dateSortie")) ),
-    	    	request.getParameter("emplacement"), request.getParameter("motifSejour") );                    		
+    	    	request.getParameter("emplacement"), request.getParameter("motifSejour"),Integer.parseInt(request.getParameter("patientId")) );                    		
                 
     			em.getTransaction().commit();
                 log.info("Stays created !");

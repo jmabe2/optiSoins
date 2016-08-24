@@ -18,9 +18,9 @@ public class SejourService {
 		this.em=em;
 		}
 	
-	public Sejour createSejour(boolean actif,Date dateEntree, Date dateSortie, String emplacement, String motifSejour){
+	public Sejour createSejour(boolean actif,Date dateEntree, Date dateSortie, String emplacement, String motifSejour, int patientId){
 		Sejour sej = new Sejour();
-		Patient patient = em.find(Patient.class, 1);
+		Patient patient = em.find(Patient.class, patientId);
 		sej.setPatient(patient);
 		sej.setActif(actif);
 		sej.setDateEntree(dateEntree);

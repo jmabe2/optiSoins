@@ -6,6 +6,7 @@
 <form action="${pageContext.request.contextPath}/intervention" method="post">
 	
 	<input type="hidden" name="action" value="savecreate">
+	<input type="hidden" name="sejourId" value="${param.sejourId}">
 	<label>Date de l'intervention : </label>
 	<input type="text" name="date" value=<fmt:formatDate value="${intervention.getDate()}" pattern="yyyy-MM-dd" /> ><br>
 	<label>Description de l'intervention : </label>

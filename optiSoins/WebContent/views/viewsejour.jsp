@@ -14,7 +14,11 @@
 	<button type="submit">Modifier</button>	
 	
 </form>
-	<a href=${pageContext.request.contextPath}/intervention><button>Créer une intervention</button></a><br><br>
+	<form action="${pageContext.request.contextPath}/intervention" method="post">
+	    <input type="hidden" name="action" value="create">
+	    <input type="hidden" name="sejourId" value="${sejour.getIdSejour()}">
+	    <button type="submit">Créer une intervention</button><br><br>
+	</form>
 	<a href=${pageContext.request.contextPath}/sejourchambre><button>Changer de chambre</button></a><br><br>	
 	<a href=${pageContext.request.contextPath}/sejours><button>Retour à la liste</button></a>
 	

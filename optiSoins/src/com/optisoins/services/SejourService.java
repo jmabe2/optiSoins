@@ -60,4 +60,10 @@ public class SejourService {
 		return query.getResultList();
 
 	}
+	
+	public List<Sejour> findSejoursPatient(int patientId) {
+		TypedQuery<Sejour> query = em.createQuery("SELECT s from Sejour s where s.patient.idPatient=:patientId", Sejour.class).setParameter("patientId", patientId);
+		return query.getResultList();
+		
+	}
 }

@@ -58,6 +58,7 @@ public class ChambreServlet extends HttpServlet {
 		
 		// case Edit
 		if (action.equalsIgnoreCase("edit")){
+			request.setAttribute("types", typeChambreService.findAllTypechambre());
 			jspview="/views/edit/editchambre.jsp";
             int chambreId = Integer.parseInt(request.getParameter("chambreId"));
             Chambre chambre = service.findChambre(chambreId);
@@ -65,6 +66,7 @@ public class ChambreServlet extends HttpServlet {
         
         // case Create
 		} else if (action.equalsIgnoreCase("create")){
+			request.setAttribute("types", typeChambreService.findAllTypechambre());
         	jspview="/views/create/createchambre.jsp";        	
 		} else if (action.equalsIgnoreCase("saveedit")){
         	jspview="/views/chambres.jsp";

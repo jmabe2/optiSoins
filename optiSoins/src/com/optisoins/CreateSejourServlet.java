@@ -85,7 +85,7 @@ public class CreateSejourServlet extends HttpServlet {
         	
 		} else if (action.equalsIgnoreCase("saveedit")){
         	jspview="/views/viewsejour.jsp";
-        	em.getTransaction().begin();  		
+        	em.getTransaction().begin();  
     		try {
     		
     			Sejour sej = service.updateSejour(Integer.parseInt(request.getParameter("sejourId") ),

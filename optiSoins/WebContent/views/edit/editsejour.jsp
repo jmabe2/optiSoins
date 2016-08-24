@@ -14,7 +14,7 @@
 	<label>Emplacement : </label>
 	<input type="text" name="emplacement" value="${sejour.getEmplacement()}"><br>
 	<label>Motif du Séjour : </label>
-	<input type="text" name="motif" value="${sejour.getMotifSejour()}"><br>
+	<input type="text" name="motifSejour" value="${sejour.getMotifSejour()}"><br>
 	<label>Actif: </label>
 	<input type="checkbox" name="actif" ${sejour.getActif() ? "checked" : ""}><br>
 	<button type="submit">Enregistrer</button>

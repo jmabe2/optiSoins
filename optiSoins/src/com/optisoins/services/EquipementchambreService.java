@@ -53,8 +53,8 @@ public class EquipementchambreService {
 
 	}
 	
-	public List<Sejour> findSejoursPatient(int patientId) {
-		TypedQuery<Sejour> query = em.createQuery("SELECT s from Sejour s where s.patient.idPatient=:patientId", Sejour.class).setParameter("patientId", patientId);
+	public List<Equipementchambre> findSejoursPatient(int chambreId) {
+		TypedQuery<Equipementchambre> query = em.createQuery("SELECT s from Equipementchambre s where s.chambre.idChambre=:chambreId", Equipementchambre.class).setParameter("chambreId", chambreId);
 		return query.getResultList();
 		
 	}

@@ -15,7 +15,7 @@ public class EquipementchambreService {
 		this.em=em;
 		}
 	
-	public Equipementchambre createEquipementchambre(Chambre chambreId, Equipement equipementId){
+	public Equipementchambre createEquipementchambre(int  chambreId, int equipementId){
 		Equipementchambre equipc = new Equipementchambre();
 		Chambre chambre = em.find(Chambre.class, chambreId);
 		Equipement equipement = em.find(Equipement.class, equipementId);

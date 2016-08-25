@@ -71,7 +71,7 @@ public class EquipementchambreServlet extends HttpServlet {
         
         // case Createc
 		} else if (action.equalsIgnoreCase("create")){
-			request.setAttribute("equipc", equipementService.findAllEquipement());
+			request.setAttribute("equipements", equipementService.findAllEquipement());
         	jspview="/views/create/createequipc.jsp";        	
 		} else if (action.equalsIgnoreCase("saveedit")){
         	jspview="/views/equipc.jsp";
@@ -93,9 +93,7 @@ public class EquipementchambreServlet extends HttpServlet {
         	em.getTransaction().begin();  		
     		try {
     		
-    			Equipementchambre equipc = service.createEquipementchambre (chambreService.findChambre(Integer.parseInt(
-						request.getParameter("chambre"))) ,equipementService.findEquipement(Integer.parseInt(
-						request.getParameter("equip"))));                     		
+    			Equipementchambre equipc = service.createEquipementchambre (Integer.parseInt(request.getParameter("chambreId")) ,Integer.parseInt(request.getParameter("equip")));                     		
                 em.getTransaction().commit();
                 log.info("Equipement chambre created !");
                 request.setAttribute("equipc", equipc);

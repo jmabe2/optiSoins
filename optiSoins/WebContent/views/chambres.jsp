@@ -10,9 +10,9 @@
 </form><br>
 
  <h4><u>Equipements</u></h4><br>
-<form action="${pageContext.request.contextPath}/equipc" method="post">
+<form action="${pageContext.request.contextPath}/equipcs" method="post">
   		<input type="hidden" name="action" value="create">
-  		<input type="hidden" name="equipcId" value="${chambre.getIdChambre()}">
+  		<input type="hidden" name="chambreId" value="${chambre.getIdChambre()}">
   		<button type="submit">Ajouter un équipement</button><br><br>
 </form>
 

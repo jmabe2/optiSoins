@@ -8,8 +8,8 @@ import javax.persistence.*;
 import javax.servlet.http.HttpServletRequest;
 
 import com.optisoins.entities.Chambre;
-import com.optisoins.Utils;
 import com.optisoins.entities.Typechambre;
+import com.optisoins.entities.Equipement;
 
 
 public class ChambreService {

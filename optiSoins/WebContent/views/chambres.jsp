@@ -25,7 +25,7 @@
                <c:forEach items="${equipcs}" var="equipc">
                    <tr>
                      <td>${equipc.getIdEquipementChambre()}</td>
-					<td>${equipc.getEquipement()}</td>
+					<td>${equipc.getEquipement().getNom()}</td>
                        
 					  <td>
                          <form action="${pageContext.request.contextPath}/equipc" method="post">

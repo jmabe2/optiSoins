@@ -15,6 +15,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import com.optisoins.connection.EMF;
 import com.optisoins.entities.Patient;
+import com.optisoins.services.SejourService;
 import com.optisoins.services.PatientService;
 import com.optisoins.services.RoleService;
 import com.optisoins.services.SpecialiteService;
@@ -61,6 +62,7 @@ public class PatientServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		EntityManager em = EMF.getEM();
 		PatientService service = new PatientService(em);
+		SejourService sejourService = new SejourService(em);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Map<String, String> erreurs;
 
@@ -70,6 +72,7 @@ public class PatientServlet extends HttpServlet {
 			int patientId = Integer.parseInt(request.getParameter("patientId"));
 			Patient patient = service.findPatient(patientId);
 			request.setAttribute("patient", patient);
+			request.setAttribute("sejours", sejourService.findSejoursPatient(patientId));
 			// case Edit
 		} else if (action.equalsIgnoreCase("edit")) {
 			jspview = "/views/edit/editpatient.jsp";

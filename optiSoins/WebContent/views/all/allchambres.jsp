@@ -13,6 +13,7 @@
                     <th>Numero de chambre</th>
                     <th>Type de chambre</th>
                     <th></th>
+                    <th></th>
                 </tr>
                 <c:forEach items="${chambres}" var="chambre">
                     <tr>
@@ -20,13 +21,19 @@
                         <td>${chambre.getNumeroChambre()}</td>
                          <td>${chambre.getTypechambre().getNom()}</td>
                         <td>
+                         <form action="${pageContext.request.contextPath}/chambres" method="post">
+	    					<input type="hidden" name="action" value="view">
+	    					<input type="hidden" name="chambreId" value="${chambre.getIdChambre()}">
+	    					<button type="submit">Visualiser</button>
+						  </form>
+						  </td>
+						  <td>
                           <form action="${pageContext.request.contextPath}/chambres" method="post">
 	    					<input type="hidden" name="action" value="edit">
 	    					<input type="hidden" name="chambreId" value="${chambre.getIdChambre()}">
 	    					<button type="submit">Modifier</button>
 						  </form>
-						  </td>
-	
+						  </td>						
                     </tr>
                 </c:forEach>
             </table>

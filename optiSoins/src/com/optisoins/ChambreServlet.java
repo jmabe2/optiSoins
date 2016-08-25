@@ -19,6 +19,10 @@ import com.optisoins.services.ChambreService;
 import com.optisoins.services.RoleService;
 import com.optisoins.services.TypechambreService;
 import com.optisoins.entities.Typechambre;
+import com.optisoins.entities.Equipementchambre;
+import com.optisoins.services.EquipementchambreService;
+
+
 
 /**
  * Servlet implementation class ChambreServlet
@@ -56,6 +60,7 @@ public class ChambreServlet extends HttpServlet {
         EntityManager em = EMF.getEM(); 
         ChambreService service = new ChambreService(em);
         TypechambreService typeChambreService = new TypechambreService(em);
+		EquipementchambreService equipService = new EquipementchambreService(em);
 		
 		// case Edit
 		if (action.equalsIgnoreCase("view")) {
@@ -63,7 +68,7 @@ public class ChambreServlet extends HttpServlet {
 			int chambreId = Integer.parseInt(request.getParameter("chambreId"));
 			Chambre chambre = service.findChambre(chambreId);
 			request.setAttribute("chambre", chambre);
-			//request.setAttribute("sejours", sejourService.findSejoursPatient(patientId));
+			request.setAttribute("equipcs", equipService.findAllEquipementchambre(chambreId));
 			
 			
 		} else if (action.equalsIgnoreCase("edit")){

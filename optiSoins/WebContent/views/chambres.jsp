@@ -30,7 +30,7 @@
 					  <td>
                          <form action="${pageContext.request.contextPath}/equipc" method="post">
                          <input type="hidden" name="action" value="edit">
-    				  <input type="hidden" name="sejourId" value="${equipc.getIdEquipementchambre()}">
+    				  <input type="hidden" name="sejourId" value="${equipc.getIdEquipementChambre()}">
     				  <button type="submit">Modifier equipement</button>						  
 					  </form>
 					  </td>

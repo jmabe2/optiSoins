@@ -61,7 +61,7 @@ public class TypeInterventionServlet extends HttpServlet {
             request.setAttribute("Typeintervention", typeinterv);
         
         // case Create
-		} else if (action.equalsIgnoreCase("create")){
+		} else if (action.equalsIgnoreCase("create") ){
         	jspview="/views/create/createtypeintervention.jsp";        	
 		} else if (action.equalsIgnoreCase("saveedit")){
         	jspview="/views/viewtypeintervention.jsp";

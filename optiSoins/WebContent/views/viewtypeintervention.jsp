@@ -1,6 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 
 <jsp:include page="header.jsp"/>
+
 <form action="${pageContext.request.contextPath}/typeintervention" method="post">
 	<input type="hidden" name="action" value="edit">
 	<input type="hidden" name="typeinterventionId" value="${typeintervention.getIdTypeIntervention()}">

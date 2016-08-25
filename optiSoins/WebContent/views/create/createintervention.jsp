@@ -17,9 +17,11 @@
 	<tr id="typeintervention">
 			<td><label>Type intervention : </label></td>
 			<select id="typeintervention" name="typeintervention">
+			
 					<c:forEach items="${typeintervention}" var="typeintervention">
 						<option value="${typeintervention.getIdTypeIntervention()}" ${param.typeintervention == typeintervention.getIdTypeIntervention() ? "selected" : ""}
-						${typeintervention.getIdTypeIntervention () == typeintervention.getIdTypeIntervention() ? "selected" : ""}>${typeintervention.getLibelle()}</option>
+						${typeintervention.getIdTypeIntervention() == typeintervention.getIdTypeIntervention() ? "selected" : ""}>
+						${typeintervention.getLibelle()}</option>
 					</c:forEach>
 			</select>
 		</tr>

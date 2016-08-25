@@ -1,7 +1,5 @@
 package com.optisoins.services;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -53,7 +51,7 @@ public class EquipementchambreService {
 
 	}
 	
-	public List<Equipementchambre> findSejoursPatient(int chambreId) {
+	public List<Equipementchambre> findAllEquipementchambre(int chambreId) {
 		TypedQuery<Equipementchambre> query = em.createQuery("SELECT s from Equipementchambre s where s.chambre.idChambre=:chambreId", Equipementchambre.class).setParameter("chambreId", chambreId);
 		return query.getResultList();
 		

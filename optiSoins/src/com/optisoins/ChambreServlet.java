@@ -14,6 +14,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import com.optisoins.connection.EMF;
 import com.optisoins.entities.Chambre;
+import com.optisoins.entities.Patient;
 import com.optisoins.services.ChambreService;
 import com.optisoins.services.RoleService;
 import com.optisoins.services.TypechambreService;
@@ -57,7 +58,15 @@ public class ChambreServlet extends HttpServlet {
         TypechambreService typeChambreService = new TypechambreService(em);
 		
 		// case Edit
-		if (action.equalsIgnoreCase("edit")){
+		if (action.equalsIgnoreCase("view")) {
+			jspview = "/views/chambres.jsp";
+			int chambreId = Integer.parseInt(request.getParameter("chambreId"));
+			Chambre chambre = service.findChambre(chambreId);
+			request.setAttribute("chambre", chambre);
+			//request.setAttribute("sejours", sejourService.findSejoursPatient(patientId));
+			
+			
+		} else if (action.equalsIgnoreCase("edit")){
 			request.setAttribute("types", typeChambreService.findAllTypechambre());
 			jspview="/views/edit/editchambre.jsp";
             int chambreId = Integer.parseInt(request.getParameter("chambreId"));

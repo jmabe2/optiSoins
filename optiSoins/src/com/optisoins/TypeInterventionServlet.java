@@ -38,7 +38,7 @@ public class TypeInterventionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EntityManager em = EMF.getEM(); 
 		TypeinterventionService service = new TypeinterventionService(em);
-		request.setAttribute("Typeintervention", service.findAllTypeintervention());
+		request.setAttribute("typeinterventions", service.findAllTypeintervention());
 		this.getServletContext().getRequestDispatcher("/views/all/alltypeintervention.jsp").forward( request, response );
 	}
 
@@ -56,9 +56,9 @@ public class TypeInterventionServlet extends HttpServlet {
 		// case Edit
 		if (action.equalsIgnoreCase("edit")){
 			jspview="/views/edit/edittypeintervention.jsp";
-            int TypeinterventionId = Integer.parseInt(request.getParameter("TypeInterventionId"));
-            Typeintervention typeinterv = service.findTypeintervention(TypeinterventionId);
-            request.setAttribute("Typeintervention", typeinterv);
+            int typeInterventionId = Integer.parseInt(request.getParameter("typeInterventionId"));
+            Typeintervention typeinterv = service.findTypeintervention(typeInterventionId);
+            request.setAttribute("typeintervention", typeinterv);
         
         // case Create
 		} else if (action.equalsIgnoreCase("create") ){
@@ -68,11 +68,11 @@ public class TypeInterventionServlet extends HttpServlet {
         	em.getTransaction().begin();  		
     		try {
     		
-    			Typeintervention Typeintervention = service.updateTypeintervention(Integer.parseInt(request.getParameter("TypeInterventionId")),
+    			Typeintervention typeinterv = service.updateTypeintervention(Integer.parseInt(request.getParameter("typeInterventionId")),
     		    request.getParameter("Libelle"));                    		
                 em.getTransaction().commit();
                 log.info("Type intervention updated !");
-                request.setAttribute("Typeintervention", Typeintervention);
+                request.setAttribute("typeintervention", typeinterv);
     		}	
     		catch (Exception e){
     			log.error(e,e);
@@ -83,10 +83,10 @@ public class TypeInterventionServlet extends HttpServlet {
         	em.getTransaction().begin();  		
     		try {
     		
-    			Typeintervention Typeintervention = service.createTypeintervention(request.getParameter("Libelle"));                    		
+    			Typeintervention typeinterv = service.createTypeintervention(request.getParameter("Libelle"));                    		
                 em.getTransaction().commit();
                 log.info("Type intervention created !");
-                request.setAttribute("Typeintervention", Typeintervention);
+                request.setAttribute("typeintervention", typeinterv);
     		}	
     		catch (Exception e){
     			log.error(e,e);

@@ -19,6 +19,8 @@ import org.apache.log4j.Logger;
 import com.optisoins.connection.EMF;
 import com.optisoins.entities.Intervention;
 import com.optisoins.services.InterventionService;
+import com.optisoins.services.RoleService;
+import com.optisoins.services.TypeinterventionService;
 
 /**
  * Servlet implementation class InterventionServlet
@@ -59,6 +61,7 @@ public class CreateInterventionServlet extends HttpServlet {
         EntityManager em = EMF.getEM(); 
 		InterventionService service = new InterventionService(em);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		TypeinterventionService typeInterventionService = new TypeinterventionService(em);
 		
 		// case Edit
 		if (action.equalsIgnoreCase("edit")){
@@ -66,9 +69,11 @@ public class CreateInterventionServlet extends HttpServlet {
             int interventionId = Integer.parseInt(request.getParameter("interventionId"));
             Intervention interv = service.findIntervention(interventionId);
             request.setAttribute("intervention", interv);
+            request.setAttribute("typeinterventions", typeInterventionService.findAllTypeintervention());
         
         // case Create
 		} else if (action.equalsIgnoreCase("create")){
+			request.setAttribute("typeinterventions", typeInterventionService.findAllTypeintervention());
         	jspview="/views/create/createintervention.jsp";        	
 		} else if (action.equalsIgnoreCase("saveedit")){
         	jspview="/views/viewintervention.jsp";
@@ -77,7 +82,7 @@ public class CreateInterventionServlet extends HttpServlet {
     		
     			Intervention interv = service.updateIntervention( Integer.parseInt(request.getParameter("interventionId") ),
     	        sdf.parse( request.getParameter("date")), request.getParameter("description"), 
-    	        request.getParameter("nom") );                    		
+    	        request.getParameter("nom"), Integer.parseInt(request.getParameter("typeintervention")) );                    		
                 
     			em.getTransaction().commit();
                 log.info("Interventions updated !");
@@ -93,7 +98,7 @@ public class CreateInterventionServlet extends HttpServlet {
     		try {
     		
     			Intervention interv = service.createIntervention(sdf.parse( request.getParameter("date")), 
-    			request.getParameter("description"), request.getParameter("nom"), Integer.parseInt(request.getParameter("sejourId")));                    		
+    			request.getParameter("description"), request.getParameter("nom"), Integer.parseInt(request.getParameter("sejourId")), Integer.parseInt(request.getParameter("typeintervention")));                    		
     			em.getTransaction().commit();
                 log.info("Interventions created !");
                 request.setAttribute("intervention", interv);

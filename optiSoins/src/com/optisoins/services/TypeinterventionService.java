@@ -48,7 +48,6 @@ public class TypeinterventionService {
 	}
 	
 	public List<Typeintervention> findAllTypeintervention (){
-		
 		TypedQuery<Typeintervention> query = em.createQuery("SELECT t FROM Typeintervention t", Typeintervention.class);
 		return query.getResultList();
 	

@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 import com.optisoins.entities.Intervention;
 import com.optisoins.entities.Patient;
 import com.optisoins.entities.Sejour;
+import com.optisoins.entities.Typeintervention;
 
 public class InterventionService {
 	protected EntityManager em;
@@ -16,12 +17,13 @@ public InterventionService(EntityManager em){
 	this.em=em;
 }
 
-public Intervention createIntervention(Date date, String description, String nom, int sejourId) 
+public Intervention createIntervention(Date date, String description, String nom, int sejourId, int typeInterventionId) 
 
 {
 	Intervention interv = new Intervention();
 	Sejour sej = em.find(Sejour.class, sejourId);
 	interv.setSejour(sej);
+	interv.setTypeintervention(em.find(Typeintervention.class, typeInterventionId));
 	interv.setDate(date);
 	interv.setDescription("description");
 	interv.setNom("nom");
@@ -29,11 +31,12 @@ public Intervention createIntervention(Date date, String description, String nom
 	return interv;
 }
 
-public Intervention updateIntervention(int idIntervention,Date date, String description, String nom) 	
+public Intervention updateIntervention(int idIntervention,Date date, String description, String nom, int typeInterventionId) 	
 {
 	Intervention interv = em.find(Intervention.class, idIntervention);
 	interv.setDate(date);
 	interv.setDescription("description");
+	interv.setTypeintervention(em.find(Typeintervention.class, typeInterventionId));
 	interv.setNom("nom");
 	return interv;
 	

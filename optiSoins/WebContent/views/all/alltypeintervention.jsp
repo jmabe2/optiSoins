@@ -12,7 +12,7 @@
                     <th>Id</th>
                     <th>Libellé</th>
                 </tr>
-                <c:forEach items="${typeintervention}" var="typeintervention">
+                <c:forEach items="${typeinterventions}" var="typeintervention">
                     <tr>
                         <td>${typeintervention.getIdTypeIntervention()}</td>
                         <td>${typeintervention.getLibelle()}</td>
@@ -20,7 +20,7 @@
                         
                           <form action="${pageContext.request.contextPath}/typeintervention" method="post">
 	    					<input type="hidden" name="action" value="edit">
-	    					<input type="hidden" name="typeinterventionId" value="${typeintervention.getIdTypeIntervention()}">
+	    					<input type="hidden" name="typeInterventionId" value="${typeintervention.getIdTypeIntervention()}">
 	    					<button type="submit">Modifier</button>
 						  </form>
 						  </td>

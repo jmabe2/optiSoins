@@ -4,7 +4,7 @@
 
 <form action="${pageContext.request.contextPath}/typeintervention" method="post">
 	<input type="hidden" name="action" value="saveedit">
-	<input type="hidden" name="typeinterventionId" value="${typeintervention.IdTypeIntervention()}">
+	<input type="hidden" name="typeInterventionId" value="${typeintervention.getIdTypeIntervention()}">
 	<label>Libellé : </label>
 	<input type="text" name="Libelle" value="${typeintervention.getLibelle()}"><br>
 	<button type="submit">Enregistrer</button>

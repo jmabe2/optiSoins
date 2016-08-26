@@ -13,6 +13,12 @@
 	<input type="text" name="description" value="${intervention.getDescription()}"><br>
 	<label>Nom de l'intervention : </label>
 	<input type="text" name="name" value="${intervention.getNom()}"><br>
+	<td><label>Type d'intervention: </label></td>
+			<td><select id="selectRole" name="typeintervention">
+					<c:forEach items="${typeinterventions}" var="typeintervention">
+						<option value="${typeintervention.getIdTypeIntervention()}" ${param.role == typeintervention.getIdTypeIntervention() ? "selected" : ""}${intervention.getTypeIntervention()().getIdTypeIntervention()() == typeintervention.getIdTypeIntervention() ? "selected" : ""}>${typeintervention.getNom()}</option>
+					</c:forEach>
+			</select><br></td>
 	<button type="submit">Enregistrer</button>
 	
 </form>

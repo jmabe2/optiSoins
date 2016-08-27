@@ -63,7 +63,7 @@ public class EquipementchambreServlet extends HttpServlet {
 		
 		// case Edit
 		if (action.equalsIgnoreCase("edit")){
-			request.setAttribute("equip", equipementService.findAllEquipement());
+			request.setAttribute("equipements", equipementService.findAllEquipement());
 			jspview="/views/edit/editequipc.jsp";
             int equipcId = Integer.parseInt(request.getParameter("equipcId"));
             Equipementchambre equipc = service.findEquipementchambre(equipcId);

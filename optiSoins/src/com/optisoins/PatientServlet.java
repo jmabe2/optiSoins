@@ -73,6 +73,9 @@ public class PatientServlet extends HttpServlet {
 			Patient patient = service.findPatient(patientId);
 			request.setAttribute("patient", patient);
 			request.setAttribute("sejours", sejourService.findSejoursPatient(patientId));
+		} else if (action.equalsIgnoreCase("search")) {
+			jspview = "/views/all/allpatients.jsp";
+			request.setAttribute("patients", service.searchPatients(request.getParameter("searchnom"),request.getParameter("searchprenom")));		
 			// case Edit
 		} else if (action.equalsIgnoreCase("edit")) {
 			jspview = "/views/edit/editpatient.jsp";

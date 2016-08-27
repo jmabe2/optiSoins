@@ -25,10 +25,11 @@ public class EquipementchambreService {
 		return equipc;
 	}
 	
-	public Equipementchambre updateEquipementchambre (int idEquipementchambre, Equipement equipementId ) 	
+	public Equipementchambre updateEquipementchambre (int idEquipementchambre, int equipementId ) 	
 	{
 		Equipementchambre equipc = em.find(Equipementchambre.class, idEquipementchambre);
-		equipc.setEquipement(equipementId);
+		Equipement equipement = em.find(Equipement.class, equipementId);
+		equipc.setEquipement(equipement);
 		return equipc;
 		}
 		

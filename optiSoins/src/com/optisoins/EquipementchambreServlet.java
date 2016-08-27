@@ -78,8 +78,8 @@ public class EquipementchambreServlet extends HttpServlet {
         	em.getTransaction().begin();  		
     		try {
     		
-    			Equipementchambre equipc = service.updateEquipementchambre(Integer.parseInt(request.getParameter("equipcId")),equipementService.findEquipement(Integer.parseInt(
-						request.getParameter("equip"))));                  		
+    			Equipementchambre equipc = service.updateEquipementchambre(Integer.parseInt(request.getParameter("equipcId")),Integer.parseInt(
+						request.getParameter("equip")));                  		
                 em.getTransaction().commit();
                 log.info("Equipement chambre updated !");
                 request.setAttribute("equipc", equipc);

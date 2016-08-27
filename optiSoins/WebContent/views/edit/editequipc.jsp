@@ -5,11 +5,14 @@
 <form action="${pageContext.request.contextPath}/equipcs" method="post">
 
 	<input type="hidden" name="action" value="saveedit">
-	<input type="hidden" name="equipcId" value="${equipc.getIdEquipementchambre()}">
-	<label>Equipement:</label> 
-	<select id="selectEquipement" name="equip">
+	<input type="hidden" name="equipcId" value="${equipc.getIdEquipementChambre()}">
+	<label>Equipement : </label> 
+	
+	<select id="equipement" name="equipement">
+	
 					<c:forEach items="${equipements}" var="equipement">
-						<option value="${equipement.getIdEquipement()}" ${param.equipement == equipement.getIdEquipement() ? "selected" : ""}${equipement.getIdEquipement() == equipement.getIdEquipement() ? "selected" : ""}>${equipement.getNom()}</option>
+						<option value="${equipement.getIdEquipement()}" ${param.equipement == equipement.getIdEquipement() ? "selected" : ""}${equipement.getIdEquipement() == equipement.getIdEquipement() ? "selected" : ""}>
+						${equipement.getNom()}</option>
 					</c:forEach>
 			</select><br>
 	

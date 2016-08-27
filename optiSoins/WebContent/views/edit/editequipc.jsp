@@ -8,9 +8,8 @@
 	<input type="hidden" name="equipcId" value="${equipc.getIdEquipementChambre()}">
 	<label>Equipement : </label> 
 	
-	<select id="equipement" name="equipement">
-	
-					<c:forEach items="${equipements}" var="equipement">
+	<select name="equip">
+						<c:forEach items="${equipements}" var="equipement">
 						<option value="${equipement.getIdEquipement()}" ${param.equipement == equipement.getIdEquipement() ? "selected" : ""}${equipement.getIdEquipement() == equipement.getIdEquipement() ? "selected" : ""}>
 						${equipement.getNom()}</option>
 					</c:forEach>

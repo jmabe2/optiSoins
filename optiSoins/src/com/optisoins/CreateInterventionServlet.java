@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Month;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -18,9 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import com.optisoins.connection.EMF;
 import com.optisoins.entities.Intervention;
+import com.optisoins.entities.Utilisateur;
 import com.optisoins.services.InterventionService;
 import com.optisoins.services.RoleService;
 import com.optisoins.services.TypeinterventionService;
+import com.optisoins.services.UtilisateurService;
 
 /**
  * Servlet implementation class InterventionServlet
@@ -42,11 +45,15 @@ public class CreateInterventionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		Utilisateur user = (Utilisateur) request.getSession().getAttribute("loginUser");
+		if (UtilisateurService.checkRole(user, Arrays.asList("Admin","Médecin"))) {	
 		EntityManager em = EMF.getEM(); 
 		InterventionService service = new InterventionService(em);
 		request.setAttribute("intervention", service.findAllIntervention() );
 		this.getServletContext().getRequestDispatcher("/views/all/allintervention.jsp").forward( request, response );
+	} else {
+		this.getServletContext().getRequestDispatcher("/views/signin.jsp").forward(request, response);
+	}
 		
 	}
 	
@@ -55,7 +62,8 @@ public class CreateInterventionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		Utilisateur user = (Utilisateur) request.getSession().getAttribute("loginUser");
+		if (UtilisateurService.checkRole(user, Arrays.asList("Admin","Médecin"))) {
 		String jspview="";
         String action = request.getParameter("action");
         EntityManager em = EMF.getEM(); 
@@ -127,7 +135,9 @@ public class CreateInterventionServlet extends HttpServlet {
 		em.close();
 		this.getServletContext().getRequestDispatcher(jspview).forward( request, response );
 
-
+		} else {
+			this.getServletContext().getRequestDispatcher("/views/signin.jsp").forward(request, response);
+		}
 
 	}
 

@@ -30,7 +30,15 @@ public class RoleService {
 		return ro;
 	}
 	
-
+	
+	/**
+	 * Method to update a role
+	 * @param idRole
+	 * @param actif
+	 * @param nom
+	 * @return
+	 */
+	
 	public Role updateRole(int idRole,boolean actif, String nom) 	
 	{
 		Role ro = em.find(Role.class, idRole);
@@ -40,9 +48,20 @@ public class RoleService {
 		return ro;
 	}
 	
+	/**
+	 * Method to find a role
+	 * @param idRole
+	 * @return
+	 */
+	
 	public Role findRole(int idRole){
 		return em.find(Role.class, idRole);
 	}
+	
+	/**
+	 * Method to remove a role
+	 * @param idRole
+	 */
 	
 	public void RemoveRole(int idRole){
 		
@@ -51,6 +70,11 @@ public class RoleService {
 			em.remove(ro);
 		}
 	}
+	
+	/**
+	 * Method to list all role
+	 * @return
+	 */
 	
 	public List<Role> findAllRole (){
 		

@@ -29,6 +29,13 @@ public class SpecialiteService {
 		return specialite;
 	}
 	
+	/**
+	 * Method to update a specialite
+	 * @param idSpecialite
+	 * @param actif
+	 * @param nom
+	 * @return
+	 */
 	public Specialite updateSpecialite(int idSpecialite,boolean actif, String nom) 	
 	{
 		Specialite specialite = em.find(Specialite.class, idSpecialite);
@@ -37,10 +44,19 @@ public class SpecialiteService {
 		return specialite;
 	}
 	
+	/**
+	 * Method to find a specialite
+	 * @param idspecialite
+	 * @return
+	 */
 	public Specialite findSpecialite(int idspecialite){
 		return em.find(Specialite.class, idspecialite);
 	}
 	
+	/**
+	 * Method to remove a specialite
+	 * @param idspecialite
+	 */
 	public void RemoveSpecialite(int idspecialite){
 		
 		Specialite specialite=findSpecialite(idspecialite);
@@ -49,6 +65,10 @@ public class SpecialiteService {
 		}
 	}
 	
+	/**
+	 * Method to list all specialite
+	 * @return
+	 */
 	public List<Specialite> findAllSpecialite (){
 		
 		TypedQuery<Specialite> query = em.createQuery("SELECT specialite from Specialite specialite", Specialite.class);

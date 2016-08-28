@@ -17,6 +17,16 @@ public class SejourService {
 	public SejourService(EntityManager em){
 		this.em=em;
 		}
+	/**
+	 * Method to create a new sejour
+	 * @param actif
+	 * @param dateEntree
+	 * @param dateSortie
+	 * @param emplacement
+	 * @param motifSejour
+	 * @param patientId
+	 * @return
+	 */
 	
 	public Sejour createSejour(boolean actif,Date dateEntree, Date dateSortie, String emplacement, String motifSejour, int patientId){
 		Sejour sej = new Sejour();
@@ -31,6 +41,17 @@ public class SejourService {
 		return sej;
 	}
 	
+	/**
+	 * Method to update a sejour
+	 * @param idSejour
+	 * @param actif
+	 * @param dateEntree
+	 * @param dateSortie
+	 * @param emplacement
+	 * @param motifSejour
+	 * @return
+	 */
+	
 	public Sejour updateSejour (int idSejour,boolean actif,Date dateEntree, Date dateSortie, String emplacement, String motifSejour) 	
 	{
 		Sejour sej = em.find(Sejour.class, idSejour);
@@ -42,10 +63,21 @@ public class SejourService {
 		return sej;
 		}
 		
+	/**
+	 * Method to find a sejour
+	 * @param idSejour
+	 * @return
+	 */
+	
 	public Sejour findSejour(int idSejour){
 		return em.find(Sejour.class, idSejour);
 	}
-
+	
+	/**
+	 * Method to remove a sejour
+	 * @param idSejour
+	 */
+	
 	public void RemoveSejour(int idSejour){
 		
 		Sejour sej = findSejour(idSejour);
@@ -53,7 +85,11 @@ public class SejourService {
 			em.remove(sej);
 		}
 	}
-
+	
+	/**
+	 * Method to list all sejour
+	 * @return
+	 */
 	public List<Sejour> findAllSejour (){
 		
 		TypedQuery<Sejour> query = em.createQuery("SELECT s from Sejour s", Sejour.class);
@@ -61,6 +97,11 @@ public class SejourService {
 
 	}
 	
+	/**
+	 * Method to list a sejour by patient
+	 * @param patientId
+	 * @return
+	 */
 	public List<Sejour> findSejoursPatient(int patientId) {
 		TypedQuery<Sejour> query = em.createQuery("SELECT s from Sejour s where s.patient.idPatient=:patientId", Sejour.class).setParameter("patientId", patientId);
 		return query.getResultList();

@@ -21,7 +21,15 @@ public class SejourChambreService {
 	public SejourChambreService() {
 	}
 
-
+	/**
+	 * Method to create a new sejourchambre
+	 * @param actif
+	 * @param dateEntree
+	 * @param dateSortie
+	 * @param chambre
+	 * @param sejourId
+	 * @return
+	 */
 	public Sejourchambre createSejourchambre (boolean actif,Date dateEntree, Date dateSortie, Chambre chambre,int sejourId) 
 	{
 		Sejourchambre sejchamb = new Sejourchambre();
@@ -35,7 +43,18 @@ public class SejourChambreService {
 		sej.addSejourchambre(sejchamb);
 		return sejchamb;
 	}
-
+	
+	/**
+	 * Method to update a sejourchambre
+	 * @param idSejourchambre
+	 * @param actif
+	 * @param dateEntree
+	 * @param dateSortie
+	 * @param chambre
+	 * @param sejourId
+	 * @return
+	 */
+	
 	public Sejourchambre updateSejourchambre (int idSejourchambre,boolean actif,Date dateEntree, Date dateSortie, Chambre chambre, int sejourId) 	
 	{
 		Sejourchambre sejchamb = em.find(Sejourchambre.class, idSejourchambre);
@@ -47,12 +66,22 @@ public class SejourChambreService {
 		return sejchamb;
 		}
 	
+	/**
+	 * Method to find a sejourchambre
+	 * @param idSejourchambre
+	 * @return
+	 */
+	
 	public Sejourchambre findSejourChambre(int idSejourchambre){
 		return em.find(Sejourchambre.class, idSejourchambre);
 	}
 
 
-
+	/**
+	 * Method to list a sejourchambre
+	 * @return
+	 */
+	
 	public List<Sejourchambre> findAllSejourchambre (){
 		
 		TypedQuery<Sejourchambre> query = em.createQuery("SELECT sc from Sejourchambre sc", Sejourchambre.class);

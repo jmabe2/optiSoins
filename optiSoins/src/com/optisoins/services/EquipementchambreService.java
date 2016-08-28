@@ -15,6 +15,13 @@ public class EquipementchambreService {
 		this.em=em;
 		}
 	
+	/**
+	 * Method to add equipements in a chambre
+	 * @param chambreId
+	 * @param equipementId
+	 * @return
+	 */
+	
 	public Equipementchambre createEquipementchambre(int  chambreId, int equipementId){
 		Equipementchambre equipc = new Equipementchambre();
 		em.persist(equipc);
@@ -26,6 +33,13 @@ public class EquipementchambreService {
 		return equipc;
 	}
 	
+	/**
+	 * Method to update equipements in a chambre
+	 * @param idEquipementchambre
+	 * @param equipementId
+	 * @return
+	 */
+	
 	public Equipementchambre updateEquipementchambre (int idEquipementchambre, int equipementId ) 	
 	{
 		Equipementchambre equipc = em.find(Equipementchambre.class, idEquipementchambre);
@@ -34,10 +48,21 @@ public class EquipementchambreService {
 		return equipc;
 		}
 		
+	/**
+	 * Method to find equipements in a chambre
+	 * @param idEquipementchambre
+	 * @return
+	 */
+	
 	public Equipementchambre findEquipementchambre(int idEquipementchambre){
 		return em.find(Equipementchambre.class, idEquipementchambre);
 	}
-
+	
+	/**
+	 * Method to remove equipements in a chambre
+	 * @param idEquipementchambre
+	 */
+	
 	public void removeEquipementchambre(int idEquipementchambre){
 		
 		Equipementchambre equipc = findEquipementchambre(idEquipementchambre);
@@ -47,13 +72,23 @@ public class EquipementchambreService {
 			em.persist(chambre);
 		}
 	}
-
+	
+	/**
+	 * Method to list all equipements in a chambre
+	 * @return
+	 */
 	public List<Equipementchambre> findAllEquipementchambre (){
 		
 		TypedQuery<Equipementchambre> query = em.createQuery("SELECT s from Equipementchambre s", Equipementchambre.class);
 		return query.getResultList();
 
 	}
+	
+	/**
+	 * Method to find all kind equipements in a chambre
+	 * @param chambreId
+	 * @return
+	 */
 	
 	public List<Equipementchambre> findAllEquipementchambre(int chambreId) {
 		TypedQuery<Equipementchambre> query = em.createQuery("SELECT s from Equipementchambre s where s.chambre.idChambre=:chambreId", Equipementchambre.class).setParameter("chambreId", chambreId);

@@ -14,7 +14,7 @@ public class TypeinterventionService {
 	}
 
 	/** 
-	 * Mehod to create a new Typeintervention
+	 * Method to create a new Typeintervention
 	 * 
 	 * @param actif
 	 * @param nom
@@ -28,6 +28,12 @@ public class TypeinterventionService {
 		return Typeintervention;
 	}
 	
+	/**
+	 *  Method to update a Typeintervention
+	 * @param idTypeintervention
+	 * @param libelle
+	 * @return
+	 */
 	public Typeintervention updateTypeintervention(int idTypeintervention, String libelle) 	
 	{
 		Typeintervention typeinterv = em.find(Typeintervention.class, idTypeintervention);
@@ -35,10 +41,19 @@ public class TypeinterventionService {
 		return typeinterv;
 	}
 	
+	/**
+	 *  Method to find a Typeintervention
+	 * @param idTypeintervention
+	 * @return
+	 */
 	public Typeintervention findTypeintervention(int idTypeintervention){
 		return em.find(Typeintervention.class, idTypeintervention);
 	}
 	
+	/**
+	 *  Method to remove a Typeintervention
+	 * @param idTypeintervention
+	 */
 	public void RemoveTypeintervention(int idTypeintervention){
 		
 		Typeintervention Typeintervention=findTypeintervention(idTypeintervention);
@@ -47,6 +62,11 @@ public class TypeinterventionService {
 		}
 	}
 	
+	/**
+	 *  Method to list all Typeintervention
+	 * @return
+	 */
+
 	public List<Typeintervention> findAllTypeintervention (){
 		TypedQuery<Typeintervention> query = em.createQuery("SELECT t FROM Typeintervention t", Typeintervention.class);
 		return query.getResultList();

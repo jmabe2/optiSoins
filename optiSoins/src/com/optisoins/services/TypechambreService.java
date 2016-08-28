@@ -11,7 +11,12 @@ public class TypechambreService {
 public TypechambreService(EntityManager em){
 	this.em=em;
 }
-
+/**
+ *  Method to create a new Typechambre
+ * @param nom
+ * @param actif
+ * @return
+ */
 public Typechambre createTypechambre(String nom,boolean actif) 
 
 {
@@ -21,7 +26,13 @@ public Typechambre createTypechambre(String nom,boolean actif)
 	em.persist(type);
 	return type;
 }
-
+/**
+ * Method to update a new Typechambre
+ * @param idTypechambre
+ * @param nom
+ * @param actif
+ * @return
+ */
 public Typechambre updateTypechambre(int idTypechambre, String nom, boolean actif) 	
 {
 	Typechambre type = em.find(Typechambre.class, idTypechambre);
@@ -29,11 +40,19 @@ public Typechambre updateTypechambre(int idTypechambre, String nom, boolean acti
 	type.setActif(actif);
 	return type;
 }
-
+/**
+ * Method to find a Typechambre
+ * @param idTypechambre
+ * @return
+ */
 public Typechambre findTypechambre(int idTypechambre){
 	return em.find(Typechambre.class, idTypechambre);
 }
 
+/**
+ * Method to remove a Typechambre
+ * @param idTypechambre
+ */
 public void RemoveTypechambre(int idTypechambre){
 	
 	Typechambre type =findTypechambre(idTypechambre);
@@ -42,6 +61,10 @@ public void RemoveTypechambre(int idTypechambre){
 	}
 }
 
+/**
+ * Method to list all Typechambre
+ * @return
+ */
 public List<Typechambre> findAllTypechambre (){
 	
 	TypedQuery<Typechambre> query = em.createQuery("SELECT r from Typechambre r", Typechambre.class);

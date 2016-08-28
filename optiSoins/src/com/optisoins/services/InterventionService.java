@@ -17,7 +17,16 @@ public class InterventionService {
 public InterventionService(EntityManager em){
 	this.em=em;
 }
-
+/**
+ * Method to create a intervention
+ * @param date
+ * @param description
+ * @param nom
+ * @param sejourId
+ * @param typeInterventionId
+ * @param utilisateurId
+ * @return
+ */
 public Intervention createIntervention(Date date, String description, String nom, int sejourId, int typeInterventionId, int utilisateurId) 
 
 {
@@ -34,6 +43,16 @@ public Intervention createIntervention(Date date, String description, String nom
 	return interv;
 }
 
+/**
+ * Method to update a intervention
+ * @param idIntervention
+ * @param date
+ * @param description
+ * @param nom
+ * @param typeInterventionId
+ * @return
+ */
+
 public Intervention updateIntervention(int idIntervention,Date date, String description, String nom, int typeInterventionId) 	
 {
 	Intervention interv = em.find(Intervention.class, idIntervention);
@@ -44,9 +63,21 @@ public Intervention updateIntervention(int idIntervention,Date date, String desc
 	return interv;
 	
 	}
+
+/**
+ * Method to find a intervention
+ * @param idIntervention
+ * @return
+ */
+
 public Intervention findIntervention(int idIntervention){
 	return em.find(Intervention.class, idIntervention);
 }
+
+/**
+ * Method to remove a intervention
+ * @param idIntervention
+ */
 
 public void RemoveIntervention(int idIntervention){
 	
@@ -55,6 +86,11 @@ public void RemoveIntervention(int idIntervention){
 		em.remove(interv);
 	}
 }
+
+/**
+ * Method to list all intervention
+ * @return
+ */
 
 public List<Intervention> findAllIntervention (){
 	

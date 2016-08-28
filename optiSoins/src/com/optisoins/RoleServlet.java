@@ -76,6 +76,8 @@ public class RoleServlet extends HttpServlet {
 			// case Create
 		} else if (action.equalsIgnoreCase("create")) {
 			jspview = "/views/create/createrole.jsp";
+			
+			
 		} else if (action.equalsIgnoreCase("saveedit")) {
 			jspview = "/views/viewrole.jsp";
 			em.getTransaction().begin();

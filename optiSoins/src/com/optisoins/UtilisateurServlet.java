@@ -62,6 +62,7 @@ public class UtilisateurServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// TODO Auto-generated method stub
 		Utilisateur user = (Utilisateur) request.getSession().getAttribute("loginUser");
 		if (UtilisateurService.checkRole(user, Arrays.asList("Admin"))) {	
@@ -75,6 +76,7 @@ public class UtilisateurServlet extends HttpServlet {
 		Map<String, String> erreurs;
 
 		// case View
+		
 		if (action.equalsIgnoreCase("view")) {
 			jspview = "/views/viewutilisateur.jsp";
 			int utilisateurId = Integer.parseInt(request.getParameter("utilisateurId"));

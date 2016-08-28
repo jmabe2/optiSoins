@@ -29,10 +29,22 @@ public class ChambreService {
 		return erreurs;
 	}*/
 	
-	public ChambreService(EntityManager em){
+	/**
+	 * 
+	 * @param em (EntityManager)
+	 */
+	public ChambreService(EntityManager em) {
 		this.em=em;
 	}
 
+	/**
+	 * Method to create a new chambre
+
+	 * @param numeroChambre
+	 * @param type
+	 * @return
+	 */
+	
 	public Chambre createChambre(int numeroChambre, Typechambre type) 
 	{
 		Chambre chambre = new Chambre();
@@ -42,6 +54,14 @@ public class ChambreService {
 		return chambre;
 	}
 	
+	/**
+	 * Method to update a chambre
+
+	 * @param idChambre
+	 * @param numeroChambre
+	 * @param type
+	 * @return
+	 */
 	public Chambre updateChambre(int idChambre,int numeroChambre, Typechambre type) 
 	{
 		Chambre chambre = em.find(Chambre.class, idChambre);
@@ -50,9 +70,20 @@ public class ChambreService {
 		return chambre;
 	}
 	
+	/**
+	 *  Method to find a chambre
+	 * @param idchambre
+	 * @return
+	 */
+	
 	public Chambre findChambre(int idchambre){
 		return em.find(Chambre.class, idchambre);
 	}
+	
+	/**
+	 *  Method to remove a chambre
+	 * @param idchambre
+	 */
 	
 	public void RemoveChambre(int idchambre){
 		
@@ -62,6 +93,10 @@ public class ChambreService {
 		}
 	}
 	
+	/**
+	 *  Method to list a chambre
+	 * @return
+	 */
 	public List<Chambre> findAllChambre (){
 		
 		TypedQuery<Chambre> query = em.createQuery("SELECT chambre from Chambre chambre", Chambre.class);
@@ -69,6 +104,11 @@ public class ChambreService {
 	
 	}
 	
+	/**
+	 *  Method to find by number a chambre
+	 * @param numChambre
+	 * @return
+	 */
 	public Chambre findByNum (int numChambre){
 		
 		TypedQuery<Chambre> query = em.createQuery("SELECT chambre from Chambre chambre where chambre.numeroChambre=:numchambre", Chambre.class);

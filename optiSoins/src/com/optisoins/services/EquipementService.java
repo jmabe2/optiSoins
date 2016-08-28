@@ -12,6 +12,13 @@ public EquipementService(EntityManager em){
 	this.em=em;
 }
 
+/**
+ * Method to create equipements
+ * @param nom
+ * @param description
+ * @return
+ */
+
 public Equipement createEquipement(String nom, String description) 
 
 {
@@ -22,6 +29,14 @@ public Equipement createEquipement(String nom, String description)
 	return equip;
 }
 
+/**
+ * Method to update equipements
+ * @param idEquipement
+ * @param nom
+ * @param description
+ * @return
+ */
+
 public Equipement updateEquipement(int idEquipement, String nom, String description) 	
 {
 	Equipement equip = em.find(Equipement.class, idEquipement);
@@ -30,10 +45,20 @@ public Equipement updateEquipement(int idEquipement, String nom, String descript
 	return equip;
 }
 
+/**
+ * Method to find equipements
+ * @param idEquipement
+ * @return
+ */
+
 public Equipement findEquipement(int idEquipement){
 	return em.find(Equipement.class, idEquipement);
 }
 
+/**
+ * Method to remove equipements
+ * @param idEquipement
+ */
 public void RemoveEquipement(int idEquipement){
 	
 	Equipement equip =findEquipement(idEquipement);
@@ -41,6 +66,11 @@ public void RemoveEquipement(int idEquipement){
 		em.remove(equip);
 	}
 }
+
+/**
+ * Method to list all equipements
+ * @return
+ */
 
 public List<Equipement> findAllEquipement (){
 	

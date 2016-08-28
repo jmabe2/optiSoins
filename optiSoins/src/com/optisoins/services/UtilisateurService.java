@@ -64,7 +64,20 @@ public class UtilisateurService {
 		em.persist(utilisateur);
 		return utilisateur;
 	}
-	
+	 /**
+	  *  Method to update a utilisateur
+	  * @param idUtilisateur
+	  * @param actif
+	  * @param nom
+	  * @param prenom
+	  * @param sexe
+	  * @param datenaiss
+	  * @param login
+	  * @param mdp
+	  * @param role
+	  * @param specialite
+	  * @return
+	  */
 	public Utilisateur updateUtilisateur(int idUtilisateur,boolean actif, 
 			String nom,
 			String prenom,
@@ -88,10 +101,19 @@ public class UtilisateurService {
 		return utilisateur;
 	}
 	
+	/**
+	 *  Method to find a utilisateur
+	 * @param idutilisateur
+	 * @return
+	 */
 	public Utilisateur findUtilisateur(int idutilisateur){
 		return em.find(Utilisateur.class, idutilisateur);
 	}
 	
+	/**
+	 *  Method to remove a utilisateur
+	 * @param idutilisateur
+	 */
 	public void RemoveUtilisateur(int idutilisateur){
 		
 		Utilisateur utilisateur=findUtilisateur(idutilisateur);
@@ -99,13 +121,24 @@ public class UtilisateurService {
 			em.remove(utilisateur);
 		}
 	}
-	
+	/**
+	 *  Method to list utilisateur
+	 * @return
+	 */
 	public List<Utilisateur> findAllUtilisateur (){
 		
 		TypedQuery<Utilisateur> query = em.createQuery("SELECT utilisateur from Utilisateur utilisateur", Utilisateur.class);
 		return query.getResultList();
 	
 	}
+	
+	/**
+	 * Method to check utilisateur role
+	 * @param user
+	 * @param roleNames
+	 * @return
+	 */
+	
 	public static boolean checkRole(Utilisateur user, List<String> roleNames) {
 		return (user != null) && (roleNames.contains(user.getRole().getNom()));
 	}

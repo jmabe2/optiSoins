@@ -32,6 +32,7 @@ import com.optisoins.services.UtilisateurService;
 public class CreateInterventionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static Logger log = Logger.getLogger(CreateInterventionServlet.class);
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -41,105 +42,95 @@ public class CreateInterventionServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Utilisateur user = (Utilisateur) request.getSession().getAttribute("loginUser");
-		if (UtilisateurService.checkRole(user, Arrays.asList("Admin","Médecin"))) {	
-		EntityManager em = EMF.getEM(); 
-		InterventionService service = new InterventionService(em);
-		request.setAttribute("intervention", service.findAllIntervention() );
-		this.getServletContext().getRequestDispatcher("/views/all/allintervention.jsp").forward( request, response );
-	} else {
-		this.getServletContext().getRequestDispatcher("/views/signin.jsp").forward(request, response);
-	}
-		
-	}
-	
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Utilisateur user = (Utilisateur) request.getSession().getAttribute("loginUser");
-		if (UtilisateurService.checkRole(user, Arrays.asList("Admin","Médecin"))) {
-		String jspview="";
-        String action = request.getParameter("action");
-        EntityManager em = EMF.getEM(); 
-		InterventionService service = new InterventionService(em);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		TypeinterventionService typeInterventionService = new TypeinterventionService(em);
-		
-		// case Edit
-		if (action.equalsIgnoreCase("edit")){
-			jspview="/views/edit/editintervention.jsp";
-            int interventionId = Integer.parseInt(request.getParameter("interventionId"));
-            Intervention interv = service.findIntervention(interventionId);
-            request.setAttribute("intervention", interv);
-            request.setAttribute("typeinterventions", typeInterventionService.findAllTypeintervention());
-        
-        // case Create
-		} else if (action.equalsIgnoreCase("create")){
-			request.setAttribute("typeinterventions", typeInterventionService.findAllTypeintervention());
-        	jspview="/views/create/createintervention.jsp";        	
-		} else if (action.equalsIgnoreCase("saveedit")){
-        	jspview="/views/viewintervention.jsp";
-        	em.getTransaction().begin();  		
-    		try {
-    		
-    			Intervention interv = service.updateIntervention( Integer.parseInt(request.getParameter("interventionId") ),
-    	        sdf.parse( request.getParameter("date")), request.getParameter("description"), 
-    	        request.getParameter("nom"), Integer.parseInt(request.getParameter("typeintervention")) );                    		
-                
-    			em.getTransaction().commit();
-                log.info("Interventions updated !");
-                request.setAttribute("intervention", interv);
-    		}	
-    		catch (Exception e){
-    			log.error(e,e);
-    			log.info("Interventions not updated !"); 
-           }
-        } else if (action.equalsIgnoreCase("savecreate")){
-        	jspview="/views/viewintervention.jsp";
-        	em.getTransaction().begin();  		
-    		try {
-    		
-    			Intervention interv = service.createIntervention(sdf.parse( request.getParameter("date")), 
-    			request.getParameter("description"), request.getParameter("nom"), Integer.parseInt(request.getParameter("sejourId")), Integer.parseInt(request.getParameter("typeintervention")));                    		
-    			em.getTransaction().commit();
-                log.info("Interventions created !");
-                request.setAttribute("intervention", interv);
-    		}	
-    		catch (Exception e){
-    			log.error(e,e);
-    			log.info("Intervention not created !"); 
-           }
-
-        /*} else if (action.equalsIgnoreCase("delete")){
-            int interventionrId = Integer.parseInt(request.getParameter("interventionId"));
-            em.getTransaction().begin();  		
-    		try {
-    			service.RemoveIntervention (interventionId);
-    			log.info("Interventions deleted !");
-    		}
-    		catch (Exception e){
-        			log.error(e,e);
-        			log.info("Interventions not deleted !"); 
-            }*/
-
-            jspview = "/views/all/allintervention.jsp";;
-            request.setAttribute("intervention", service.findAllIntervention());    
-        }
-		
-		em.close();
-		this.getServletContext().getRequestDispatcher(jspview).forward( request, response );
-
+		if (UtilisateurService.checkRole(user, Arrays.asList("Admin", "Médecin"))) {
+			EntityManager em = EMF.getEM();
+			InterventionService service = new InterventionService(em);
+			request.setAttribute("intervention", service.findAllIntervention());
+			this.getServletContext().getRequestDispatcher("/views/all/allintervention.jsp").forward(request, response);
 		} else {
 			this.getServletContext().getRequestDispatcher("/views/signin.jsp").forward(request, response);
 		}
 
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		Utilisateur user = (Utilisateur) request.getSession().getAttribute("loginUser");
+		if (UtilisateurService.checkRole(user, Arrays.asList("Admin", "Médecin"))) {
+			String jspview = "";
+			String action = request.getParameter("action");
+			EntityManager em = EMF.getEM();
+			InterventionService service = new InterventionService(em);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			TypeinterventionService typeInterventionService = new TypeinterventionService(em);
+
+			// case Edit
+			if (action.equalsIgnoreCase("edit")) {
+				jspview = "/views/edit/editintervention.jsp";
+				int interventionId = Integer.parseInt(request.getParameter("interventionId"));
+				Intervention interv = service.findIntervention(interventionId);
+				request.setAttribute("intervention", interv);
+				request.setAttribute("typeinterventions", typeInterventionService.findAllTypeintervention());
+
+				// case Create
+			} else if (action.equalsIgnoreCase("create")) {
+				request.setAttribute("typeinterventions", typeInterventionService.findAllTypeintervention());
+				jspview = "/views/create/createintervention.jsp";
+			} else if (action.equalsIgnoreCase("saveedit")) {
+				jspview = "/views/viewintervention.jsp";
+				em.getTransaction().begin();
+				try {
+
+					Intervention interv = service.updateIntervention(
+							Integer.parseInt(request.getParameter("interventionId")),
+							sdf.parse(request.getParameter("date")), request.getParameter("description"),
+							request.getParameter("nom"), Integer.parseInt(request.getParameter("typeintervention")));
+
+					em.getTransaction().commit();
+					log.info("Interventions updated !");
+					request.setAttribute("intervention", interv);
+				} catch (Exception e) {
+					log.error(e, e);
+					log.info("Interventions not updated !");
+				}
+			} else if (action.equalsIgnoreCase("savecreate")) {
+				jspview = "/views/viewintervention.jsp";
+				em.getTransaction().begin();
+				try {
+
+					Intervention interv = service.createIntervention(sdf.parse(request.getParameter("date")),
+							request.getParameter("description"), request.getParameter("nom"),
+							Integer.parseInt(request.getParameter("sejourId")),
+							Integer.parseInt(request.getParameter("typeintervention")),
+							Integer.parseInt(request.getParameter("utilisateurId")));
+					em.getTransaction().commit();
+					log.info("Interventions created !");
+					request.setAttribute("intervention", interv);
+				} catch (Exception e) {
+					log.error(e, e);
+					log.info("Intervention not created !");
+				}
+			}
+
+			em.close();
+			this.getServletContext().getRequestDispatcher(jspview).forward(request, response);
+
+		} else {
+			this.getServletContext().getRequestDispatcher("/views/signin.jsp").forward(request, response);
+		}
+
+	}
 
 }

@@ -9,6 +9,7 @@ import com.optisoins.entities.Intervention;
 import com.optisoins.entities.Patient;
 import com.optisoins.entities.Sejour;
 import com.optisoins.entities.Typeintervention;
+import com.optisoins.entities.Utilisateur;
 
 public class InterventionService {
 	protected EntityManager em;
@@ -17,17 +18,19 @@ public InterventionService(EntityManager em){
 	this.em=em;
 }
 
-public Intervention createIntervention(Date date, String description, String nom, int sejourId, int typeInterventionId) 
+public Intervention createIntervention(Date date, String description, String nom, int sejourId, int typeInterventionId, int utilisateurId) 
 
 {
 	Intervention interv = new Intervention();
 	Sejour sej = em.find(Sejour.class, sejourId);
 	interv.setSejour(sej);
+	interv.setUtilisateur(em.find(Utilisateur.class, utilisateurId));
 	interv.setTypeintervention(em.find(Typeintervention.class, typeInterventionId));
 	interv.setDate(date);
-	interv.setDescription("description");
-	interv.setNom("nom");
+	interv.setDescription(description);
+	interv.setNom(nom);
 	em.persist(interv);
+	sej.addIntervention(interv);
 	return interv;
 }
 
@@ -35,9 +38,9 @@ public Intervention updateIntervention(int idIntervention,Date date, String desc
 {
 	Intervention interv = em.find(Intervention.class, idIntervention);
 	interv.setDate(date);
-	interv.setDescription("description");
+	interv.setDescription(description);
 	interv.setTypeintervention(em.find(Typeintervention.class, typeInterventionId));
-	interv.setNom("nom");
+	interv.setNom(nom);
 	return interv;
 	
 	}

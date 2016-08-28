@@ -51,7 +51,7 @@
                           <form action="${pageContext.request.contextPath}/sejours" method="post">
                           <input type="hidden" name="action" value="edit">
 	    				  <input type="hidden" name="sejourId" value="${sejour.getIdSejour()}">
-	    				  <button type="submit">Modifier un séjour</button>						  
+	    				  <button type="submit">Modifier séjour</button>						  
 						  </form>
 						  </td>
 						  

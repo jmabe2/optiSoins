@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css">
+     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/optiSoins.css">
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/flatpickr-gh-pages/dist/flatpickr.min.css">

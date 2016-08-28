@@ -90,7 +90,6 @@ public class UtilisateurServlet extends HttpServlet {
 			request.setAttribute("utilisateur", utilisateur);
 			// case Create
 		} else if (action.equalsIgnoreCase("create")) {
-			request.setAttribute("actif", true);
 			request.setAttribute("roles", roleService.findAllRole());
 			request.setAttribute("specialites", specialiteService.findAllSpecialite());
 			jspview = "/views/create/createutilisateur.jsp";

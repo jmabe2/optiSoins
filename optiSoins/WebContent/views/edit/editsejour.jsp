@@ -7,22 +7,19 @@
 
 	<input type="hidden" name="action" value="saveedit">
 	<input type="hidden" name="sejourId" value="${sejour.getIdSejour()}">
-	<label>Date d'entrée : </label>
-	<input type="text" name="dateEntree" class="datepicker" value=<fmt:formatDate value="${sejour.getDateEntree()}" pattern="yyyy-MM-dd" /> > <br>
-	<label>Date de sortie : </label>
-	<input type="text" name="dateSortie" class="datepicker" value=<fmt:formatDate value="${sejour.getDateSortie()}" pattern="yyyy-MM-dd" /> ><br>
-	<label>Emplacement : </label>
-	<input type="text" name="emplacement" value="${sejour.getEmplacement()}"><br>
-	<label>Motif du Séjour : </label>
-	<input type="text" name="motifSejour" value="${sejour.getMotifSejour()}"><br>
-	<label>Actif: </label>
-	<input type="checkbox" name="actif" ${sejour.getActif() ? "checked" : ""}><br>
+	
+	<jsp:include page="../form/formsejour.jsp" />
 	<button type="submit">Enregistrer</button>
 	
 </form>
 	<script type="text/javascript">
 		$(".datepicker").flatpickr();
 	</script>
-	<a href="${pageContext.request.contextPath}/sejours"><button>Retour à la liste</button></a>
+	<form action="${pageContext.request.contextPath}/patients" method="post">
+	<input type="hidden" name="action" value="view"> <input
+		type="hidden" name="patientId"
+		value="${param.patientId}${sejour.getPatient().getIdPatient()}">
+	<button type="submit">Retour au patient</button>
+</form>
 	
 <jsp:include page="../footer.jsp"/>

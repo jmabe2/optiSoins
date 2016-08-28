@@ -7,18 +7,7 @@
 
 	<input type="hidden" name="action" value="saveedit">
 	<input type="hidden" name="interventionId" value="${intervention.getIdIntervention()}">
-	<label>Date de l'intervention : </label>
-	<input type="text" class="datepicker" name="date" value=<fmt:formatDate value="${sejour.getDate()}" pattern="yyyy-MM-dd" /> ><br>
-	<label>Description de l'intervention : </label>
-	<input type="text" name="description" value="${intervention.getDescription()}"><br>
-	<label>Nom de l'intervention : </label>
-	<input type="text" name="name" value="${intervention.getNom()}"><br>
-	<td><label>Type d'intervention: </label></td>
-			<td><select id="selectRole" name="typeintervention">
-					<c:forEach items="${typeinterventions}" var="typeintervention">
-						<option value="${typeintervention.getIdTypeIntervention()}" ${param.role == typeintervention.getIdTypeIntervention() ? "selected" : ""}${intervention.getTypeIntervention()().getIdTypeIntervention()() == typeintervention.getIdTypeIntervention() ? "selected" : ""}>${typeintervention.getNom()}</option>
-					</c:forEach>
-			</select><br></td>
+	<jsp:include page="../form/formintervention.jsp" />
 	<button type="submit">Enregistrer</button>
 	
 </form>

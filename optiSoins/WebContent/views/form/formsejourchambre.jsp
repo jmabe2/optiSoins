@@ -7,6 +7,6 @@
 	<label>Date de sortie : </label>
 	<input type="text" name="dateSortie" class="datepicker" value="${param.dateSortie}<fmt:formatDate value="${sejourchambre.getDateSortie()}" pattern="yyyy-MM-dd" />" > <span class="erreur">${erreurs['dateSortie']}</span><br>
 	<label>N° de chambre : </label>
-	<input type="text" name="numchambre" value="${param.numchambre}${sejourchambre.getChambre().getNumeroChambre()}"> 
+	<input type="text" name="numchambre" value="${param.numchambre}${sejourchambre.getChambre().getNumeroChambre()}"> <span class="erreur">${erreurs['numchambre']}</span><br>
 	<label>Actif: </label>
 	<input type="checkbox" name="actif" ${param.actif != null || param.action == 'create' ? "checked" : ""}${sejourchambre.getActif() != null ? "checked" : ""}><br>

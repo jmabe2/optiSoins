@@ -22,11 +22,13 @@
 		</tr>
 		<tr>
 			<td><label>Date de naissance: </label></td>
-			<td><input id="datenaiss" type="text" name="datenaiss" value="${param.datenaiss}<fmt:formatDate value="${utilisateur.getDateNaissance()}" pattern="yyyy-MM-dd" />"></td>
+			<td><input id="datenaiss" type="text" name="datenaiss" value="${param.datenaiss}<fmt:formatDate value="${utilisateur.getDateNaissance()}" pattern="yyyy-MM-dd" />">
+			<span class="erreur">${erreurs['datenaiss']}</span></td>
 		</tr>
 		<tr>
 			<td><label>Login: </label></td>
-			<td><input type="text" name="login" value="${param.login}${utilisateur.getLogin()}"></td>
+			<td><input type="text" name="login" value="${param.login}${utilisateur.getLogin()}">
+			<span class="erreur">${erreurs['login']}</span></td>
 		</tr>
 		<tr>
 			<td><label>Mot de passe: </label></td>

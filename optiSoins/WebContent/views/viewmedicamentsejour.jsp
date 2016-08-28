@@ -18,7 +18,6 @@
 	<button type="submit">Modifier</button>	
 	
 </form>
-
 	<form action="${pageContext.request.contextPath}/sejours" method="post">
 	<input type="hidden" name="action" value="view"> <input
 		type="hidden" name="sejourId"

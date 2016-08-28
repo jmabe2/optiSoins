@@ -4,14 +4,11 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import com.optisoins.connection.EMF;
 import com.optisoins.entities.Role;
@@ -61,68 +58,68 @@ public class RoleServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Utilisateur user = (Utilisateur) request.getSession().getAttribute("loginUser");
 		if (UtilisateurService.checkRole(user, Arrays.asList("Admin"))) {
-		String jspview = "";
-		String action = request.getParameter("action");
-		EntityManager em = EMF.getEM();
-		RoleService service = new RoleService(em);
+			String jspview = "";
+			String action = request.getParameter("action");
+			EntityManager em = EMF.getEM();
+			RoleService service = new RoleService(em);
 
-		// case Edit
-		if (action.equalsIgnoreCase("edit")) {
-			jspview = "/views/edit/editrole.jsp";
-			int roleId = Integer.parseInt(request.getParameter("roleId"));
-			Role role = service.findRole(roleId);
-			request.setAttribute("role", role);
-
-			// case Create
-		} else if (action.equalsIgnoreCase("create")) {
-			jspview = "/views/create/createrole.jsp";
-			
-			
-		} else if (action.equalsIgnoreCase("saveedit")) {
-			jspview = "/views/viewrole.jsp";
-			em.getTransaction().begin();
-			try {
-
-				Role role = service.updateRole(Integer.parseInt(request.getParameter("roleId")),
-						(request.getParameter("actif") != null), request.getParameter("name"));
-				em.getTransaction().commit();
-				log.info("Role updated !");
+			// case Edit
+			if (action.equalsIgnoreCase("edit")) {
+				jspview = "/views/edit/editrole.jsp";
+				int roleId = Integer.parseInt(request.getParameter("roleId"));
+				Role role = service.findRole(roleId);
 				request.setAttribute("role", role);
-			} catch (Exception e) {
-				log.error(e, e);
-				log.info("Role not updated !");
-			}
-		} else if (action.equalsIgnoreCase("savecreate")) {
-			jspview = "/views/viewrole.jsp";
-			em.getTransaction().begin();
-			try {
 
-				Role role = service.createRole((request.getParameter("actif") != null), request.getParameter("name"));
-				em.getTransaction().commit();
-				log.info("Role created !");
-				request.setAttribute("role", role);
-			} catch (Exception e) {
-				log.error(e, e);
-				log.info("Role not created !");
-			}
+				// case Create
+			} else if (action.equalsIgnoreCase("create")) {
+				jspview = "/views/create/createrole.jsp";
 
-		} else if (action.equalsIgnoreCase("delete")) {
-			int roleId = Integer.parseInt(request.getParameter("roleId"));
-			em.getTransaction().begin();
-			try {
-				service.RemoveRole(roleId);
-				log.info("Role deleted !");
-			} catch (Exception e) {
-				log.error(e, e);
-				log.info("Role not deleted !");
-			}
+			} else if (action.equalsIgnoreCase("saveedit")) {
+				jspview = "/views/viewrole.jsp";
+				em.getTransaction().begin();
+				try {
 
-			jspview = "/views/all/allroles.jsp";
-			;
-			request.setAttribute("roles", service.findAllRole());
-		}
-		em.close();
-		this.getServletContext().getRequestDispatcher(jspview).forward(request, response);
+					Role role = service.updateRole(Integer.parseInt(request.getParameter("roleId")),
+							(request.getParameter("actif") != null), request.getParameter("name"));
+					em.getTransaction().commit();
+					log.info("Role updated !");
+					request.setAttribute("role", role);
+				} catch (Exception e) {
+					log.error(e, e);
+					log.info("Role not updated !");
+				}
+			} else if (action.equalsIgnoreCase("savecreate")) {
+				jspview = "/views/viewrole.jsp";
+				em.getTransaction().begin();
+				try {
+
+					Role role = service.createRole((request.getParameter("actif") != null),
+							request.getParameter("name"));
+					em.getTransaction().commit();
+					log.info("Role created !");
+					request.setAttribute("role", role);
+				} catch (Exception e) {
+					log.error(e, e);
+					log.info("Role not created !");
+				}
+
+			} else if (action.equalsIgnoreCase("delete")) {
+				int roleId = Integer.parseInt(request.getParameter("roleId"));
+				em.getTransaction().begin();
+				try {
+					service.RemoveRole(roleId);
+					log.info("Role deleted !");
+				} catch (Exception e) {
+					log.error(e, e);
+					log.info("Role not deleted !");
+				}
+
+				jspview = "/views/all/allroles.jsp";
+				;
+				request.setAttribute("roles", service.findAllRole());
+			}
+			em.close();
+			this.getServletContext().getRequestDispatcher(jspview).forward(request, response);
 		} else {
 			this.getServletContext().getRequestDispatcher("/views/signin.jsp").forward(request, response);
 		}

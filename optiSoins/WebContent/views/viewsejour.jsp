@@ -17,14 +17,17 @@
 	<button type="submit">Modifier</button>
 
 </form>
+<h4>Interventions</h4><br>
+<c:if test="${sessionScope['loginUser'].role.nom.equals('Admin') || sessionScope['loginUser'].role.nom.equals('Médecin')}">
 <form action="${pageContext.request.contextPath}/intervention"
 	method="post">
 	<input type="hidden" name="action" value="create"> <input
 		type="hidden" name="sejourId" value="${sejour.getIdSejour()}">
 	<button type="submit">Ajouter une intervention</button>
 	</form>
+</c:if>
 	<br>
-	<h4><u>Interventions</u></h4><br>
+	
 	            <table class="table table-striped">
                 <tr>
                     <th>Id</th>
@@ -58,7 +61,7 @@
             </table>
 	<br>
 	
-	
+	<h4>Chambres</h4><br>
 	<form action="${pageContext.request.contextPath}/sejourchambre"
 	method="post">
 	<input type="hidden" name="action" value="create"> <input
@@ -66,7 +69,7 @@
 	<button type="submit">Ajouter une chambre</button>
 	</form>
 	<br>
-	<h4><u>Chambres</u></h4><br>
+	
 	            <table class="table table-striped">
                 <tr>
                     
@@ -98,6 +101,7 @@
             </table>
 	<br>
 
+<h4>Médicaments</h4><br>
 <form action="${pageContext.request.contextPath}/medicamentsejour"
 	method="post">
 	<input type="hidden" name="action" value="create"> <input
@@ -105,7 +109,7 @@
 	<button type="submit">Ajouter un médicament</button>
 	</form>
 	<br>
-	<h4><u>Médicaments</u></h4><br>
+	
 	            <table class="table table-striped">
                 <tr>
                     

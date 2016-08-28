@@ -1,16 +1,13 @@
 package com.optisoins;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DateFormat;
+
 import java.text.SimpleDateFormat;
-import java.time.Month;
+
 import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +18,6 @@ import com.optisoins.connection.EMF;
 import com.optisoins.entities.Intervention;
 import com.optisoins.entities.Utilisateur;
 import com.optisoins.services.InterventionService;
-import com.optisoins.services.RoleService;
 import com.optisoins.services.TypeinterventionService;
 import com.optisoins.services.UtilisateurService;
 
@@ -40,7 +36,7 @@ public class CreateInterventionServlet extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
- 
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)

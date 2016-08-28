@@ -1,16 +1,9 @@
 package com.optisoins;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.Month;
+
 import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,11 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import com.optisoins.connection.EMF;
 import com.optisoins.entities.Medicamentsejour;
-import com.optisoins.entities.Chambre;
 import com.optisoins.entities.Utilisateur;
 import com.optisoins.services.MedicamentSejourService;
-import com.optisoins.services.ChambreService;
-import com.optisoins.services.RoleService;
 import com.optisoins.services.UtilisateurService;
 import com.optisoins.services.MedicamentService;
 
@@ -64,14 +54,12 @@ public class MedicamentsejourServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Utilisateur user = (Utilisateur) request.getSession().getAttribute("loginUser");
 		if (UtilisateurService.checkRole(user, Arrays.asList("Admin", "Médecin", "Infirmière"))) {
-			
+
 			String jspview = "";
 			String action = request.getParameter("action");
 			EntityManager em = EMF.getEM();
 			MedicamentService medicamentService = new MedicamentService(em);
 			MedicamentSejourService service = new MedicamentSejourService(em);
-			ChambreService chambreService = new ChambreService(em);
-			
 
 			// case Edit
 			if (action.equalsIgnoreCase("edit")) {
@@ -89,7 +77,7 @@ public class MedicamentsejourServlet extends HttpServlet {
 				jspview = "/views/viewmedicamentsejour.jsp";
 				em.getTransaction().begin();
 				try {
-					
+
 					Medicamentsejour medsej = service.updateMedicamentsejour(
 							Integer.parseInt(request.getParameter("medicamentsejourId")),
 							(request.getParameter("actif") != null),
@@ -108,7 +96,7 @@ public class MedicamentsejourServlet extends HttpServlet {
 				jspview = "/views/viewmedicamentsejour.jsp";
 				em.getTransaction().begin();
 				try {
-					
+
 					Medicamentsejour medsej = service.createMedicamentsejour((request.getParameter("actif") != null),
 							Integer.parseInt(request.getParameter("medicament")), request.getParameter("indication"),
 							request.getParameter("posologie"), request.getParameter("remarque"),

@@ -4,21 +4,16 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import com.optisoins.connection.EMF;
 import com.optisoins.entities.Chambre;
-import com.optisoins.services.ChambreService;
-import com.optisoins.services.TypechambreService;
 import com.optisoins.services.UtilisateurService;
-import com.optisoins.entities.Typechambre;
 import com.optisoins.entities.Utilisateur;
 import com.optisoins.entities.Equipement;
 import com.optisoins.services.EquipementService;
@@ -72,7 +67,6 @@ public class EquipementchambreServlet extends HttpServlet {
 			EntityManager em = EMF.getEM();
 			EquipementchambreService service = new EquipementchambreService(em);
 			EquipementService equipementService = new EquipementService(em);
-			ChambreService chambreService = new ChambreService(em);
 
 			// case Edit
 			if (action.equalsIgnoreCase("edit")) {
@@ -111,7 +105,7 @@ public class EquipementchambreServlet extends HttpServlet {
 							Integer.parseInt(request.getParameter("equip")));
 					em.getTransaction().commit();
 					log.info("Equipement chambre created !");
-					
+
 					request.setAttribute("chambre", equipc.getChambre());
 				} catch (Exception e) {
 					log.error(e, e);
@@ -130,11 +124,10 @@ public class EquipementchambreServlet extends HttpServlet {
 					chambre.removeEquipementchambre(equipementChambre);
 					equipement.removeEquipementchambre(equipementChambre);
 					em.remove(equipementChambre);
-					
 
 					em.getTransaction().commit();
 					log.info("Equipement chambre removed !");
-					
+
 					request.setAttribute("chambre", chambre);
 				} catch (Exception e) {
 					log.error(e, e);

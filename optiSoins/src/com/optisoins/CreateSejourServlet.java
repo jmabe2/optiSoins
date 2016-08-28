@@ -6,16 +6,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
-import java.text.DateFormat;
+
 import java.text.SimpleDateFormat;
-import java.time.Month;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.Map;
+
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+
 import org.apache.log4j.Logger;
 import com.optisoins.connection.EMF;
 import com.optisoins.entities.Sejour;
@@ -30,109 +27,123 @@ import com.optisoins.services.UtilisateurService;
 
 public class CreateSejourServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static Logger log = Logger.getLogger(CreateSejourServlet.class);     
-    /**
-     * @see HttpServlet#HttpSevlet()
-     */
-    public CreateSejourServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	static Logger log = Logger.getLogger(CreateSejourServlet.class);
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpSevlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Utilisateur user = (Utilisateur) request.getSession().getAttribute("loginUser");
-		if (UtilisateurService.checkRole(user, Arrays.asList("Admin","Médecin","Infirmière"))) {
-		EntityManager em = EMF.getEM(); 
-		SejourService service = new SejourService(em);
-		request.setAttribute("sejours", service.findAllSejour() );
-		this.getServletContext().getRequestDispatcher("/views/all/allsejour.jsp").forward( request, response );
-	} else {
-		this.getServletContext().getRequestDispatcher("/views/signin.jsp").forward(request, response);
-	}
+	public CreateSejourServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Utilisateur user = (Utilisateur) request.getSession().getAttribute("loginUser");
-		if (UtilisateurService.checkRole(user, Arrays.asList("Admin","Médecin","Infirmière"))) {
-		String jspview="";
-        String action = request.getParameter("action");
-        EntityManager em = EMF.getEM(); 
-		SejourService service = new SejourService(em);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
-		// case view
-		if (action.equalsIgnoreCase("view")) {
-			jspview = "/views/viewsejour.jsp";
-			int sejourId = Integer.parseInt(request.getParameter("sejourId"));
-            Sejour sej = service.findSejour(sejourId);
-            request.setAttribute("sejour", sej);
+		if (UtilisateurService.checkRole(user, Arrays.asList("Admin", "Médecin", "Infirmière"))) {
+			EntityManager em = EMF.getEM();
+			SejourService service = new SejourService(em);
+			request.setAttribute("sejours", service.findAllSejour());
+			this.getServletContext().getRequestDispatcher("/views/all/allsejour.jsp").forward(request, response);
+		} else {
+			this.getServletContext().getRequestDispatcher("/views/signin.jsp").forward(request, response);
 		}
-			
-		else if (action.equalsIgnoreCase("edit")){
-			jspview="/views/edit/editsejour.jsp";
-            int sejourId = Integer.parseInt(request.getParameter("sejourId"));
-            Sejour sej = service.findSejour(sejourId);
-            request.setAttribute("sejour", sej);
-        
-        // case Create
-            
-		} else if (action.equalsIgnoreCase("create")){
-        	jspview="/views/create/createsejour.jsp";      
-        	
-        //case update
-        	
-		} else if (action.equalsIgnoreCase("saveedit")){
-        	jspview="/views/viewsejour.jsp";
-        	em.getTransaction().begin();  
-    		try {
-    		
-    			Sejour sej = service.updateSejour(Integer.parseInt(request.getParameter("sejourId") ),
-    		    (request.getParameter("actif") != null), (sdf.parse (request.getParameter("dateEntree")) ),
-    		    (sdf.parse (request.getParameter("dateSortie")) ),
-    			request.getParameter("emplacement"), request.getParameter("motifSejour") );                    		
-                
-    			em.getTransaction().commit();
-                log.info("Stays updated !");
-                request.setAttribute("sejour", sej);
-    		}	
-    		catch (Exception e){
-    			log.error(e,e);
-    			log.info("Stays not updated !"); 
-           }
-        } else if (action.equalsIgnoreCase("savecreate")){
-        	jspview="/views/viewsejour.jsp";
-        	em.getTransaction().begin();  		
-    		try {
-    		
-    			Sejour sej = service.createSejour( (request.getParameter("actif") != null), 
-    		    (sdf.parse (request.getParameter("dateEntree")) ),(sdf.parse (request.getParameter("dateSortie")) ),
-    	    	request.getParameter("emplacement"), request.getParameter("motifSejour"),Integer.parseInt(request.getParameter("patientId")) );                    		
-                
-    			em.getTransaction().commit();
-                log.info("Stays created !");
-                request.setAttribute("sejour", sej);
-    		}	
-    		catch (Exception e){
-    			log.error(e,e);
-    			log.info("Stays not created !"); 
-           }
+	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		Utilisateur user = (Utilisateur) request.getSession().getAttribute("loginUser");
+		if (UtilisateurService.checkRole(user, Arrays.asList("Admin", "Médecin", "Infirmière"))) {
+			String jspview = "";
+			String action = request.getParameter("action");
+			EntityManager em = EMF.getEM();
+			SejourService service = new SejourService(em);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Map<String, String> erreurs;
+			// case view
+			if (action.equalsIgnoreCase("view")) {
+				jspview = "/views/viewsejour.jsp";
+				int sejourId = Integer.parseInt(request.getParameter("sejourId"));
+				Sejour sej = service.findSejour(sejourId);
+				request.setAttribute("sejour", sej);
+			}
 
-            jspview = "/views/all/allsejour.jsp";
-            request.setAttribute("sejour", service.findAllSejour());    
-        }
-		em.close();
-		this.getServletContext().getRequestDispatcher(jspview).forward( request, response );
+			else if (action.equalsIgnoreCase("edit")) {
+				jspview = "/views/edit/editsejour.jsp";
+				int sejourId = Integer.parseInt(request.getParameter("sejourId"));
+				Sejour sej = service.findSejour(sejourId);
+				request.setAttribute("sejour", sej);
+
+				// case Create
+
+			} else if (action.equalsIgnoreCase("create")) {
+				jspview = "/views/create/createsejour.jsp";
+
+				// case update
+
+			} else if (action.equalsIgnoreCase("saveedit")) {
+				erreurs = service.validate(request);
+				if (erreurs.isEmpty()) {
+				jspview = "/views/viewsejour.jsp";
+				em.getTransaction().begin();
+				try {
+
+					Sejour sej = service.updateSejour(Integer.parseInt(request.getParameter("sejourId")),
+							(request.getParameter("actif") != null), (sdf.parse(request.getParameter("dateEntree"))),
+							(sdf.parse(request.getParameter("dateSortie"))), request.getParameter("emplacement"),
+							request.getParameter("motifSejour"));
+
+					em.getTransaction().commit();
+					log.info("Stays updated !");
+					request.setAttribute("sejour", sej);
+				} catch (Exception e) {
+					log.error(e, e);
+					log.info("Stays not updated !");
+				}
+				} else {
+					request.setAttribute("erreurs", erreurs);
+					jspview = "/views/edit/editsejour.jsp";
+
+				}
+			} else if (action.equalsIgnoreCase("savecreate")) {
+				erreurs = service.validate(request);
+				if (erreurs.isEmpty()) {
+				jspview = "/views/viewsejour.jsp";
+				em.getTransaction().begin();
+				try {
+
+					Sejour sej = service.createSejour((request.getParameter("actif") != null),
+							(sdf.parse(request.getParameter("dateEntree"))),
+							(sdf.parse(request.getParameter("dateSortie"))), request.getParameter("emplacement"),
+							request.getParameter("motifSejour"), Integer.parseInt(request.getParameter("patientId")));
+
+					em.getTransaction().commit();
+					log.info("Stays created !");
+					request.setAttribute("sejour", sej);
+				} catch (Exception e) {
+					log.error(e, e);
+					log.info("Stays not created !");
+				}
+
+				} else {
+					request.setAttribute("erreurs", erreurs);
+					jspview = "/views/create/createsejour.jsp";
+
+				}
+			}
+			em.close();
+			this.getServletContext().getRequestDispatcher(jspview).forward(request, response);
 		} else {
 			this.getServletContext().getRequestDispatcher("/views/signin.jsp").forward(request, response);
 		}

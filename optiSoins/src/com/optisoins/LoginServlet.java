@@ -2,15 +2,10 @@ package com.optisoins;
 
 import java.io.IOException;
 
-import java.io.PrintWriter;
-import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,14 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import com.optisoins.connection.EMF;
-import com.optisoins.entities.Patient;
-import com.optisoins.entities.Role;
+
 import com.optisoins.entities.Utilisateur;
-import com.optisoins.services.RoleService;
+
 
 
 /**
@@ -71,8 +64,6 @@ public class LoginServlet extends HttpServlet {
 		doGet(request, response);
 
 		Utilisateur user = new Utilisateur();
-		String name = request.getParameter("login");
-		String pwd = request.getParameter("pwd");
 		EntityManager em = EMF.getEM();
 		HttpSession session = request.getSession();
 		TypedQuery<Utilisateur> query = em.createQuery("SELECT u from Utilisateur U where u.login like :login and u.motDePasse like :pwd", Utilisateur.class);

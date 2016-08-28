@@ -1,16 +1,12 @@
 package com.optisoins.services;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.*;
-import javax.servlet.http.HttpServletRequest;
 
 import com.optisoins.entities.Chambre;
 import com.optisoins.entities.Typechambre;
-import com.optisoins.entities.Utilisateur;
-import com.optisoins.entities.Equipement;
+
 
 
 public class ChambreService {

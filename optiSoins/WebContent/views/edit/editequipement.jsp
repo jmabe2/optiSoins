@@ -13,5 +13,5 @@
 	
 	<button type="submit">Enregistrer</button>
 </form>
-	<a href="${pageContext.request.contextPath}/medicaments"><button>Retour à la liste</button></a>
+	<a href="${pageContext.request.contextPath}/equipements"><button>Retour à la liste</button></a>
 <jsp:include page="../footer.jsp"/>

@@ -1,5 +1,6 @@
 package com.optisoins.services;
 
+import java.sql.ResultSet;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -95,7 +96,7 @@ public class PatientService {
 		return query.getResultList();
 	
 	}
-
+	
 	public List<Patient> searchPatients (String searchnom, String searchprenom){
 		TypedQuery<Patient> query = em.createQuery("SELECT p from Patient p where p.nom like :searchnom and p.prenom like :searchprenom", Patient.class);
 		query.setParameter("searchnom", "%"+searchnom+"%");

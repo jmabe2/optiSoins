@@ -122,21 +122,7 @@ public class ChambreServlet extends HttpServlet {
     			log.info("Chambre not created !"); 
            }
 
-        } else if (action.equalsIgnoreCase("delete")){
-            int chambreId = Integer.parseInt(request.getParameter("chambreId"));
-            em.getTransaction().begin();  		
-    		try {
-    			service.RemoveChambre(chambreId);
-    			log.info("Medicament deleted !");
-    		}
-    		catch (Exception e){
-        			log.error(e,e);
-        			log.info("Chambre not deleted !"); 
-            }
-
-            jspview = "/views/all/allchambres.jsp";;
-            request.setAttribute("chambres", service.findAllChambre());    
-        }
+        } 
 		em.close();
 		this.getServletContext().getRequestDispatcher(jspview).forward( request, response );
 		} else {

@@ -19,7 +19,7 @@
 
 <form action="${pageContext.request.contextPath}/utilisateurs" method="post">
 	<input type="hidden" name="action" value="create">
-	<button type="submit">Modifier</button>	
+	<button type="submit">Créer</button>	
 
 </form>
 	<a href="${pageContext.request.contextPath}/utilisateurs"><button>Retour à la liste</button></a>

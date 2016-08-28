@@ -100,21 +100,7 @@ public class TypechambreServlet extends HttpServlet {
     			log.info("Medicament not created !"); 
            }
 
-        } else if (action.equalsIgnoreCase("delete")){
-            int typeId = Integer.parseInt(request.getParameter("typeId"));
-            em.getTransaction().begin();  		
-    		try {
-    			service.RemoveTypechambre(typeId);
-    			log.info("Typechambre deleted !");
-    		}
-    		catch (Exception e){
-        			log.error(e,e);
-        			log.info("Typechambre not deleted !"); 
-            }
-
-            jspview = "/views/all/alltypes.jsp";;
-            request.setAttribute("typechambre", service.findAllTypechambre());    
-        }
+        } 
 		em.close();
 		this.getServletContext().getRequestDispatcher(jspview).forward( request, response );
 		} else {

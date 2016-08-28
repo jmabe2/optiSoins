@@ -50,7 +50,7 @@
 		</tr>
 		<tr>
 			<td><label>Actif: </label></td>
-			<td><input type="checkbox" name="actif" ${param.actif != null ? "checked" : ""}${utilisateur.getActif() != null ? "checked" : ""}><br></td>
+			<td><input type="checkbox" name="actif" ${param.actif != null || param.action == 'create' ? "checked" : ""}${utilisateur.getActif() != null ? "checked" : ""}><br></td>
 		</tr>
 	</table>
 	<script type="text/javascript">

@@ -11,7 +11,7 @@
 	<label>Type de chambre :</label> 
 	<select id="selectType" name="type">
 					<c:forEach items="${types}" var="typechambre">
-						<option value="${typechambre.getIdTypeChambre()}" ${param.typechambre == typechambre.getIdTypeChambre() ? "selected" : ""}${typechambre.getIdTypeChambre() == typechambre.getIdTypeChambre() ? "selected" : ""}>${typechambre.getNom()}</option>
+						<option value="${typechambre.getIdTypeChambre()}" ${param.typechambre == typechambre.getIdTypeChambre() ? "selected" : ""}${chambre.getTypechambre().getIdTypeChambre() == typechambre.getIdTypeChambre() ? "selected" : ""}>${typechambre.getNom()}</option>
 					</c:forEach>
 			</select><br>
 	

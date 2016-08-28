@@ -9,7 +9,7 @@
 	<label>Prénom: </label>${patient.getPrenom()}<br>
 	<label>Sexe: </label>${patient.getSexe()=="M" ? "Homme" : "Femme"}<br>
 	<label>Date de naissance: </label><fmt:formatDate value="${patient.getDateDeNaissance()}" pattern="yyyy-MM-dd" /><br>
-	<label>Adresse: </label>${patient.getAdresse()}<br>
+	<label>Adresse: </label><textarea readonly>${patient.getAdresse()}</textarea><br>
 	<label>Actif: </label> ${patient.getActif() ? "<span class=\"glyphicon glyphicon-check\"  aria-hidden=\"true\"></span>" : "<span class=\"glyphicon glyphicon-unchecked\"  aria-hidden=\"true\"></span>"}<br>
 	<button type="submit">Modifier</button>	
 </form><br>

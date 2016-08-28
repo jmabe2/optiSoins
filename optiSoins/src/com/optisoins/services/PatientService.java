@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.optisoins.entities.Patient;
 import com.optisoins.Utils;
 import com.optisoins.entities.Role;
+import com.optisoins.entities.Sejour;
 import com.optisoins.entities.Specialite;
 
 
@@ -95,5 +96,12 @@ public class PatientService {
 	
 	}
 
+	public List<Patient> searchPatients (String searchnom, String searchprenom){
+		TypedQuery<Patient> query = em.createQuery("SELECT p from Patient p where p.nom like :searchnom and p.prenom like :searchprenom", Patient.class);
+		query.setParameter("searchnom", "%"+searchnom+"%");
+		query.setParameter("searchprenom", "%"+searchprenom+"%");
+		return query.getResultList();
+	
+	}
 }
 

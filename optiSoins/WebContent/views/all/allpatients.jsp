@@ -4,6 +4,15 @@
 <jsp:include page="../header.jsp"/>
 
 			<h2>Patients</h2><br>
+			<fieldset>
+			<legend>Rechercher</legend>
+			<form action="${pageContext.request.contextPath}/patients" method="post">
+	    		<input type="hidden" name="action" value="search">
+	    		<label>Nom: </label><input type="text" name="searchnom" value="${param.searchnom}">
+			    <label>Prenom: </label><input type="text" name="searchprenom" value="${param.searchprenom}">
+	    		<button type="submit">Rechercher</button>
+			</form>
+			</fieldset>
 			<form action="${pageContext.request.contextPath}/patients" method="post">
 	    		<input type="hidden" name="action" value="create">
 	    		<button type="submit">Créer</button>

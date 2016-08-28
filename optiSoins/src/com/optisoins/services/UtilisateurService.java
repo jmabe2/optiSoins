@@ -106,6 +106,9 @@ public class UtilisateurService {
 		return query.getResultList();
 	
 	}
+	public static boolean checkRole(Utilisateur user, List<String> roleNames) {
+		return (user != null) && (roleNames.contains(user.getRole().getNom()));
+	}
 
 }
 

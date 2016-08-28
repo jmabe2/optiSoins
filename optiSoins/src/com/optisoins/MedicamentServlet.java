@@ -1,6 +1,7 @@
 package com.optisoins;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,7 +15,9 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import com.optisoins.connection.EMF;
 import com.optisoins.entities.Medicament;
+import com.optisoins.entities.Utilisateur;
 import com.optisoins.services.MedicamentService;
+import com.optisoins.services.UtilisateurService;
 
 /**
  * Servlet implementation class MedicamentServlet
@@ -35,10 +38,15 @@ public class MedicamentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Utilisateur user = (Utilisateur) request.getSession().getAttribute("loginUser");
+		if (UtilisateurService.checkRole(user, Arrays.asList("Admin","Pharmacien"))) {
 		EntityManager em = EMF.getEM(); 
 		MedicamentService service = new MedicamentService(em);
 		request.setAttribute("medicaments", service.findAllMedicament());
 		this.getServletContext().getRequestDispatcher("/views/all/allmedicaments.jsp").forward( request, response );
+		} else {
+			this.getServletContext().getRequestDispatcher("/views/signin.jsp").forward(request, response);
+		}
 	}
 
 	/**
@@ -46,7 +54,8 @@ public class MedicamentServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-				
+		Utilisateur user = (Utilisateur) request.getSession().getAttribute("loginUser");
+		if (UtilisateurService.checkRole(user, Arrays.asList("Admin","Pharmacien"))) {		
 		String jspview="";
         String action = request.getParameter("action");
         EntityManager em = EMF.getEM(); 
@@ -108,7 +117,9 @@ public class MedicamentServlet extends HttpServlet {
         }
 		em.close();
 		this.getServletContext().getRequestDispatcher(jspview).forward( request, response );
-		
+		} else {
+			this.getServletContext().getRequestDispatcher("/views/signin.jsp").forward(request, response);
+		}
 	}
 
 }

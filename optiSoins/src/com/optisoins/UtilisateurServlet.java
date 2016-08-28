@@ -18,6 +18,8 @@ import com.optisoins.entities.Utilisateur;
 import com.optisoins.services.UtilisateurService;
 import com.optisoins.services.RoleService;
 import com.optisoins.services.SpecialiteService;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,10 +45,15 @@ public class UtilisateurServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Utilisateur user = (Utilisateur) request.getSession().getAttribute("loginUser");
+		if (UtilisateurService.checkRole(user, Arrays.asList("Admin"))) {	
 		EntityManager em = EMF.getEM();
 		UtilisateurService service = new UtilisateurService(em);
 		request.setAttribute("utilisateurs", service.findAllUtilisateur());
 		this.getServletContext().getRequestDispatcher("/views/all/allutilisateurs.jsp").forward(request, response);
+		} else {
+			this.getServletContext().getRequestDispatcher("/views/signin.jsp").forward(request, response);
+		}
 	}
 
 	/**
@@ -56,7 +63,8 @@ public class UtilisateurServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		Utilisateur user = (Utilisateur) request.getSession().getAttribute("loginUser");
+		if (UtilisateurService.checkRole(user, Arrays.asList("Admin"))) {	
 		String jspview = "";
 		String action = request.getParameter("action");
 		EntityManager em = EMF.getEM();
@@ -166,7 +174,9 @@ public class UtilisateurServlet extends HttpServlet {
 		}
 		em.close();
 		this.getServletContext().getRequestDispatcher(jspview).forward(request, response);
-
+		} else {
+			this.getServletContext().getRequestDispatcher("/views/signin.jsp").forward(request, response);
+		}
 	}
 
 }

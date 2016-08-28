@@ -48,7 +48,7 @@ public void RemoveMedicament(int idMedicament){
 
 public List<Medicament> findAllMedicament (){
 	
-	TypedQuery<Medicament> query = em.createQuery("SELECT r from Medicament r", Medicament.class);
+	TypedQuery<Medicament> query = em.createQuery("SELECT m from Medicament m", Medicament.class);
 	return query.getResultList();
 
 }

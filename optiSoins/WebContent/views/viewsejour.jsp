@@ -97,7 +97,46 @@
                 </c:forEach>
             </table>
 	<br>
-	
+
+<form action="${pageContext.request.contextPath}/medicamentsejour"
+	method="post">
+	<input type="hidden" name="action" value="create"> <input
+		type="hidden" name="sejourId" value="${sejour.getIdSejour()}">
+	<button type="submit">Ajouter un médicament</button>
+	</form>
+	<br>
+	<h4><u>Médicaments</u></h4><br>
+	            <table class="table table-striped">
+                <tr>
+                    
+                    <th>Medicament</th>
+                    <th>Indication</th>
+ 				    <th>Posologie</th>
+ 				    <th>Remarque</th>                  
+                    <th></th>
+                </tr>
+                <c:forEach items="${sejour.getMedicamentsejours()}" var="medicamentsejour">
+                    <tr>
+                    	 <td>${medicamentsejour.getMedicament().getNom()}</td>
+                    	 <td>${medicamentsejour.getIndication()}</td>
+                    	 <td>${medicamentsejour.getPosologie()}</td>
+                    	 <td>${medicamentsejour.getRemarque()}</td>
+                        <td>
+                        
+                          <form action="${pageContext.request.contextPath}/medicamentsejour" method="post">
+                          
+	    					<input type="hidden" name="action" value="edit">
+	    					<input type="hidden" name="medicamentsejourId" value="${medicamentsejour.getIdMedicamentSejour()}">
+	    					
+	    					<button type="submit">Modifier médicament</button>
+						  
+						  </form>
+						  
+						  </td>
+                    </tr>
+                </c:forEach>
+            </table>
+	<br>
 
 <form action="${pageContext.request.contextPath}/patients" method="post">
 	<input type="hidden" name="action" value="view"> <input

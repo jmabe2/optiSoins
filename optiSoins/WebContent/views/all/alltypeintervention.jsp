@@ -11,6 +11,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Libellé</th>
+                    <th></th>
                 </tr>
                 <c:forEach items="${typeinterventions}" var="typeintervention">
                     <tr>

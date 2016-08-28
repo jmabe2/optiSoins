@@ -8,27 +8,30 @@
             <table class="table table-striped">
                 <tr>
                     <th>Id</th>
-                    <th>Nom de l'intervention</th>
- 				    <th>Description de l'intervention</th>                   
+                    <th>Type</th>
+                    <th>Nom</th>
+ 				    <th>Description</th>                   
  				    <th>Date de l'intervention</th>
                     <th></th>
                 </tr>
-                <c:forEach items="${interventions}" var="sejour">
+                <c:forEach items="${interventions}" var="intervention">
                     <tr>
                         <td>${intervention.getIdIntervention()}</td>
-                        <td>${intervention.getdNom()}</td>
+                        <td>${intervention.getTypeintervention().getLibelle()}</td>
+                        <td>${intervention.getNom()}</td>
 						<td>${intervention.getDescription()}</td>
 						<td> <fmt:formatDate value="${intervention.getDate()}" pattern="yyyy-MM-dd" /> </td>
                         <td>
-                        
+                        <c:if test="${intervention.getUtilisateur().getIdUtilisateur()==sessionScope['loginUser'].idUtilisateur}">
                           <form action="${pageContext.request.contextPath}/intervention" method="post">
                           
 	    					<input type="hidden" name="action" value="edit">
 	    					<input type="hidden" name="interventionId" value="${intervention.getIdIntervention()}">
 	    					
-	    					<button type="submit">Modifier une intervention</button>
+	    					<button type="submit">Modifier intervention</button>
 						  
 						  </form>
+						  </c:if>
 						  </td>
                     </tr>
                 </c:forEach>

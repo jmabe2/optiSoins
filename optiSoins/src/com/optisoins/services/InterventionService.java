@@ -58,7 +58,7 @@ public void RemoveIntervention(int idIntervention){
 
 public List<Intervention> findAllIntervention (){
 	
-	TypedQuery<Intervention> query = em.createQuery("SELECT i from Role i", Intervention.class);
+	TypedQuery<Intervention> query = em.createQuery("SELECT i from Intervention i", Intervention.class);
 	return query.getResultList();
 
 }

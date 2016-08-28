@@ -52,7 +52,7 @@ public class CreateInterventionServlet extends HttpServlet {
 		if (UtilisateurService.checkRole(user, Arrays.asList("Admin", "Médecin"))) {
 			EntityManager em = EMF.getEM();
 			InterventionService service = new InterventionService(em);
-			request.setAttribute("intervention", service.findAllIntervention());
+			request.setAttribute("interventions", service.findAllIntervention());
 			this.getServletContext().getRequestDispatcher("/views/all/allintervention.jsp").forward(request, response);
 		} else {
 			this.getServletContext().getRequestDispatcher("/views/signin.jsp").forward(request, response);

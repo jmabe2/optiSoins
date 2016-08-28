@@ -126,17 +126,7 @@ public class CreateSejourServlet extends HttpServlet {
     			log.info("Stays not created !"); 
            }
 
-        /*} else if (action.equalsIgnoreCase("delete")){
-            int sejourId = Integer.parseInt(request.getParameter("sejourId"));
-            em.getTransaction().begin();  		
-    		try {
-    			service.RemoveSejour(sejourId);
-    			log.info("Stays deleted !");
-    		}
-    		catch (Exception e){
-        			log.error(e,e);
-        			log.info("Stays not deleted !"); 
-            }*/
+
 
             jspview = "/views/all/allsejour.jsp";
             request.setAttribute("sejour", service.findAllSejour());    

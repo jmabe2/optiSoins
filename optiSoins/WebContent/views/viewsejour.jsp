@@ -57,6 +57,47 @@
                 </c:forEach>
             </table>
 	<br>
+	
+	
+	<form action="${pageContext.request.contextPath}/sejourchambre"
+	method="post">
+	<input type="hidden" name="action" value="create"> <input
+		type="hidden" name="sejourId" value="${sejour.getIdSejour()}">
+	<button type="submit">Ajouter une chambre</button>
+	</form>
+	<br>
+	<h4><u>Chambres</u></h4><br>
+	            <table class="table table-striped">
+                <tr>
+                    
+                    <th>Numéro</th>
+                    <th>Date de début</th>
+ 				    <th>Date de fin</th>                   
+                    <th></th>
+                </tr>
+                <c:forEach items="${sejour.getSejourchambres()}" var="sejourchambre">
+                    <tr>
+                    	 <td>${sejourchambre.getChambre().getNumeroChambre()}</td>
+                        <td><fmt:formatDate value="${sejourchambre.getDateEntree()}" pattern="yyyy-MM-dd" /></td>
+                        <td><fmt:formatDate value="${sejourchambre.getDateSortie()}" pattern="yyyy-MM-dd" /></td>
+                        
+                        <td>
+                        
+                          <form action="${pageContext.request.contextPath}/sejourchambre" method="post">
+                          
+	    					<input type="hidden" name="action" value="edit">
+	    					<input type="hidden" name="sejourchambreId" value="${sejourchambre.getIdSejourChambre()}">
+	    					
+	    					<button type="submit">Modifier chambre</button>
+						  
+						  </form>
+						  
+						  </td>
+                    </tr>
+                </c:forEach>
+            </table>
+	<br>
+	
 
 <form action="${pageContext.request.contextPath}/patients" method="post">
 	<input type="hidden" name="action" value="view"> <input

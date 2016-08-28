@@ -6,18 +6,17 @@
 <form action="${pageContext.request.contextPath}/sejourchambre" method="post">
 
 	<input type="hidden" name="action" value="saveedit">
-	<input type="hidden" name="sejourchambreId" value="${sejourchambre.getIdSejour()}">
-	<label>Date d'entrée : </label>
-	<input type="text" name="dateEntree" value=<fmt:formatDate value="${sejourchambre.getDateEntree()}" pattern="yyyy-MM-dd" /> > <br>
-	<label>Date de sortie : </label>
-	<input type="text" name="dateSortie" value=<fmt:formatDate value="${sejourchambre.getDateSortie()}" pattern="yyyy-MM-dd" /> ><br>
-	<input type="text" name="motif" value="${sejourchambre.getMotifSejour()}"><br>
-	<label>Actif: </label>
-	<input type="checkbox" name="actif" ${sejourchambre.getActif() ? "checked" : ""}><br>
+	<input type="hidden" name="sejourchambreId" value="${sejourchambre.getIdSejourChambre()}">
+	<jsp:include page="../form/formsejourchambre.jsp" />
 	<button type="submit">Enregistrer</button>
 	
 </form>
 
-	<a href="${pageContext.request.contextPath}/sejourchambre"><button>Retour à la liste</button></a>
+		<form action="${pageContext.request.contextPath}/sejours" method="post">
+	<input type="hidden" name="action" value="view"> <input
+		type="hidden" name="sejourId"
+		value="${param.sejourId}${sejourchambre.getSejour().getIdSejour()}">
+	<button type="submit">Retour au séjour</button>
+	</form>
 	
 <jsp:include page="../footer.jsp"/>

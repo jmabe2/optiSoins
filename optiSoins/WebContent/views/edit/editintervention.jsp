@@ -12,7 +12,12 @@
 	
 </form>
 
-	<a href="${pageContext.request.contextPath}/intervention"><button>Retour à la liste</button></a>
+	<form action="${pageContext.request.contextPath}/sejours" method="post">
+	<input type="hidden" name="action" value="view"> <input
+		type="hidden" name="sejourId"
+		value="${param.sejourId}${intervention.getSejour().getIdSejour()}">
+	<button type="submit">Retour au séjour</button>
+	</form>
 	<script type="text/javascript">
 		$(".datepicker").flatpickr();
 	</script>

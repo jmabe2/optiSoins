@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.optisoins.entities.Chambre;
+import com.optisoins.entities.Intervention;
 import com.optisoins.entities.Sejour;
 import com.optisoins.entities.Sejourchambre;
 
@@ -20,22 +22,28 @@ public class SejourChambreService {
 	}
 
 
-	public Sejourchambre createSejourchambre (boolean actif,Date dateEntree, Date dateSortie) 
+	public Sejourchambre createSejourchambre (boolean actif,Date dateEntree, Date dateSortie, Chambre chambre,int sejourId) 
 	{
 		Sejourchambre sejchamb = new Sejourchambre();
 		sejchamb.setActif(actif);
 		sejchamb.setDateEntree(dateEntree);
 		sejchamb.setDateSortie(dateSortie);
+		sejchamb.setChambre(chambre);
+		Sejour sej = em.find(Sejour.class, sejourId);
+		sejchamb.setSejour(sej);
 		em.persist(sejchamb);
+		sej.addSejourchambre(sejchamb);
 		return sejchamb;
 	}
 
-	public Sejourchambre updateSejourchambre (int idSejourchambre,boolean actif,Date dateEntree, Date dateSortie) 	
+	public Sejourchambre updateSejourchambre (int idSejourchambre,boolean actif,Date dateEntree, Date dateSortie, Chambre chambre, int sejourId) 	
 	{
-		Sejourchambre sejchamb = new Sejourchambre();
+		Sejourchambre sejchamb = em.find(Sejourchambre.class, idSejourchambre);
 		sejchamb.setActif(actif);
 		sejchamb.setDateEntree(dateEntree);
 		sejchamb.setDateSortie(dateSortie);
+		sejchamb.setChambre(chambre);
+		sejchamb.setSejour(em.find(Sejour.class, sejourId));
 		return sejchamb;
 		}
 	
@@ -43,13 +51,7 @@ public class SejourChambreService {
 		return em.find(Sejourchambre.class, idSejourchambre);
 	}
 
-	public void RemoveSejourchambre(int idSejourchambre){
-		
-		Sejourchambre sejchamb = findSejourChambre(idSejourchambre);
-		if (sejchamb!=null){
-			em.remove(sejchamb);
-		}
-	}
+
 
 	public List<Sejourchambre> findAllSejourchambre (){
 		

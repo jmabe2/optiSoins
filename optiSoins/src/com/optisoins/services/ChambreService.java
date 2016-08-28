@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.optisoins.entities.Chambre;
 import com.optisoins.entities.Typechambre;
+import com.optisoins.entities.Utilisateur;
 import com.optisoins.entities.Equipement;
 
 
@@ -65,6 +66,14 @@ public class ChambreService {
 		
 		TypedQuery<Chambre> query = em.createQuery("SELECT chambre from Chambre chambre", Chambre.class);
 		return query.getResultList();
+	
+	}
+	
+	public Chambre findByNum (int numChambre){
+		
+		TypedQuery<Chambre> query = em.createQuery("SELECT chambre from Chambre chambre where chambre.numeroChambre=:numchambre", Chambre.class);
+		query.setParameter("numchambre", numChambre);
+		return query.getSingleResult();
 	
 	}
 

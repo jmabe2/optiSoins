@@ -4,7 +4,7 @@
 <form action="${pageContext.request.contextPath}/specialites" method="post">
 	<input type="hidden" name="action" value="savecreate">
 	<label>Nom: </label><input type="text" name="name">
-	<label>Actif: </label><input type="checkbox" name="actif">
+	<label>Actif: </label><input type="checkbox" name="actif" checked>
 	<button type="submit">Enregistrer</button>
 </form>
 <jsp:include page="../footer.jsp"/>

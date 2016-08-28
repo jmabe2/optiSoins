@@ -8,6 +8,10 @@
 	<label>Type de chambre: </label>${chambre.getTypechambre().getNom()}<br>
 	<button type="submit">Modifier</button>	
 </form><br>
+<form action="${pageContext.request.contextPath}/chambres" method="post">
+	    		<input type="hidden" name="action" value="create">
+	    		<button type="submit">Créer</button>
+			</form>
 
  <h4><u>Equipements</u></h4><br>
 <form action="${pageContext.request.contextPath}/equipcs" method="post">
@@ -22,16 +26,17 @@
 				    <th>Equipement</th>                   
                    <th></th>
                </tr>
-               <c:forEach items="${equipcs}" var="equipc">
+               <c:forEach items="${chambre.getEquipementchambres()}" var="equipc">
                    <tr>
                      <td>${equipc.getIdEquipementChambre()}</td>
 					<td>${equipc.getEquipement().getNom()}</td>
                        
 					  <td>
                          <form action="${pageContext.request.contextPath}/equipcs" method="post">
-                         <input type="hidden" name="action" value="edit">
-    				  <input type="hidden" name="equipcId" value="${equipc.getIdEquipementChambre()}">
-    				  <button type="submit">Modifier equipement</button>						  
+                         <input type="hidden" name="action" value="remove">
+    				  <input type="hidden" name="idEquipementchambre" value="${equipc.getIdEquipementChambre()}">
+    				  <input type="hidden" name="chambreId" value="${chambre.getIdChambre()}">
+    				  <button type="submit">Retirer equipement</button>						  
 					  </form>
 					  </td>
                    </tr>

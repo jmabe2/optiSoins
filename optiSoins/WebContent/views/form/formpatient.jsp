@@ -22,7 +22,7 @@
 		</tr>
 		<tr>
 			<td><label>Date de naissance: </label></td>
-			<td><input type="text" name="datenaiss" value="${param.datenaiss}<fmt:formatDate value="${patient.getDateDeNaissance()}" pattern="yyyy-MM-dd" />"></td>
+			<td><input id="datenaiss" type="text" name="datenaiss" value="${param.datenaiss}<fmt:formatDate value="${patient.getDateDeNaissance()}" pattern="yyyy-MM-dd" />"></td>
 		</tr>
 		<tr>
 			<td><label>Adresse: </label></td>
@@ -32,6 +32,9 @@
 		</tr>
 		<tr>
 			<td><label>Actif: </label></td>
-			<td><input type="checkbox" name="actif" ${param.actif != null ? "checked" : ""}${patient.getActif() != null ? "checked" : ""}><br></td>
+			<td><input type="checkbox" name="actif" ${param.actif != null || param.action == 'create' ? "checked" : ""}${patient.getActif() != null ? "checked" : ""}><br></td>
 		</tr>
 	</table>
+	<script type="text/javascript">
+		$("#datenaiss").flatpickr();	
+	</script>

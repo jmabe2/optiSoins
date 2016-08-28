@@ -21,12 +21,12 @@ public class Equipementchambre implements Serializable {
 
 	//bi-directional many-to-one association to Chambre
 	@ManyToOne
-	@JoinColumn(name="ChambreIdChambre", nullable=false)
+	@JoinColumn(name="ChambreIdChambre", nullable=true)
 	private Chambre chambre;
 
 	//bi-directional many-to-one association to Equipement
 	@ManyToOne
-	@JoinColumn(name="EquipementIdEquipement", nullable=false)
+	@JoinColumn(name="EquipementIdEquipement", nullable=true)
 	private Equipement equipement;
 
 	public Equipementchambre() {

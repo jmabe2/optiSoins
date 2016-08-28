@@ -17,10 +17,11 @@ public class EquipementchambreService {
 	
 	public Equipementchambre createEquipementchambre(int  chambreId, int equipementId){
 		Equipementchambre equipc = new Equipementchambre();
+		em.persist(equipc);
 		Chambre chambre = em.find(Chambre.class, chambreId);
 		Equipement equipement = em.find(Equipement.class, equipementId);
-		equipc.setChambre(chambre);
-		equipc.setEquipement(equipement);
+		chambre.addEquipementchambre(equipc);
+		equipement.addEquipementchambre(equipc);
 		em.persist(equipc);
 		return equipc;
 	}
@@ -37,11 +38,13 @@ public class EquipementchambreService {
 		return em.find(Equipementchambre.class, idEquipementchambre);
 	}
 
-	public void RemoveEquipementchambre(int idEquipementchambre){
+	public void removeEquipementchambre(int idEquipementchambre){
 		
 		Equipementchambre equipc = findEquipementchambre(idEquipementchambre);
+		Chambre chambre = equipc.getChambre();
 		if (equipc!=null){
 			em.remove(equipc);
+			em.persist(chambre);
 		}
 	}
 
